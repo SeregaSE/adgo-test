@@ -2,9 +2,9 @@
   "name": "adgo-test",
   "version": "1.0.0",
   "description": "Adgo frontend test task",
-  "main": "server.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
