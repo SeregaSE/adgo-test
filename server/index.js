@@ -13,7 +13,10 @@ server.on('request', (request, response) => {
     if (request.method === 'GET' && api === 'api' && version === 'v1' && routes.includes(route)) {
         try {
             const source = typeof data[route] === 'function' ? data[route](url) : data[route];
-            response.end(JSON.stringify(source));
+            response.setHeader('Content-Type', 'application/json');
+            const body = JSON.stringify(source);
+            response.setHeader('Content-Length', body.length);
+            response.end(body);
         } catch (error) {
             console.error(error);
             response.statusCode = error.code || 500;

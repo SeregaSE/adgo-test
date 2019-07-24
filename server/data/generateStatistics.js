@@ -109,7 +109,8 @@ const applyFilter = (statistics, filter) => {
     ], []);
 
     return {
-        rows,
+        count: rows.length,
+        rows: (limit !== null && offset !== null) ? rows.slice(offset * limit, offset * limit + limit) : rows,
         total: rows.reduce((acc, row) => ({
             impressions: acc.impressions + row.impressions,
             clicks: acc.clicks + row.clicks,
@@ -131,7 +132,7 @@ const generateStatistics = url => {
         const multi = name.slice(-2) === '[]';
         let value = params[multi ? 'getAll' : 'get'].call(params, name);
 
-        if (!value && defaultValue) {
+        if ((value === null || value === undefined) && defaultValue !== undefined) {
             value = defaultValue;
         }
 
