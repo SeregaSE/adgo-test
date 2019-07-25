@@ -10,12 +10,18 @@ server.on('request', (request, response) => {
     const url = parseUrl(request.url);
     const [_, api, version, route] = url.pathname.split('/');
 
+    response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+    response.setHeader('Access-Control-Allow-Headers', 'content-type');
+
+    if (request.method === 'OPTIONS') {
+        response.end();
+    }
+
     if (request.method === 'GET' && api === 'api' && version === 'v1' && routes.includes(route)) {
         try {
             const source = typeof data[route] === 'function' ? data[route](url) : data[route];
             response.setHeader('Content-Type', 'application/json');
             const body = JSON.stringify(source);
-            response.setHeader('Content-Length', body.length);
             response.end(body);
         } catch (error) {
             console.error(error);
