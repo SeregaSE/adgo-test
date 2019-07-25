@@ -10,8 +10,10 @@ server.on('request', (request, response) => {
     const url = parseUrl(request.url);
     const [_, api, version, route] = url.pathname.split('/');
 
-    response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
-    response.setHeader('Access-Control-Allow-Headers', 'content-type');
+    if (request.headers.origin !== undefined) {
+        response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+        response.setHeader('Access-Control-Allow-Headers', 'content-type');
+    }
 
     if (request.method === 'OPTIONS') {
         response.end();
