@@ -141,7 +141,7 @@
 
 Получаем статистику за первые 7 дней июля, сгруппированную по дням
 
-`/api/v1/statisticss?groupBy=day&from=2019-07-01&to=2019-07-07`
+`/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07`
 
 Ответ:
 ```
@@ -201,7 +201,7 @@
 
 Вот так можем посмотреть что у нас происходило в июне и на разных платформах
 
-`/api/v1/statisticss?groupBy=platform&from=2019-06-01&to=2019-06-30`
+`/api/v1/statistics?groupBy=platform&from=2019-06-01&to=2019-06-30`
 
 Ответ:
 ```
