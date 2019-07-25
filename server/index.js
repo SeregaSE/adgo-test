@@ -12,8 +12,9 @@ server.on('request', (request, response) => {
 
     if (request.headers.origin !== undefined) {
         response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
-        response.setHeader('Access-Control-Allow-Headers', 'content-type');
     }
+
+    response.setHeader('Access-Control-Allow-Headers', 'content-type');
 
     if (request.method === 'OPTIONS') {
         response.end();
