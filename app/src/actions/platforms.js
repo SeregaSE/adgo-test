@@ -11,7 +11,7 @@ const {
 );
 
 const fetchPlatforms = () => dispatch => {
-  dispatch(fetchingPlatforms);
+  dispatch(fetchingPlatforms());
   fetch("/api/v1/platforms")
     .then(data => data.json())
     .then(res => dispatch(getPlatformsSuccess(res)))

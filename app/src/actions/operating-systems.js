@@ -11,7 +11,7 @@ const {
 );
 
 const fetchOperatingSystems = () => dispatch => {
-  dispatch(fetchingOperatingSystems);
+  dispatch(fetchingOperatingSystems());
   fetch("/api/v1/operating-systems")
     .then(data => data.json())
     .then(res => dispatch(getOperatingSystemsSuccess(res)))

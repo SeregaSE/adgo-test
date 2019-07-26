@@ -7,29 +7,29 @@ import {
   fetchPlatforms,
   fetchStatistics
 } from "../actions";
-
+import Form from "./form";
+import Table from "./table";
 class App extends Component {
   componentDidMount() {
     const {
       fetchBrowsers,
       fetchGroups,
       fetchOperatingSystems,
-      fetchPlatforms,
-      fetchStatistics
+      fetchPlatforms
     } = this.props;
     fetchBrowsers();
     fetchGroups();
     fetchOperatingSystems();
     fetchPlatforms();
-    fetchStatistics({
-      groupBy: "day",
-      from: "2019-07-01",
-      to: "2019-07-07"
-    });
   }
 
   render() {
-    return <div />;
+    return (
+      <>
+        <Form />
+        <Table />
+      </>
+    );
   }
 }
 const mapStateToProps = (state, ownProps) => ({

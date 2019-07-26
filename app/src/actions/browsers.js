@@ -11,7 +11,7 @@ const {
 );
 
 const fetchBrowsers = () => dispatch => {
-  dispatch(fetchingBrowsers);
+  dispatch(fetchingBrowsers());
   fetch("/api/v1/browsers")
     .then(data => data.json())
     .then(res => dispatch(getBrowsersSuccess(res)))

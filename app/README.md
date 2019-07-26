@@ -1,1 +1,4 @@
-Решенение мы ждем в данной директории
+Start client
+
+- npm install
+- npm start

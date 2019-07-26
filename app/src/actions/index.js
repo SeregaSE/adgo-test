@@ -9,7 +9,8 @@ import {
   getGroupsSuccess,
   fetchingGroups,
   getGroupsError,
-  fetchGroups
+  fetchGroups,
+  changeGroups
 } from "./groups";
 
 import {
@@ -30,7 +31,9 @@ import {
   fetchingStatistics,
   getStatisticsSuccess,
   getStatisticsError,
-  fetchStatistics
+  fetchStatistics,
+  changeLimit,
+  changeOffset
 } from "./statistics";
 
 export {
@@ -53,5 +56,8 @@ export {
   fetchingStatistics,
   getStatisticsSuccess,
   getStatisticsError,
-  fetchStatistics
+  fetchStatistics,
+  changeGroups,
+  changeLimit,
+  changeOffset
 };

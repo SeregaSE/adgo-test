@@ -3,18 +3,18 @@ const base = "/api/v1/statistics?";
 const {
   fetchingStatistics,
   getStatisticsSuccess,
-  getStatisticsError
+  getStatisticsError,
+  changeOffset,
+  changeLimit
 } = createActions(
   "FETCHING_STATISTICS",
   "GET_STATISTICS_SUCCESS",
-  "GET_STATISTICS_ERROR"
+  "GET_STATISTICS_ERROR",
+  "CHANGE_OFFSET",
+  "CHANGE_LIMIT"
 );
 
-const fetchStatistics = params => dispatch => {
-  if (!params.groupBy || !params.from || !params.to) return;
-  const queryString = Object.entries(params)
-    .map(([key, value]) => `${key}=${value}`)
-    .join("&");
+const fetchStatistics = queryString => dispatch => {
   dispatch(fetchingStatistics());
   fetch(`${base}${queryString}`)
     .then(data => data.json())
@@ -26,5 +26,7 @@ export {
   fetchingStatistics,
   getStatisticsSuccess,
   getStatisticsError,
-  fetchStatistics
+  fetchStatistics,
+  changeLimit,
+  changeOffset
 };
