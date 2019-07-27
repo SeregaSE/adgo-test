@@ -13,6 +13,7 @@ import ControlPanel from '../ControlPanel'
 import Table from '../Table'
 
 import handleSelectChange from '../../Scripts/handleSelectChange'
+import getDataFromApi from '../../Scripts/getDataFromApi'
 
 
 const urls = [
@@ -33,7 +34,7 @@ class App extends Component {
     }
     this.handleSelectChange = handleSelectChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
-    this.getDataFromApi = this.getDataFromApi.bind(this)
+    this.getDataFromApi = getDataFromApi.bind(this)
   }
 
 
@@ -53,17 +54,15 @@ class App extends Component {
 
   componentDidUpdate() {
     if (this.state.from && this.state.to && this.state.groupBy) {
-
+      getDataFromApi();
     }
   }
 
   handleDateChange = (name) => (date) => {
-    console.log(name, date)
+    this.setState({
+      [name]: date,
+    })
    }
-
-  getDataFromApi() {
-
-  }
 
   render() {
     return (
