@@ -1,0 +1,13 @@
+.statistic-app {
+    margin: auto;
+    max-width: 40%;
+}
+
+.control-panel {
+    margin: 1rem 0;
+}
+
+.custom-select {
+    max-width: 40%;
+    margin: 20px;
+}
