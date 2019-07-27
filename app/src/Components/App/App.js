@@ -28,7 +28,7 @@ class App extends Component {
     super(props);
     this.state = {
       options:[],
-      data:[],
+      data:{},
       from:'',
       to: '',
     }
@@ -52,9 +52,12 @@ class App extends Component {
     });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.from === this.state.from && prevState.to === this.state.to && prevState.groupBy === this.state.groupBy) {
+      return
+    }
     if (this.state.from && this.state.to && this.state.groupBy) {
-      getDataFromApi();
+      this.getDataFromApi();
     }
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Table.css'
 
-const Table = () => {
+const Table = ({data}) => {
     return (
       <table className="table">
         <thead>
@@ -13,6 +13,13 @@ const Table = () => {
             <th scope="col">Money</th>
           </tr>
         </thead>
+        <tbody>
+          {data.rows.map(row => {
+            return (
+              null
+            )
+          })}
+        </tbody>
       </table>
 
     );
