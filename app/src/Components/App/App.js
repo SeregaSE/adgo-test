@@ -11,9 +11,11 @@ import './App.css'
 import AppHeader from '../AppHeader'
 import ControlPanel from '../ControlPanel'
 import Table from '../Table'
+import Pagination from '../Pagination'
 
 import handleSelectChange from '../../Scripts/handleSelectChange'
 import getDataFromApi from '../../Scripts/getDataFromApi'
+import handlePageChange from '../../Scripts/handlePageChange'
 
 
 const urls = [
@@ -31,10 +33,12 @@ class App extends Component {
       data:{},
       from:'',
       to: '',
+      offset: 0,
       needToUpdate: false,
     }
     this.handleSelectChange = handleSelectChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.handlePageChange = handlePageChange.bind(this)
     this.getDataFromApi = getDataFromApi.bind(this)
   }
 
@@ -76,7 +80,7 @@ class App extends Component {
           <AppHeader />
           <ControlPanel > 
             <DatePicker label="From" name="from" value={this.state.from? this.state.from : Date.now()} format="yyyy/MM/dd" onChange={this.handleDateChange('from')}/>
-            <DatePicker label="To" name="to" value={this.state.to? this.state.from : Date.now()} format="yyyy/MM/dd" onChange={this.handleDateChange('to')}/>
+            <DatePicker label="To" name="to" value={this.state.to? this.state.to : Date.now()} format="yyyy/MM/dd" onChange={this.handleDateChange('to')}/>
             {this.state.options.map(option => {
               return (
                 <select className="custom-select" key={uniqid.time()} name={option.param} onChange={this.handleSelectChange} multiple={option.multiple} value={this.state[option.param]}>
@@ -94,6 +98,7 @@ class App extends Component {
             })}
           </ControlPanel>
           <Table data={this.state.data}/>
+          <Pagination count={this.state.data.count} offset={this.state.offset} handlePageChange={this.handlePageChange}/>
         </div>
       </MuiPickersUtilsProvider>  
     );

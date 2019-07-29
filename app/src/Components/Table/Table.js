@@ -1,4 +1,5 @@
 import React from 'react';
+import uniqid from 'uniqid';
 import './Table.css'
 
 import TableHead from '../TableHead'
@@ -18,7 +19,7 @@ const Table = ({data}) => {
         <tbody>
           {data.rows.map(row => {
             return (
-              <tr>
+              <tr key={uniqid.time()}>
                 <td>{row.day}</td>
                 <td>{row.impressions}</td>
                 <td>{row.clicks}</td>
