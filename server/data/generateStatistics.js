@@ -151,6 +151,7 @@ const generateStatistics = url => {
     }, {});
 
     const days = Math.floor((query.to.getTime() - query.from.getTime()) / DAY_DURATION_MILLISECONDS);
+    const cacheKey = query.to.getTime() + query.from.getTime();
 
     if (days < 0) {
         throw new Error('Date from must be before date to');
@@ -160,8 +161,8 @@ const generateStatistics = url => {
         throw new Error('Maximum period must be less than 365 days');
     }
 
-    if (cache[days]) {
-        return applyFilter(cache[days], query);
+    if (cache[cacheKey]) {
+        return applyFilter(cache[cacheKey], query);
     }
 
     const statistics = [];
@@ -198,7 +199,7 @@ const generateStatistics = url => {
         day = new Date(day.getTime() + DAY_DURATION_MILLISECONDS);
     }
 
-    cache[days] = statistics;
+    cache[cacheKey] = statistics;
     return applyFilter(statistics, query);
 };
 
