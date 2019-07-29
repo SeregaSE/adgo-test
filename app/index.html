@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Statistics</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="root1"></div>
+    <div id="head"></div>
+    <div id="output"></div>
+    <div id="pages"></div>
+
+    <script type="text/babel">
+        function InputDate(text) {
+            return (
+                <div className="date">
+                    <div>{text.name}</div>
+                    <input type="date"/>
+                </div>
+            )
+        }
+        // Функция возвращает input с выбором даты и текстом
+
+        function Result(content) {
+            return (
+                <div className="result">
+                    <div className="result-item">{content.day}</div>
+                    <div className="result-item">{content.impressions}</div>
+                    <div className="result-item">{content.conversions}</div>
+                    <div className="result-item">{content.money}</div>
+                </div>
+            )
+        }
+        // Функция возвращает строку с 4 блоками - day, impressions, conversions и money
+
+        function InputGroupBy() {
+            return (
+                    <div>
+                        <div className="select__item">
+                            <div>Platform</div>
+                            <select className="inputGroup">
+                                <option>Desktop</option>
+                                <option>Mobile</option> 
+                            </select>
+                        </div>
+
+                        <div className="select__item">
+                            <div>Group by</div>
+                            <select className="groupBy">
+                                <option value="day">Day</option>
+                                <option value="platform">Platform</option> 
+                                <option value="operatingSystem">Operating system</option> 
+                                <option value="browser">Browser</option> 
+                            </select>
+                        </div>
+                    </div>
+            )
+        }
+        // Функция возвращает select с возможностью выбора параметров группировки полученных данных
+
+        function SelectBrowser() {
+            return (
+
+                <div className="select__item"> 
+                    <div>Browser</div>
+                    <select className="selectBrowser" multiple>
+                        <option value="1">Chrome</option>
+                        <option value="2">Firefox</option>
+                        <option value="3">UC browser</option>
+                        <option value="4">Opera</option>
+                        <option value="5">Chrome Mobile</option>
+                        <option value="6">Chrome Webview</option>
+                        <option value="7">Android browser</option>
+                        <option value="8">UC browser mobile</option>
+                        <option value="9">Opera Mini</option>
+                    </select>
+                </div> 
+            )
+        }
+        // Функция с выбором браузеров
+
+        function SelectSistem() {
+            return (
+
+                <div className="select__item"> 
+                    <div>SelectSistem</div>
+                    <select className="selectSistem" multiple>
+                        <option value="1">Windows</option>
+                        <option value="2">Mac OS</option>
+                        <option value="3">Linux</option>
+                        <option value="4">Android</option>
+                        <option value="5">IOS</option>
+                    </select>
+                </div> 
+            )
+        }
+        // Функция с выбором системы с которой заходил пользователь
+
+        function SelectPage() {
+            return (
+
+                <ul className="selectPage"> 
+                    
+                    <div>back</div>
+                    <li value="0">1</li>
+                    <li value="1">2</li>
+                    <li value="2">3</li>
+                    <li value="3">4</li>
+                    <li value="4">5</li>
+                    <li value="5">6</li>
+                    <li value="6">7</li>
+                    <li value="7">8</li>
+                    <li value="8">9</li>
+                    <div>next</div>
+                </ul> 
+            )
+        }
+        // Функция с выбором просматриваемой страницы
+
+        let sendGetFunc = (x, y, z, browserS, groupByResult, listSist, chosenPage) => {
+            if (x !== undefined && y !== undefined) {
+
+                // выполняем запрос
+                let request = new XMLHttpRequest();
+                request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=${groupByResult}&from=${x}&to=${y}&platform=${z}${browserS}${listSist}&offset=${chosenPage}&limit=25`);
+                // console.log(x, y);
+                request.send();
+                // выполняем запрос
+                // console.log(`http://localhost:3000/api/v1/statistics?groupBy=${groupByResult}&from=${x}&to=${y}&platform=${z}${browserS}${listSist}&offset=${chosenPage}&limit=25`)
+
+                /* Когда запрос готов - создаем список: */
+                request.addEventListener("readystatechange", function () {
+
+                    if (request.readyState === 4 && request.status == 200) {
+                        
+
+                        data = JSON.parse(request.response);
+
+                        let App = () => {
+
+
+                            let items = data.rows.map(item => {
+                                return <Result day={item[groupByResult]} impressions={item.impressions} conversions={item.clicks} money={item.money}/>
+                            })
+
+                            return  <div>
+                                        {items}
+                                    </div>    
+                        }
+
+                        ReactDOM.render(
+                            // App(data.rows[0].day, data.rows[0].impressions, data.rows[0].clicks, data.rows[0].money),
+                            App(data.rows.day, data.rows.impressions, data.rows.clicks, data.rows.money),
+                            document.querySelector("#output")
+                        )
+                    } 
+                });
+            }     
+        }
+        // Самая главная функция (!) - через которую проходят все полученные данные и выводятся на страницу
+
+        
+        Date.prototype.format = function(format = 'yyyy-mm-dd') {
+            const replaces = {
+                yyyy: this.getFullYear(),
+                mm: ('0'+(this.getMonth() + 1)).slice(-2),
+                dd: ('0'+this.getDate()).slice(-2),
+                ss: ('0'+this.getSeconds()).slice(-2)
+            };
+            let result = format;
+            for(const replace in replaces){
+                result = result.replace(replace,replaces[replace]);
+            }
+            return result;
+        };
+        // Создаем метод форматирования даты в нужную нам
+
+        const InputDates = (
+            <div className="inputDates">
+                <div>
+                    <InputDate className="from" name="From"/>
+                    <InputDate className="to" name="To"/>
+                </div>
+                
+                <div>
+                    <div>
+                        <SelectBrowser/>
+                        <SelectSistem/>
+                    </div>
+                    
+                    <InputGroupBy/>
+                </div> 
+            </div>       
+        )
+        // Переменная с инпутами выбора даты и минимальной группировкой
+
+        
+        const InputHead = (
+            <div className="inputHead">
+                <div><Result day="Day (can be customized)" impressions="Impressions" conversions="Conversions" money="Money"/></div>
+            </div>       
+        )
+        // Шапка таблицы с информацией что и где должно располагаться при выводе на экран
+
+        ReactDOM.render(
+            InputDates,
+            document.querySelector("#root1")
+        )
+        // Создаем элемент с инпутами выбора даты и минимальной группировкой
+
+        ReactDOM.render(
+            InputHead,
+            document.querySelector("#head")
+        )
+        // Создаем элемент шапки таблицы
+
+        ReactDOM.render(
+            <SelectPage/>,
+            document.querySelector("#pages")
+        )
+        // Создаем список со страницами
+
+
+        let inputFrom = document.querySelectorAll(".date input")[0];
+        // Первый инпут даты from
+        let inputTo = document.querySelectorAll(".date input")[1];
+        // Второй инпут даты to   
+
+
+        let x, y; 
+        // тут мы храним данные инпутов
+        let data;
+        // data
+
+
+        var values  = [];
+        // Тут у нас выбранные значения браузеров
+        let elm = document.querySelector(".selectBrowser");
+        // Элемент select со выбором бразеров со страницы
+
+        function getSelectValues(select) {
+            var result = [];
+            var options = select && select.options;
+            var opt;
+
+            for (var i=0, iLen=options.length; i<iLen; i++) {
+                opt = options[i];
+
+                if (opt.selected) {
+                result.push(opt.value || opt.text);
+                }
+            }
+            return result;
+        }
+        // Функция считывает значение value и выводит в формате ["*"]
+        
+        let listBr = "&browsers[]=1&browsers[]=2&browsers[]=3&browsers[]=4&browsers[]=5&browsers[]=6&browsers[]=7&browsers[]=8&browsers[]=9";
+        // Список выбранных браузеров по умолчанию
+
+        elm.addEventListener("change", () => {
+            
+            for (let i = 0; i < getSelectValues(elm).length; i++) {
+
+                if (i == 0) {
+                    listBr = "&browsers[]=" + getSelectValues(elm)[i];
+                } else {
+                    listBr = listBr + "&browsers[]=" + getSelectValues(elm)[i];
+                }
+            }
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist);
+        });
+
+        let groupBy = document.querySelector(".groupBy");
+
+        let groupByResult = groupBy.value;
+        // Значение по умолчанию day
+
+        let selectSistem = document.querySelector(".selectSistem");
+        let listSist = "&operatingSystems[]=1&operatingSystems[]=2&operatingSystems[]=3&operatingSystems[]=4&operatingSystems[]=5";
+        // console.log( listSist );
+        
+        selectSistem.addEventListener("change", () => {
+            
+
+            for (let i = 0; i < getSelectValues(selectSistem).length; i++) {
+
+                if (i == 0) {
+                    listSist = "&operatingSystems[]=" + getSelectValues(selectSistem)[i];
+                } else {
+                    listSist = listSist + "&operatingSystems[]=" + getSelectValues(selectSistem)[i];
+                }
+
+            }
+
+            // console.log( listSist );
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
+        });
+
+        let selectPages = document.querySelectorAll(".selectPage li");
+
+        let chosenPage = 0;
+        // console.log(chosenPage);
+    
+        // Значения по умолчанию
+        selectPages.forEach( (item, i, arr) => {
+
+            selectPages[i].addEventListener("click", () => {
+                
+                selectPages[i].style.cssText = "background-color: #282c34;";
+
+                for (let y = 0; y < selectPages.length; y++) {
+                    if (y !== i) {
+                        selectPages[y].style.cssText = "background-color: #20232a;";
+                    }
+                }
+
+                chosenPage = selectPages[i].value;
+
+                sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
+                // console.log(chosenPage);
+            });
+
+        });
+            
+        /* let request = new XMLHttpRequest();
+        request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07&offset=0&limit=25`);
+        request.send();      
+   
+
+        request.addEventListener("readystatechange", function () {
+
+            if (request.readyState === 4 && request.status == 200) {
+
+                let test = JSON.parse(request.response);
+                console.log(test); 
+
+            }
+        }); */
+
+        let inputGroups = document.querySelector(".inputGroup");
+        // Переменная select с выбором платформы
+
+        let inputGroup;
+        // Переменная с данными Desktop(1) или Mobile(2)
+        if (inputGroups.value == "Desktop") {
+            inputGroup = 1;
+        } else {
+            inputGroup = 2;
+        }
+        // Так определяется значение inputGroup по умолчанию
+
+        inputGroups.addEventListener("change", () => {
+            
+            if (inputGroups.value == "Desktop") {
+                inputGroup = 1;
+            } else {
+                inputGroup = 2;
+            }
+
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
+        });
+        // Событие выбора Desktop(1) или Mobile(2)
+
+        groupBy.addEventListener("change", () => {
+
+            groupByResult = groupBy.value;
+
+            // console.log(groupByResult);
+
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
+        })
+
+        inputFrom.addEventListener("change", () => {
+
+            // console.log(listBr);
+
+            x = ((new Date(inputFrom.valueAsDate)).format('yyyy-mm-dd'));
+
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
+        })
+
+        inputTo.addEventListener("change", () => {
+
+            // console.log(listBr);
+
+            y = ((new Date(inputTo.valueAsDate)).format('yyyy-mm-dd'));
+
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);      
+        })
+        
+    </script>
+</body>
+</html>
