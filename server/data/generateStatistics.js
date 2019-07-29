@@ -72,7 +72,7 @@ const filters = [
 const formatDay = (date) => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return `${date.getFullYear()}-${month > 9 ? month : `0${month}`}-${day > 10 ? day : `0${day}`}`;
+    return `${date.getFullYear()}-${month > 9 ? month : `0${month}`}-${day > 9 ? day : `0${day}`}`;
 }
 const applyFilter = (statistics, filter) => {
     const { groupBy, platform, browsers, operatingSystems, limit, offset } = filter
