@@ -12,6 +12,7 @@ import AppHeader from '../AppHeader'
 import ControlPanel from '../ControlPanel'
 import Table from '../Table'
 import Pagination from '../Pagination'
+import SelectForm from '../SelectForm'
 
 import handleSelectChange from '../../Scripts/handleSelectChange'
 import getDataFromApi from '../../Scripts/getDataFromApi'
@@ -31,8 +32,8 @@ class App extends Component {
     this.state = {
       options:[],
       data:{},
-      from:'',
-      to: '',
+      from: Date.now(),
+      to: Date.now(),
       offset: 0,
       needToUpdate: false,
     }
@@ -61,7 +62,7 @@ class App extends Component {
     if (!this.state.needToUpdate) {
       return
     }
-    if (this.state.from && this.state.to && this.state.groupBy) {
+    if (this.state.groupBy) {
       this.getDataFromApi();
     }
   }
@@ -79,25 +80,15 @@ class App extends Component {
         <div className='statistic-app'>
           <AppHeader />
           <ControlPanel > 
-            <DatePicker label="From" name="from" value={this.state.from? this.state.from : Date.now()} format="yyyy/MM/dd" onChange={this.handleDateChange('from')}/>
-            <DatePicker label="To" name="to" value={this.state.to? this.state.to : Date.now()} format="yyyy/MM/dd" onChange={this.handleDateChange('to')}/>
+            <DatePicker label="From" name="from" value={this.state.from} format="yyyy/MM/dd" onChange={this.handleDateChange('from')}/>
+            <DatePicker label="To" name="to" value={this.state.to} format="yyyy/MM/dd" onChange={this.handleDateChange('to')}/>
             {this.state.options.map(option => {
               return (
-                <select className="custom-select" key={uniqid.time()} name={option.param} onChange={this.handleSelectChange} multiple={option.multiple} value={this.state[option.param]}>
-                  <option value={0}>{`Select ${option.name}`}</option>
-                  {option.options.map(newOption =>{
-                    return (
-                      <option 
-                        value={newOption.value} 
-                        key={uniqid.time()}
-                      >{newOption.label}</option>
-                    )
-                  })}
-                </select>
+                <SelectForm option={option} handleSelectChange={this.handleSelectChange} values={this.state} key={uniqid.time()}/>
               )
             })}
           </ControlPanel>
-          <Table data={this.state.data}/>
+          <Table data={this.state.data} groupBy={this.state.groupBy}/>
           <Pagination count={this.state.data.count} offset={this.state.offset} handlePageChange={this.handlePageChange}/>
         </div>
       </MuiPickersUtilsProvider>  
