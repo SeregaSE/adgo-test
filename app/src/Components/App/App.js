@@ -97,7 +97,7 @@ class App extends Component {
               )
             })}
           </ControlPanel>
-          <Table data={this.state.data}/>
+          <Table data={this.state.data} groupBy={this.state.groupBy}/>
           <Pagination count={this.state.data.count} offset={this.state.offset} handlePageChange={this.handlePageChange}/>
         </div>
       </MuiPickersUtilsProvider>  
