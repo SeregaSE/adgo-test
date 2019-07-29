@@ -12,6 +12,7 @@ import AppHeader from '../AppHeader'
 import ControlPanel from '../ControlPanel'
 import Table from '../Table'
 import Pagination from '../Pagination'
+import SelectForm from '../SelectForm'
 
 import handleSelectChange from '../../Scripts/handleSelectChange'
 import getDataFromApi from '../../Scripts/getDataFromApi'
@@ -83,17 +84,7 @@ class App extends Component {
             <DatePicker label="To" name="to" value={this.state.to} format="yyyy/MM/dd" onChange={this.handleDateChange('to')}/>
             {this.state.options.map(option => {
               return (
-                <select className="custom-select" key={uniqid.time()} name={option.param} onChange={this.handleSelectChange} multiple={option.multiple} value={this.state[option.param]}>
-                  <option value={0}>{`Select ${option.name}`}</option>
-                  {option.options.map(newOption =>{
-                    return (
-                      <option 
-                        value={newOption.value} 
-                        key={uniqid.time()}
-                      >{newOption.label}</option>
-                    )
-                  })}
-                </select>
+                <SelectForm option={option} handleSelectChange={this.handleSelectChange} values={this.state} key={uniqid.time()}/>
               )
             })}
           </ControlPanel>
