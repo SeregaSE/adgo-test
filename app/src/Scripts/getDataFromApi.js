@@ -9,6 +9,10 @@ export default function getDataFromApi() {
         url += `&offset=${this.state.offset}`
     }
 
+    if (this.state.platform) {
+        url += `&platform=${this.state.platform}`
+    }
+
     if (this.state.operatingSystems) {
         this.state.operatingSystems.forEach( value => {
             url += `&operatingSystems[]=${value}`
@@ -20,12 +24,14 @@ export default function getDataFromApi() {
             url += `&browsers[]=${value}`
         })
     }
-
+    
     fetch(url)
     .then((response) => response.json())
     .then((response) => {
+
         this.setState({
             data: response,
+            needToUpdate: false,
         })
     })
 }

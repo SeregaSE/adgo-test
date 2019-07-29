@@ -18,7 +18,12 @@ const Table = ({data}) => {
         <tbody>
           {data.rows.map(row => {
             return (
-              null
+              <tr>
+                <td>{row.day}</td>
+                <td>{row.impressions}</td>
+                <td>{row.clicks}</td>
+                <td>{row.money}</td>
+              </tr>
             )
           })}
         </tbody>

@@ -31,6 +31,7 @@ class App extends Component {
       data:{},
       from:'',
       to: '',
+      needToUpdate: false,
     }
     this.handleSelectChange = handleSelectChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
@@ -53,7 +54,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.from === this.state.from && prevState.to === this.state.to && prevState.groupBy === this.state.groupBy) {
+    if (!this.state.needToUpdate) {
       return
     }
     if (this.state.from && this.state.to && this.state.groupBy) {
@@ -64,6 +65,7 @@ class App extends Component {
   handleDateChange = (name) => (date) => {
     this.setState({
       [name]: date,
+      needToUpdate: true,
     })
    }
 

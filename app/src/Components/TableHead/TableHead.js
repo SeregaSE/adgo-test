@@ -5,7 +5,6 @@ const TableHead = ({data}) => {
     return (
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Day</th>
           <th scope="col">Impressions</th>
           <th scope="col">Clicks</th>
