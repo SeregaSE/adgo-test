@@ -1,18 +1,33 @@
 import React from 'react';
+import uniqid from 'uniqid';
 import './Table.css'
 
-const Table = () => {
+import TableHead from '../TableHead'
+
+const Table = ({data}) => {
+    if (!data.rows) {
+      return (
+        <table className="table">
+          <TableHead />
+        </table>
+      )
+    }
+
     return (
       <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Day</th>
-            <th scope="col">Impressions</th>
-            <th scope="col">Clicks</th>
-            <th scope="col">Money</th>
-          </tr>
-        </thead>
+        <TableHead />
+        <tbody>
+          {data.rows.map(row => {
+            return (
+              <tr key={uniqid.time()}>
+                <td>{row.day}</td>
+                <td>{row.impressions}</td>
+                <td>{row.clicks}</td>
+                <td>{row.money}</td>
+              </tr>
+            )
+          })}
+        </tbody>
       </table>
 
     );
