@@ -1,11 +1,16 @@
 import React from 'react';
+import styles from './Prev.module.css';
 
 const Prev = props => {
+    let isDisabled = props.currentPage === 1;
+
     return (
-        <button disabled={props.currentPage === 1} onClick={() => {
-            let value = props.currentPage - 1;
-            props.onPageChanged(value);
-        }}>Prev</button>
+        <button className={isDisabled
+                    ? `${styles.item} ${styles.isDisable}`
+                    : styles.item}
+                disabled={isDisabled}
+                onClick={() => {props.onPageChanged(props.currentPage - 1);}
+        }>{"<<"}</button>
     )
 };
 

@@ -6,7 +6,7 @@ import {setFrom} from "../../../redux/dateReducer";
 
 class FromContainer extends React.Component {
     render() {
-        return <From {...this.props} onBlur={this.onBlur} />
+        return <From {...this.props} />
     }
 }
 

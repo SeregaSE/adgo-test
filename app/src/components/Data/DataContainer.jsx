@@ -9,7 +9,6 @@ class DataContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        // debugger;
         if (prevProps.from !== this.props.from
         || prevProps.to !== this.props.to
         || prevProps.group !== this.props.group

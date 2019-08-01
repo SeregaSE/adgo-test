@@ -4,7 +4,7 @@ import PlatformContainer from "./Platform/PlatformContainer";
 import OSContainer from "./OS/OSContainer";
 import BrowserContainer from "./Browser/BrowserContainer";
 
-const AgentFilter = props => {
+const AgentFilter = () => {
     return (
         <>
             <div className={styles.item}><PlatformContainer/></div>

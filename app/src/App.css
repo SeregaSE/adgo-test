@@ -13,7 +13,28 @@
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: flex-start;
   align-content: flex-start;
+}
+
+.table {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+.table table {
+  margin: 0 auto;
+}
+
+.table table thead tr td:nth-child(1) {
+  width: 145px;
+}
+.table table thead tr td:nth-child(2) {
+  width: 130px;
+}
+.table table thead tr td:nth-child(3) {
+  width: 140px;
+}
+.table table thead tr td:nth-child(4) {
+  width: 24%;
 }

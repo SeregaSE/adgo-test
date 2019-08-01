@@ -1,19 +1,8 @@
-.container {
-    max-width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: flex-start;
-}
-
 .item {
     padding: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
     background-color: #fff;
     cursor: pointer;
     font-size: 20px;
@@ -26,12 +15,14 @@
     border: 1px solid #69CCFF;
     color: #69CCFF;
 }
-.item:active {
-    border: 1px solid #000;
-    color: #000;
+.item:focus {
+    outline: none;
 }
-
-.currentPage {
-    border: 1px solid #69CCFF;
-    color: #69CCFF;
+.isDisable {
+    border-color: #ABADB1;
+    color: #ABADB1;
+}
+.isDisable:hover {
+    border-color: #ABADB1;
+    color: #ABADB1;
 }

@@ -12,11 +12,11 @@ const Pagination = props => {
     let lastEl = pages[pages.length - 1];
 
     let pagesEl = pages.map(p => {
-        return <div onClick={() => {
-            props.onPageChanged(p);
-        }} className={p === props.currentPage
-            ? `${styles.item} ${styles.currentPage}`
-            : styles.item}>{p}</div>;
+        return <div onClick={() => {props.onPageChanged(p);}}
+                    className={p === props.currentPage
+                        ? `${styles.item} ${styles.currentPage}`
+                        : styles.item}>{p}
+        </div>;
     });
 
     return (

@@ -12,20 +12,22 @@ const App = () => {
                 <div className="filterField"><DateFilter/></div>
                 <div className="filterField"><AgentFilter/></div>
 
-                <table>
-                    <thead>
-                    <tr>
-                        <td>Day</td>
-                        <td>Impression</td>
-                        <td>Conversions</td>
-                        <td>Money</td>
-                    </tr>
-                    </thead>
+                <div className="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Day</td>
+                                <td>Impression</td>
+                                <td>Conversions</td>
+                                <td>Money</td>
+                            </tr>
+                        </thead>
 
-                    <tbody>
+                        <tbody>
                         <DataContainer/>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
 
                 <PaginationContainer/>
             </div>
