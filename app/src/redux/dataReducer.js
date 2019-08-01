@@ -45,10 +45,9 @@ export const setOffset = offset => ({type: SET_OFFSET, offset});
 export const getData = (from, to, groupBy, platform = 1, browsers = [1], operatingSystems = [1], limit = 5, offset = 0) => dispatch => {
     API.getData(from, to, groupBy, platform, browsers, operatingSystems, limit, offset)
         .then(response => {
-
             if (response.status === 200) {
                 dispatch(setCount(response.data.count));
-                dispatch(setData(response.data.data));
+                dispatch(setData(response.data.rows));
                 dispatch(setTotal(response.data.total));
             }
         });
