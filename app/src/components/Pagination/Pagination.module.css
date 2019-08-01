@@ -1,0 +1,21 @@
+.container {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    background-color: #53AE04;
+    cursor: pointer;
+}
+
+.currentPage {
+    background-color: #AB0000;
+}
