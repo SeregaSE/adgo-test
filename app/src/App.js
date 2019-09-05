@@ -41,7 +41,7 @@ const App = () => {
             single 
             type="groups" 
             value={groupBy} 
-            onChange={value => setGroupBy(value)} 
+            onChange={setGroupBy} 
             label="Group by" />
           <SelectInput 
             single 

@@ -45,7 +45,7 @@ const SingleSelect = props => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {options.map((option, i) => <MenuItem key={i} value={option.value}>{option.label}</MenuItem>)}
+          {options.map((option, i) => <MenuItem key={i} value={`${option.value}`}>{option.label}</MenuItem>)}
         </Select>
       </FormControl>
     </div>
