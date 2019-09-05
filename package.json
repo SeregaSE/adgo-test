@@ -2,9 +2,13 @@
   "name": "adgo-test",
   "version": "1.0.0",
   "description": "Adgo frontend test task",
-  "main": "server/index.js",
+  "main": "app/index.html",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "concurrently 'npm run server' 'npm run client'",
+    "server": "node server/index.js",
+    "client": "node start-client.js",
+    "dev": "echo \"This command has been deprecated. Use 'npm start'\" && exit 1",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/SeregaSE/adgo-test/issues"
   },
-  "homepage": "https://github.com/SeregaSE/adgo-test#readme"
+  "homepage": "https://github.com/SeregaSE/adgo-test#readme",
+  "devDependencies": {
+    "concurrently": "^4.1.2"
+  }
 }

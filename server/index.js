@@ -1,12 +1,13 @@
 const http = require('http');
 const { parse: parseUrl } = require('url');
 const data = require('./data');
-const config = require('../server.config');
+const config = require('./server.config');
 
 const server = http.createServer();
 const routes = Object.keys(data);
 
 server.on('request', (request, response) => {
+    console.log('Request', request.method);
     const url = parseUrl(request.url);
     const [_, api, version, route] = url.pathname.split('/');
 
