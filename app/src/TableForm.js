@@ -13,7 +13,10 @@ class TableForm extends React.Component {
   render(){
     return (
         <form /*onSubmit={this.handleSubmit}*/ >
+            <FilterContainer url="/v1/groups" label="Groups"/>
             <FilterContainer url="/v1/platforms" label="Platform"/>
+            <FilterContainer url="/v1/operating-systems" label="Operating systems"/>
+            <FilterContainer url="/v1/browsers" label="Browsers"/>
         </form>
     );
   }
