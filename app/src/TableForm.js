@@ -10,7 +10,7 @@ class TableForm extends React.Component {
     this.state = {
       tableData: [],
       groupBy: 'day',
-      groupByName: 'day',
+      groupName: 'Day',
       from: '2019-08-10',
       to: '2019-08-19',
       limit: 25,
@@ -23,6 +23,7 @@ class TableForm extends React.Component {
 
      this.handleChange = this.handleChange.bind(this);
      this.getApiData = this.getApiData.bind(this);
+     this.getUrl = this.getUrl.bind(this);
   }
 
   componentDidMount() {
@@ -33,13 +34,25 @@ class TableForm extends React.Component {
   handleChange(e){
     const name = e.target.name;
     const value = e.target.value;
-    this.setState({ [name]: value});
+    const index = e.target.selectedIndex;
+    const groupName = e.target[index].text
+    
+    this.setState({[name]: value, groupName}, ()=>{
+      const url = this.getUrl();
+      this.getApiData(url);
+    });
+  }
 
-    if(name === 'groupBy')
-      this.setState({ groupByName: name});
-
-    const url = '/v1/statistics?groupBy=' + value + '&from="2019-08-10"&to="2019-08-19"';
-    this.getApiData(url);
+  getUrl(){
+    const {groupBy, from, to, platform, browsers, operatingSystems} = this.state;
+    let url = '/v1/statistics?groupBy=' + groupBy + '&from=' + from + '&to=' + to;
+    if (platform !== '') 
+      url += '&platform=' + platform;
+    if (browsers !== '') 
+      url += '&browsers=' + browsers;
+    if (operatingSystems !== '') 
+      url += '&operatingSystems=' + operatingSystems;
+    return url;
   }
 
   getApiData(url){
@@ -51,27 +64,40 @@ class TableForm extends React.Component {
   }
 
   render(){
-    if (this.state.errorMessage !== '') 
+    const {errorMessage, from, to, groupBy, groupName, tableData} = this.state;
+    if (errorMessage !== '') 
       return (
         <div className="alert alert-primary" role="alert">
-          { this.state.errorMessage }
+          { errorMessage }
         </div>);
     return (
         <form /*onSubmit={this.handleSubmit}*/ className="form-group" >
             <div className="filters">
               <div className="form-group form-row">
-                <DateContainer label="From" />
-                <DateContainer label="To" />
+                <DateContainer label="From" date={from} />
+                <DateContainer label="To" date={to} />
               </div>
               <div className="form-group form-row">
-                <FilterContainer url="/v1/groups" label="Groups" handleChange={this.handleChange} name="groupBy"  />
-                <FilterContainer url="/v1/platforms" label="Platform" handleChange={this.handleChange} name="platform" />
-                <FilterContainer url="/v1/operating-systems" label="Operating systems" name="operatingSystems"/>
-                <FilterContainer url="/v1/browsers" label="Browsers" name="browsers" />
+                <FilterContainer  url="/v1/groups" 
+                                  label="Groups" 
+                                  handleChange={this.handleChange} 
+                                  name="groupBy"  />
+                <FilterContainer  url="/v1/platforms" 
+                                  label="Platform" 
+                                  handleChange={this.handleChange} 
+                                  name="platform" />
+                <FilterContainer  url="/v1/operating-systems" 
+                                  label="Operating systems" 
+                                  handleChange={this.handleChange} 
+                                  name="operatingSystems"/>
+                <FilterContainer  url="/v1/browsers" 
+                                  label="Browsers" 
+                                  handleChange={this.handleChange}
+                                  name="browsers" />
               </div>
             </div>
             <div className="table">
-              <Table data={this.state.tableData} groupBy={this.state.groupBy} />
+              <Table data={tableData} groupBy={groupBy} groupName={groupName} />
             </div>
         </form>
     );
