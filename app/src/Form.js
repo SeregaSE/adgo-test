@@ -93,8 +93,12 @@ class Form extends React.Component {
                         pageCount: res.data.count/this.state.limit});
       }
     }).catch(err => {
-      this.setState({ errorMessage: err.toString()});
+      this.handleError(err);
     });
+  }
+
+  handleError = (error) => {
+    this.setState({ errorMessage: error.toString()});
   }
 
   // Set new date on date change and get new data.
@@ -150,22 +154,26 @@ class Form extends React.Component {
                                   label="Groups" 
                                   handleChange={this.handleFilterChange} 
                                   name="groupBy"
-                                  isMultiple={false}  />
+                                  isMultiple={false}
+                                  handleError={this.handleError} />
                 <FilterContainer  url="/v1/platforms" 
                                   label="Platform" 
                                   handleChange={this.handleFilterChange} 
                                   name="platform" 
-                                  isMultiple={false} />
+                                  isMultiple={false}
+                                  handleError={this.handleError} />
                 <FilterContainer  url="/v1/operating-systems" 
                                   label="Operating systems" 
                                   handleChange={this.handleFilterChange} 
                                   name="operatingSystems"
-                                  isMultiple={true} />
+                                  isMultiple={true}
+                                  handleError={this.handleError} />
                 <FilterContainer  url="/v1/browsers" 
                                   label="Browsers" 
                                   handleChange={this.handleFilterChange}
                                   name="browsers"
-                                  isMultiple={true}  />
+                                  isMultiple={true}
+                                  handleError={this.handleError} />
               </div>
             </div>
             <div className="table">
