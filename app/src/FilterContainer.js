@@ -22,13 +22,19 @@ class FilterContainer extends React.Component {
     }
   
     render(){
-      if (this.state.errorMessage !== '') 
+      const {isMultiple, label, handleChange, name} = this.props;
+      const {errorMessage, data} = this.state;
+      if (errorMessage !== '') 
         return (
           <div className="alert alert-primary" role="alert">
-            { this.state.errorMessage }
+            { errorMessage }
           </div>);
       return (
-          <Filter data={this.state.data} label={this.props.label} handleChange={this.props.handleChange} name={this.props.name} />
+          <Filter data={data} 
+                  isMultiple={isMultiple} 
+                  label={label} 
+                  handleChange={handleChange} 
+                  name={name} />
       );
     }
   }
