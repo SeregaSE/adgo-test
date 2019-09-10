@@ -1,0 +1,13 @@
+.app {
+  text-align: center;
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.form-select-wrapper {
+  min-width: 120px;
+}

@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/SeregaSE/adgo-test/issues"
   },
-  "homepage": "https://github.com/SeregaSE/adgo-test#readme"
+  "homepage": "https://github.com/SeregaSE/adgo-test#readme",
+  "dependencies": {}
 }
