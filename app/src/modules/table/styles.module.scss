@@ -1,0 +1,24 @@
+$gray: #e9e9e9;
+$darkGray: #c0bdbd;
+
+.table {
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    thead {
+      th {
+        background-color: $gray;
+        border: 1px solid $darkGray;
+      }
+    }
+    tbody {
+      tr:nth-child(even) {
+        background-color: $gray;
+      }
+    }
+  }
+}
