@@ -18,5 +18,7 @@
   background-color: #ddeaee;
 }
 
-.table-body__cell {
+.table-body__total {
+  font-weight: bold;
+  background-color: #d3e6c6;
 }

@@ -5,10 +5,7 @@ import "./SelectForm.css";
 
 export class SelectForm extends Component {
   handleInput = type => ({ target: { value } }) => {
-    console.log("TYPE", type);
-    console.log("VALUE", value);
     this.setState({ selects: { ...this.state.selects, [type]: value } });
-    setTimeout(() => console.log(this.state), 1000);
   };
 
   handleSubmit = event => {

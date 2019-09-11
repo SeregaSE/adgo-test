@@ -19,12 +19,12 @@ export class App extends Component {
       operatingSystem: "",
       browser: ""
     },
+    firstColumnTitle: "day",
     isInputError: false
   };
 
   handleInput = type => ({ target: { value } }) => {
     this.setState({ selects: { ...this.state.selects, [type]: value } });
-    setTimeout(() => console.log(this.state), 1000);
   };
 
   fetchStatistics = async () => {
@@ -54,11 +54,12 @@ export class App extends Component {
         url += `&browsers=${browser}`;
       }
 
-      console.log(url);
+      console.log("CURRENT FETCH URL", url);
 
       const response = await fetch(url);
       const result = await response.json();
-      this.setState({ statistics: result });
+
+      this.setState({ statistics: result, firstColumnTitle: groupBy });
     } catch (error) {
       console.error(error);
     }
@@ -73,12 +74,6 @@ export class App extends Component {
     );
     await this.fetchAndSetState("/api/v1/groups", "groups");
     await this.fetchAndSetState("/api/v1/browsers", "browsers");
-    await this.fetchAndSetState(
-      "/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-09-07",
-      "statistics"
-    );
-    await this.fetchStatistics;
-    console.log("STATE", this.state);
   }
 
   async fetchAndSetState(url, stateKey) {
@@ -92,13 +87,14 @@ export class App extends Component {
   }
 
   render() {
-    if (!this.state.statistics) return null;
+    if (!this.state.groups) return null;
     const {
       platforms,
       browsers,
       operatingSystems,
       groups,
-      statistics
+      statistics,
+      firstColumnTitle
     } = this.state;
     return (
       <div className="app">
@@ -110,7 +106,7 @@ export class App extends Component {
           handleInput={this.handleInput}
           onSubmit={this.fetchStatistics}
         />
-        <Table statistics={statistics} />
+        <Table firstColVal={firstColumnTitle} statistics={statistics} />
       </div>
     );
   }
