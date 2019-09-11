@@ -27,32 +27,6 @@ export class App extends Component {
     setTimeout(() => console.log(this.state), 1000);
   };
 
-  async componentDidMount() {
-    await this.fetchAndSetState("/api/v1/platforms", "platforms");
-    await this.fetchAndSetState("/api/v1/browsers", "browsers");
-    await this.fetchAndSetState(
-      "/api/v1/operating-systems",
-      "operatingSystems"
-    );
-    await this.fetchAndSetState("/api/v1/groups", "groups");
-    await this.fetchAndSetState("/api/v1/browsers", "browsers");
-    await this.fetchAndSetState(
-      "/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-09-07",
-      "statistics"
-    );
-    console.log("STATE", this.state);
-  }
-
-  async fetchAndSetState(url, stateKey) {
-    try {
-      const response = await fetch(url);
-      const result = await response.json();
-      this.setState({ [stateKey]: result });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   fetchStatistics = async () => {
     const {
       dateFrom,
@@ -89,6 +63,33 @@ export class App extends Component {
       console.error(error);
     }
   };
+
+  async componentDidMount() {
+    await this.fetchAndSetState("/api/v1/platforms", "platforms");
+    await this.fetchAndSetState("/api/v1/browsers", "browsers");
+    await this.fetchAndSetState(
+      "/api/v1/operating-systems",
+      "operatingSystems"
+    );
+    await this.fetchAndSetState("/api/v1/groups", "groups");
+    await this.fetchAndSetState("/api/v1/browsers", "browsers");
+    await this.fetchAndSetState(
+      "/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-09-07",
+      "statistics"
+    );
+    await this.fetchStatistics;
+    console.log("STATE", this.state);
+  }
+
+  async fetchAndSetState(url, stateKey) {
+    try {
+      const response = await fetch(url);
+      const result = await response.json();
+      this.setState({ [stateKey]: result });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   render() {
     if (!this.state.statistics) return null;

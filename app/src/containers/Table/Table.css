@@ -1,0 +1,22 @@
+.table {
+  margin-top: 20px;
+  width: 90%;
+  border-collapse: collapse;
+}
+
+.table__header {
+  border-spacing: 0;
+}
+
+.table__head-cell {
+}
+
+.table-body {
+}
+
+.table-body__row:nth-of-type(2n) {
+  background-color: #ddeaee;
+}
+
+.table-body__cell {
+}
