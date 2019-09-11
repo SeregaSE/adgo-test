@@ -27,7 +27,7 @@ export class App extends Component {
     this.setState({ selects: { ...this.state.selects, [type]: value } });
   };
 
-  fetchStatistics = async () => {
+  fetchStatistics = async (offset = 0) => {
     const {
       dateFrom,
       dateTo,
@@ -40,7 +40,7 @@ export class App extends Component {
     this.setState({ isInputError: false });
 
     try {
-      if (!dateFrom && !dateTo) return alert("Enter correct date!");
+      if (!dateFrom || !dateTo) return alert("Enter correct date!");
 
       let url = `/api/v1/statistics?groupBy=${groupBy}&from=${dateFrom}&to=${dateTo}`;
 
@@ -53,6 +53,8 @@ export class App extends Component {
       if (browser) {
         url += `&browsers=${browser}`;
       }
+
+      url += `&offset=${offset}&limit=25`;
 
       console.log("CURRENT FETCH URL", url);
 
@@ -106,7 +108,11 @@ export class App extends Component {
           handleInput={this.handleInput}
           onSubmit={this.fetchStatistics}
         />
-        <Table firstColVal={firstColumnTitle} statistics={statistics} />
+        <Table
+          firstColVal={firstColumnTitle}
+          statistics={statistics}
+          fetchStats={this.fetchStatistics}
+        />
       </div>
     );
   }

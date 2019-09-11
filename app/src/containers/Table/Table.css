@@ -1,6 +1,13 @@
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+}
+
 .table {
   margin-top: 20px;
-  width: 90%;
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -21,4 +28,26 @@
 .table-body__total {
   font-weight: bold;
   background-color: #d3e6c6;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin-top: 10px;
+}
+
+.pagination__btn {
+  border: 1px solid #ccc;
+  background-color: #ddeaee;
+  margin-right: 2px;
+  margin-left: 2px;
+  border-radius: 5px;
+  height: 20px;
+  width: 20px;
+}
+
+.btn--active {
+  background-color: #fff;
+  box-shadow: 2px 2px 0 #ccc;
 }
