@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Table } from "../../components/table";
+import { SelectForm } from "../SelectForm";
+import { Table } from "../Table";
 
 import "./App.css";
 
@@ -9,13 +10,30 @@ export class App extends Component {
     browsers: null,
     operatingSystems: null,
     groups: null,
-    statistics: null
+    statistics: null,
+    selects: {
+      dateFrom: "",
+      dateTo: "",
+      groupBy: "day",
+      platform: "",
+      operatingSystem: "",
+      browser: ""
+    },
+    isInputError: false
+  };
+
+  handleInput = type => ({ target: { value } }) => {
+    this.setState({ selects: { ...this.state.selects, [type]: value } });
+    setTimeout(() => console.log(this.state), 1000);
   };
 
   async componentDidMount() {
     await this.fetchAndSetState("/api/v1/platforms", "platforms");
     await this.fetchAndSetState("/api/v1/browsers", "browsers");
-    await this.fetchAndSetState("/api/v1/operating-systems", "OS");
+    await this.fetchAndSetState(
+      "/api/v1/operating-systems",
+      "operatingSystems"
+    );
     await this.fetchAndSetState("/api/v1/groups", "groups");
     await this.fetchAndSetState("/api/v1/browsers", "browsers");
     await this.fetchAndSetState(
@@ -35,25 +53,31 @@ export class App extends Component {
     }
   }
 
-  fetchStatistics = async (
-    groupBy,
-    from,
-    to,
-    platform = null,
-    browsers = null,
-    operatingSystems = null
-  ) => {
+  fetchStatistics = async () => {
+    const {
+      dateFrom,
+      dateTo,
+      groupBy,
+      platform,
+      operatingSystem,
+      browser
+    } = this.state.selects;
+
+    this.setState({ isInputError: false });
+
     try {
-      let url = `/api/v1/statistics?groupBy=${groupBy}&from=${from}&to=${to}`;
+      if (!dateFrom && !dateTo) return alert("Enter correct date!");
+
+      let url = `/api/v1/statistics?groupBy=${groupBy}&from=${dateFrom}&to=${dateTo}`;
 
       if (platform) {
         url += `&platform=${platform}`;
       }
-      if (browsers) {
-        url += `&browsers=${browsers}`;
+      if (operatingSystem) {
+        url += `&operatingSystems=${operatingSystem}`;
       }
-      if (operatingSystems) {
-        url += `&operatingSystems=${operatingSystems}`;
+      if (browser) {
+        url += `&browsers=${browser}`;
       }
 
       console.log(url);
@@ -66,10 +90,6 @@ export class App extends Component {
     }
   };
 
-  handleChange = () => {
-    console.log("Handle change!");
-  };
-
   render() {
     if (!this.state.statistics) return null;
     const {
@@ -79,6 +99,18 @@ export class App extends Component {
       groups,
       statistics
     } = this.state;
-    return <div className="app"></div>;
+    return (
+      <div className="app">
+        <SelectForm
+          platforms={platforms}
+          browsers={browsers}
+          operatingSystems={operatingSystems}
+          groups={groups}
+          handleInput={this.handleInput}
+          onSubmit={this.fetchStatistics}
+        />
+        <Table statistics={statistics} />
+      </div>
+    );
   }
 }
