@@ -1,4 +1,4 @@
-const prefix = 'table';
+const prefix = 'table/';
 
 export const GET_STATISTICS = prefix+'GET_STATISTICS';
 export const GET_STATISTICS_SUCCESS = prefix+'GET_STATISTICS_SUCCESS';

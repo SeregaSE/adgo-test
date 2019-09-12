@@ -10,6 +10,15 @@ export const statUrl = ({
   groupBy,
   from,
   to,
+  platform,
+  browser,
+  operatingSystem,
 }) => {
-  return `${statistics}?groupBy=${groupBy}&from=${from}&to=${to}`
+  const platformUrl = platform ? '&platform='+platform : '';
+  const browserUrl = browser ? '&browsers[]='+browser : '';
+  const operatingSystemUrl = operatingSystem ? '&operatingSystems[]='+operatingSystem : '';
+
+  const url = `${statistics}?groupBy=${groupBy}&from=${from}&to=${to}${platformUrl}${browserUrl}${operatingSystemUrl}`;
+  console.log(url)
+  return url;
 }

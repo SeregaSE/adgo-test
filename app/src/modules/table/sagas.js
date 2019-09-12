@@ -10,6 +10,9 @@ function* getStatistics({
     groupBy,
     from,
     to,
+    platform,
+    browser,
+    operatingSystem,
   }
 }) {
   try {
@@ -17,7 +20,10 @@ function* getStatistics({
       url: urls.statUrl({ 
         groupBy, 
         from, 
-        to
+        to,
+        platform,
+        browser,
+        operatingSystem,
       }),
     });
     

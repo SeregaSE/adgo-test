@@ -22,3 +22,12 @@ export const getOptionsFail = ({ type, errorMessage }) => ({
     errorMessage,
   }
 });
+
+export const changeSearchParam = ({ type, param }) => ({
+  type: AT.CHANGE_SEARCH_PARAM,
+  payload: {
+    type,
+    param,
+  }
+})
+ 

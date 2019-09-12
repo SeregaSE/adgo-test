@@ -16,7 +16,7 @@ function* getOptions({
     });
 
     yield put(actions.getOptionsSuccess({ type, options: response }));
-
+    yield put(actions.changeSearchParam({ type, param: response[0].value}))
   } catch (err) {
     yield put(actions.getOptionsFail({ type, errorMessage: err.toString() }));
   }

@@ -19,6 +19,13 @@ const initialState = {
     browsers: [loading],
     platforms: [loading],
   },
+
+  searchParam: {
+    groups: null,
+    operatingSystems: null,
+    browsers: null,
+    platforms: null,
+  }
 };
 
 export default ( state = { ...initialState }, actions ) => {
@@ -51,6 +58,15 @@ export default ( state = { ...initialState }, actions ) => {
         isFetching: {
           ...state.isFetching,
           [actions.payload.type]: false,
+        },
+      }
+
+    case AT.CHANGE_SEARCH_PARAM:
+      return {
+        ...state,
+        searchParam: {
+          ...state.searchParam,
+          [actions.payload.type]: `${actions.payload.param}`,
         },
       }
 
