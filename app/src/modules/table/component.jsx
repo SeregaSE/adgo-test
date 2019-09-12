@@ -12,8 +12,7 @@ const Table = ({
 	  if (searchParam.groups !== null) {
 			getStatistics({ 
 				groupBy: searchParam.groups, 
-				from: '2019-05-01', 
-				to: '2019-07-12',
+				dateRange: searchParam.dateRange,
 				platform: searchParam.platforms,
 				browser: searchParam.browsers,
 				operatingSystem: searchParam.operatingSystems,
@@ -25,6 +24,7 @@ const Table = ({
 		searchParam.platforms, 
 		searchParam.browsers,
 		searchParam.operatingSystems,
+		searchParam.dateRange,
 	]);
 
 	return (

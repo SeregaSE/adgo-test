@@ -21,6 +21,7 @@ const initialState = {
   },
 
   searchParam: {
+    dateRange: [new Date(2019, 5), new Date(2019, 7, 30)],
     groups: null,
     operatingSystems: null,
     browsers: null,
@@ -66,7 +67,7 @@ export default ( state = { ...initialState }, actions ) => {
         ...state,
         searchParam: {
           ...state.searchParam,
-          [actions.payload.type]: `${actions.payload.param}`,
+          [actions.payload.type]: actions.payload.param,
         },
       }
 

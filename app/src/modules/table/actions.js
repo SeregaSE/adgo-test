@@ -1,11 +1,10 @@
 import * as AT from './actions-type';
 
-export const getStatistics = ({ groupBy, from, to, platform, browser, operatingSystem }) => ({
+export const getStatistics = ({ groupBy, dateRange, platform, browser, operatingSystem }) => ({
   type: AT.GET_STATISTICS,
   payload: {
     groupBy,
-    from,
-    to,
+    dateRange,
     platform,
     browser,
     operatingSystem,

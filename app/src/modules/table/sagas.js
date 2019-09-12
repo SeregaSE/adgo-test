@@ -8,8 +8,7 @@ import * as actions from './actions';
 function* getStatistics({
   payload: {
     groupBy,
-    from,
-    to,
+    dateRange,
     platform,
     browser,
     operatingSystem,
@@ -19,8 +18,7 @@ function* getStatistics({
     const statistics = yield call(api.get, {
       url: urls.statUrl({ 
         groupBy, 
-        from, 
-        to,
+        dateRange,
         platform,
         browser,
         operatingSystem,

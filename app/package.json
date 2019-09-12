@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@wojtekmaj/react-daterange-picker": "^2.4.0",
+    "dateformat": "^3.0.3",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
