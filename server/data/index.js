@@ -9,5 +9,5 @@ module.exports = {
     browsers,
     platforms,
     'statistics': generateStatistics,
-    'operating-systems': operatingSystems,
+    'operating-systems': operatingSystems
 };

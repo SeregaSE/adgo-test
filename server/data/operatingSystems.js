@@ -1,27 +1,27 @@
 module.exports = [
     {
-        label: "Windows",
+        label: 'Windows',
         value: 1,
         platform: 1
     },
     {
-        label: "Mac OS",
+        label: 'Mac OS',
         value: 2,
         platform: 1
     },
     {
-        label: "Linux",
+        label: 'Linux',
         value: 3,
         platform: 1
     },
     {
-        label: "Android",
+        label: 'Android',
         value: 4,
         platform: 2
     },
     {
-        label: "IOS",
+        label: 'IOS',
         value: 5,
         platform: 2
-    },
+    }
 ]

@@ -4,7 +4,9 @@
   "description": "Adgo frontend test task",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "lint": "eslint --ext .js ./",
+    "lint:fix": "eslint --fix --ext .js ./"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/SeregaSE/adgo-test/issues"
   },
-  "homepage": "https://github.com/SeregaSE/adgo-test#readme"
+  "homepage": "https://github.com/SeregaSE/adgo-test#readme",
+  "devDependencies": {
+    "eslint": "^6.3.0"
+  }
 }

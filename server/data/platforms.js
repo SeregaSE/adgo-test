@@ -1,10 +1,10 @@
 module.exports = [
     {
-        label: "Desktop",
+        label: 'Desktop',
         value: 1
     },
     {
-        label: "Mobile",
+        label: 'Mobile',
         value: 2
     }
 ];

@@ -8,7 +8,7 @@ const routes = Object.keys(data);
 
 server.on('request', (request, response) => {
     const url = parseUrl(request.url);
-    const [_, api, version, route] = url.pathname.split('/');
+    const [, api, version, route] = url.pathname.split('/');
 
     if (request.headers.origin !== undefined) {
         response.setHeader('Access-Control-Allow-Origin', request.headers.origin);

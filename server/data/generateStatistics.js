@@ -7,29 +7,29 @@ const random = require('../util/random');
 
 const DAY_DURATION_MILLISECONDS = 86400 * 1000;
 /* YYYY-MM-DD string to date object */
-isDate = value => {
+const isDate = value => {
     if (value instanceof Date) {
         return;
     }
     
-    throw new Error(`from and to params are required`);
+    throw new Error('from and to params are required');
 }
 /* YYYY-MM-DD string to date object */
-toDate = value => new Date(value);
+const toDate = value => new Date(value);
 /* Array of strings to array of ints */
-toInt = value => parseInt(value, 10);
-toIntArray = value => value.map(toInt);
+const toInt = value => parseInt(value, 10);
+const toIntArray = value => value.map(toInt);
 
 const filters = [
     {
         name: 'from',
         converter: toDate,
-        validator: isDate,
+        validator: isDate
     },
     {
         name: 'to',
         converter: toDate,
-        validator: isDate,
+        validator: isDate
     },
     {
         name: 'groupBy',
@@ -38,35 +38,35 @@ const filters = [
                 return;
             }
             
-            throw new Error(`groupBy param is not valid or not specified`);
-        },
+            throw new Error('groupBy param is not valid or not specified');
+        }
     },
     {
         name: 'platform',
         converter: toInt,
-        default: null,
+        default: null
     },
     {
         name: 'browsers[]',
         converter: toIntArray,
-        default: [],
+        default: []
     },
     {
         name: 'operatingSystems[]',
         converter: toIntArray,
-        default: [],
+        default: []
     },
     {
         name: 'limit',
         converter: toInt,
-        default: 25,
+        default: 25
 
     },
     {
         name: 'offset',
         converter: toInt,
-        default: 0,
-    },
+        default: 0
+    }
 ];
 
 const formatDay = (date) => {
@@ -98,14 +98,14 @@ const applyFilter = (statistics, filter) => {
                 [groupBy]: group,
                 impressions: acc[group] && acc[group].impressions ? acc[group].impressions + 1 : 1,
                 clicks: acc[group] && acc[group].clicks ? acc[group].clicks + event.click : event.click ? 1 : 0,
-                money: acc[group] && acc[group].money ? acc[group].money + event.money : event.money,
+                money: acc[group] && acc[group].money ? acc[group].money + event.money : event.money
             }
         }
     }, {});
 
     const rows = Object.keys(filtered).reduce((acc, row) => [
         ...acc,
-        filtered[row],
+        filtered[row]
     ], []);
 
     return {
@@ -114,12 +114,12 @@ const applyFilter = (statistics, filter) => {
         total: rows.reduce((acc, row) => ({
             impressions: acc.impressions + row.impressions,
             clicks: acc.clicks + row.clicks,
-            money: acc.money + row.money,
+            money: acc.money + row.money
         }), {
             impressions: 0,
             clicks: 0,
-            money: 0,
-        }),
+            money: 0
+        })
     }
 };
 
@@ -146,7 +146,7 @@ const generateStatistics = url => {
    
         return {
             ...acc,
-            [multi ? name.slice(0, -2) : name]: value,
+            [multi ? name.slice(0, -2) : name]: value
         }
     }, {});
 
@@ -192,7 +192,7 @@ const generateStatistics = url => {
                 platform: platforms.find(item => item.value === platformId),
                 browser: browsers.find(item => item.value === browserId),
                 operatingSystem: operatingSystems.find(item => item.value === operatingSystemsId),
-                money: click ? (random(100, 10000) / 100000) : 0,
+                money: click ? (random(100, 10000) / 100000) : 0
             });
         }
 

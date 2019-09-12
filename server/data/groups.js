@@ -1,18 +1,18 @@
 module.exports = [
     {
-        label: "Day",
-        value: "day",
+        label: 'Day',
+        value: 'day'
     },
     {
-        label: "Platform",
-        value: "platform"
+        label: 'Platform',
+        value: 'platform'
     },
     {
-        label: "Operating system",
-        value: "operatingSystem"
+        label: 'Operating system',
+        value: 'operatingSystem'
     },
     {
-        label: "Browser",
-        value: "browser"
+        label: 'Browser',
+        value: 'browser'
     }
 ];
