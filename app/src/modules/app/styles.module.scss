@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  .container {
+    display: flex;
+    flex-basis: 960px;
+    .column {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        .select {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

@@ -36,11 +36,6 @@ const Table = ({
 			<table>
 				<thead>
 					<tr>
-						{/* {searchParam.groups && searchParam.groups.map((item) => {
-							return (
-							<div>s</div>
-							)
-						})} */}
 						{statistics.rows[0].day && 
 							<th>Day</th>
 						}
