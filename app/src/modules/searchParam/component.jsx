@@ -5,7 +5,6 @@ const SeatchOptions = ({
   options, 
   getOptions,
   changeSearchParam,
-  searchParam,
 }) => {
 
   const [ option, setOption ] = useState('');

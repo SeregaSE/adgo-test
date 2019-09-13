@@ -23,6 +23,5 @@ export const statUrl = ({
   const to = dateFormat(dateRange[1], 'yyyy-mm-dd');
 
   const url = `${statistics}?groupBy=${groupBy}&from=${from}&to=${to}&offset=${offset}${platformUrl}${browserUrl}${operatingSystemUrl}`;
-  console.log(url)
   return url;
 }

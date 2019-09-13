@@ -5,7 +5,6 @@ import * as actions from './actions';
 
 const mapStateToProps = store => ({
   options: store.searchParam.options,
-  searchParam: store.searchParam.searchParam,
 });
 
 const mapDispatchToProps = {
