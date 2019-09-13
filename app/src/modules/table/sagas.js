@@ -12,6 +12,7 @@ function* getStatistics({
     platform,
     browser,
     operatingSystem,
+    offset,
   }
 }) {
   try {
@@ -22,11 +23,15 @@ function* getStatistics({
         platform,
         browser,
         operatingSystem,
+        offset,
       }),
     });
     
     yield put(actions.getStatisticsSuccess({ statistics }));
- 
+
+    const pageCount = Math.ceil(statistics.count / 25);
+    yield put(actions.setPageCount({ pageCount }));
+
   } catch (errorMessage) {
     yield put(actions.getStatisticsFail({ errorMessage: errorMessage.toString() }));
   }

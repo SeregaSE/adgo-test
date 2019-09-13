@@ -14,6 +14,7 @@ export const statUrl = ({
   platform,
   browser,
   operatingSystem,
+  offset,
 }) => {
   const platformUrl = platform ? '&platform='+platform : '';
   const browserUrl = browser ? '&browsers[]='+browser : '';
@@ -21,7 +22,7 @@ export const statUrl = ({
   const from = dateFormat(dateRange[0], 'yyyy-mm-dd');
   const to = dateFormat(dateRange[1], 'yyyy-mm-dd');
 
-  const url = `${statistics}?groupBy=${groupBy}&from=${from}&to=${to}${platformUrl}${browserUrl}${operatingSystemUrl}`;
+  const url = `${statistics}?groupBy=${groupBy}&from=${from}&to=${to}&offset=${offset}${platformUrl}${browserUrl}${operatingSystemUrl}`;
   console.log(url)
   return url;
 }

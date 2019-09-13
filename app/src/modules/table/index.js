@@ -6,6 +6,7 @@ import * as actions from './actions';
 const mapStateToProps = state => ({
 	statistics: state.table.statistics,
 	searchParam: state.searchParam.searchParam,
+	currentPage: state.table.currentPage,
 })
 
 const mapDispatchToProps = {

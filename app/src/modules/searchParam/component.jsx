@@ -5,9 +5,10 @@ const SeatchOptions = ({
   options, 
   getOptions,
   changeSearchParam,
+  searchParam,
 }) => {
 
-  const [ option, setOption ] = useState(1);
+  const [ option, setOption ] = useState('');
 
   useEffect(() => {
     getOptions({ type });
@@ -20,6 +21,9 @@ const SeatchOptions = ({
 
   return (
     <select value={option} onChange={(e) => handleChange(e.target.value)}>
+      {type !== 'groups' &&
+        <option value=''>All</option>
+      }
       {options[type].map((item, index) => (
         <option 
           key={index} 

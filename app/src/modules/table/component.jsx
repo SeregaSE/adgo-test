@@ -6,6 +6,7 @@ const Table = ({
 	statistics,
 	getStatistics,
 	searchParam,
+	currentPage,
 }) => {
 
 	useEffect(() => {
@@ -16,6 +17,7 @@ const Table = ({
 				platform: searchParam.platforms,
 				browser: searchParam.browsers,
 				operatingSystem: searchParam.operatingSystems,
+				offset: currentPage,
 			})
 		}
 	}, [
@@ -25,6 +27,7 @@ const Table = ({
 		searchParam.browsers,
 		searchParam.operatingSystems,
 		searchParam.dateRange,
+		currentPage,
 	]);
 
 	return (
@@ -73,7 +76,7 @@ const Table = ({
 								}
 								<td>{item.impressions}</td>
 								<td>{item.clicks}</td>
-								<td>{item.money}</td>
+								<td>{Math.round(item.money * 1000) /1000}</td>
 							</tr>
 						)
 					})}
