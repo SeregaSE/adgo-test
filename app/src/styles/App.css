@@ -1,0 +1,37 @@
+.App {
+  display: flex;
+  justify-content: center;
+  background: #ECECEC;
+  padding: 20px;
+}
+
+.statistics {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 1300px;
+}
+
+.statistics__table {
+  margin-top: 20px !important;
+}
+
+
+.statistics__options-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.statistics__options-row-element_margin {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 10px;
+}
+
+.statistics__options-row-element_margin > div:nth-child(1) {
+  margin-left: 10px;
+}
