@@ -31,17 +31,7 @@
     "lint": "eslint src/**/*.js",
     "test": "react-scripts test --env=jsdom",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
-    "eject": "react-scripts eject",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
-  },
-  "devDependencies": {
-    "cypress": "^3.1.0",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0",
-    "eslint-plugin-cypress": "^2.0.1",
-    "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-react-perf": "^2.0.9"
+    "eject": "react-scripts eject"
   },
   "browserslist": [
     ">0.2%",

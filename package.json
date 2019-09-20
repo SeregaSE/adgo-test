@@ -17,8 +17,5 @@
   "bugs": {
     "url": "https://github.com/SeregaSE/adgo-test/issues"
   },
-  "homepage": "https://github.com/SeregaSE/adgo-test#readme",
-  "devDependencies": {
-    "eslint": "^6.3.0"
-  }
+  "homepage": "https://github.com/SeregaSE/adgo-test#readme"
 }

@@ -15,7 +15,6 @@ import {
 } from "@material-ui/core/";
 import ReactPaginate from "react-paginate";
 import { ThemeProvider, makeStyles, mergeClasses } from "@material-ui/styles";
-import Header from "../Header";
 import StatisticsForm from "../StatisticsForm";
 import {
   statisticsRequest,
