@@ -10,6 +10,8 @@ import { constructQueryString } from "./utils/utils";
 import { Pagination } from "./components/pagination/Pagination";
 import { DateInputs } from "./components/dates/DateInputs";
 import { PaginationLimits } from "./components/paginationLimits/PaginationLimits";
+import { Loader } from "./loader/Loader";
+
 export class App extends Component {
   state = {
     filters: {
@@ -25,7 +27,8 @@ export class App extends Component {
     count: null,
     currentPage: 1,
     rows: [],
-    total: []
+    total: [],
+    isLoading: false
   };
 
   setTableCurrentPage = page => {
@@ -43,13 +46,14 @@ export class App extends Component {
 
     if (!filters.from || !filters.to || !filters.groupBy) return;
 
+    this.setState({ isLoading: true });
     const resultQueryString = constructQueryString(filters);
     const response = await getStatistic(resultQueryString);
     const {
       data: { rows, total, count }
     } = response;
 
-    this.setState({ rows, total, count });
+    this.setState({ rows, total, count, isLoading: false });
   };
 
   render() {
@@ -58,6 +62,7 @@ export class App extends Component {
       currentPage,
       total,
       count,
+      isLoading,
       filters: { groupBy, operatingSystems, browsers, limit }
     } = this.state;
     return (
@@ -66,6 +71,11 @@ export class App extends Component {
           <h1>Statistic</h1>
           <div className="table">
             <div className="tableFilters">
+              {isLoading && (
+                <div className="loader">
+                  <Loader />
+                </div>
+              )}
               <div className="tableRow1">
                 <div className="tableElem">
                   <DateInputs getData={this.getData} />
@@ -93,7 +103,12 @@ export class App extends Component {
               </div>
             </div>
             <div className="tableData">
-              <Table rows={rows} total={total} groupBy={groupBy} />
+              <Table
+                rows={rows}
+                total={total}
+                groupBy={groupBy}
+                isLoading={isLoading}
+              />
             </div>
           </div>
           <div className="paginationWrapper">

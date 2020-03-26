@@ -9,11 +9,9 @@ export const PaginationLimits = ({ getData, limit }) => {
   return (
     <>
       <label> Limit</label>
-      <select value={limit} onChange={setLimit} className="limits">
+      <select defaultValue={limit} onChange={setLimit} className="limits">
         <option value="10">10</option>
-        <option selected value="25">
-          25
-        </option>
+        <option value="25">25</option>
       </select>
     </>
   );

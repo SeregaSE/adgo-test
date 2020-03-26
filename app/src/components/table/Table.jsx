@@ -1,8 +1,7 @@
 import React from "react";
 import "./Table.scss";
 import { TableRow } from "./TableRow/TableRow";
-
-export const Table = ({ rows, total, groupBy }) => {
+export const Table = ({ rows, total, groupBy, isLoading }) => {
   return (
     <table>
       <thead>

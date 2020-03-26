@@ -128,7 +128,14 @@ label {
   width: 100%;
 }
 
-.paginationLimits {}
+.loader {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
 
 /*Кастомные стили мультиселекта*/
 
