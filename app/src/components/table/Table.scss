@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+tr th:first-child::first-letter {
+    text-transform: uppercase;
+}
+
+th {
+    background: rgb(151, 147, 147) !important;
+}
+
+th,
+td {
+    padding: 4px;
+    border: 3px solid black;
+    text-align: start;
+    padding: 10px 8px;
+    font-weight: 500;
+}
+
+tr:nth-child(odd)>td {
+    background: white;
+}
+
+tr:nth-child(even)>td {
+    background: rgb(240, 238, 238);
+}

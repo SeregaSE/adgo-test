@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+}
+
+body {
+  background: linear-gradient(#bbb, transparent 1px),
+    linear-gradient(90deg, #bbb, transparent 1px);
+  background-size: 23px 23px;
+  background-position: center center;
+}
+
+button,
+select {
+  outline: none;
+}
+
+.select {
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+label {
+  font-style: oblique;
+  font-weight: 600;
+}
+
+.container {
+  padding: 30px 0;
+  width: 838px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Стили фильтров*/
+
+.table {
+  width: 100%;
+}
+
+.tableFilters {
+  margin-bottom: 20px;
+}
+
+.tableRow1,
+.tableRow2 {
+  display: flex;
+  justify-items: start;
+  align-items: flex-end;
+}
+
+.tableRow1 {
+  margin-bottom: 30px;
+}
+
+.tableRow1 select {
+  width: 240px;
+  padding: 3px;
+}
+
+.tableElem {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+
+  & label {
+    margin-bottom: 5px;
+
+  }
+
+  & select {
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 5px;
+  }
+
+  & input {
+    border: 2px solid black;
+    padding: 2px;
+  }
+}
+
+.required {
+  position: relative;
+
+  &:after {
+    content: "*";
+    position: absolute;
+    color: red;
+    right: 238px;
+    font-size: 30px;
+    font-weight: 800;
+    top: -8px;
+  }
+}
+
+
+::-webkit-calendar-picker-indicator {
+  color: transparent;
+  opacity: 1;
+  background: url(https://image.freepik.com/free-icon/_318-9776.jpg) no-repeat center;
+  background-size: contain;
+}
+
+.tableRow2 .tableElem {
+  width: 250px;
+}
+
+.limits {
+  width: 40px;
+}
+
+.multiSelectWrapper {
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
+.paginationWrapper {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.paginationLimits {}
+
+/*Кастомные стили мультиселекта*/
+
+.dropdown-heading {
+  padding: 0;
+  height: 20px;
+}
+
+.dropdown-heading-value {
+  line-height: inherit;
+}
+
+.dropdown-heading-value>span {
+  color: black !important;
+}
