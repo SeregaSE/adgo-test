@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Platforms = ({ platformData, getData }) => {
+export const Platforms = ({ platformData, getData, groupBy }) => {
   const onSelectPlatform = e => {
     if (e.target.value === 0) return;
     getData("platform", e.target.value);
@@ -9,7 +9,10 @@ export const Platforms = ({ platformData, getData }) => {
   return (
     <>
       <label>Platform</label>
-      <select onChange={onSelectPlatform}>
+      <select
+        disabled={groupBy !== "platform" ? true : false}
+        onChange={onSelectPlatform}
+      >
         <option value="0">Choose platform</option>
         {platformData.map(item => (
           <option

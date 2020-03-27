@@ -14,7 +14,13 @@ export class PlatformsContainer extends Component {
 
   render() {
     const { platformData } = this.state;
-    const { getData } = this.props;
-    return <Platforms platformData={platformData} getData={getData} />;
+    const { getData, groupBy } = this.props;
+    return (
+      <Platforms
+        platformData={platformData}
+        getData={getData}
+        groupBy={groupBy}
+      />
+    );
   }
 }

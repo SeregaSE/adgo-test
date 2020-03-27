@@ -10,8 +10,6 @@ import { constructQueryString } from "./utils/utils";
 import { Pagination } from "./components/pagination/Pagination";
 import { DateInputs } from "./components/dates/DateInputs";
 import { PaginationLimits } from "./components/paginationLimits/PaginationLimits";
-import { Loader } from "./loader/Loader";
-
 export class App extends Component {
   state = {
     filters: {
@@ -27,8 +25,7 @@ export class App extends Component {
     count: null,
     currentPage: 1,
     rows: [],
-    total: [],
-    isLoading: false
+    total: []
   };
 
   setTableCurrentPage = page => {
@@ -37,7 +34,12 @@ export class App extends Component {
       offset: this.state.currentPage - 1
     });
   };
-
+  clearStateRows = () => {
+    this.setState({
+      rows: [],
+      total: []
+    });
+  };
   getData = async (key, value) => {
     await this.setState({
       filters: { ...this.state.filters, [key]: value }
@@ -46,14 +48,14 @@ export class App extends Component {
 
     if (!filters.from || !filters.to || !filters.groupBy) return;
 
-    this.setState({ isLoading: true });
     const resultQueryString = constructQueryString(filters);
+    this.clearStateRows();
     const response = await getStatistic(resultQueryString);
     const {
       data: { rows, total, count }
     } = response;
 
-    this.setState({ rows, total, count, isLoading: false });
+    this.setState({ rows, total, count });
   };
 
   render() {
@@ -62,7 +64,6 @@ export class App extends Component {
       currentPage,
       total,
       count,
-      isLoading,
       filters: { groupBy, operatingSystems, browsers, limit }
     } = this.state;
     return (
@@ -71,11 +72,6 @@ export class App extends Component {
           <h1>Statistic</h1>
           <div className="table">
             <div className="tableFilters">
-              {isLoading && (
-                <div className="loader">
-                  <Loader />
-                </div>
-              )}
               <div className="tableRow1">
                 <div className="tableElem">
                   <DateInputs getData={this.getData} />
@@ -86,29 +82,29 @@ export class App extends Component {
               </div>
               <div className="tableRow2">
                 <div className="tableElem">
-                  <PlatformsContainer getData={this.getData} />
+                  <PlatformsContainer
+                    getData={this.getData}
+                    groupBy={groupBy}
+                  />
                 </div>
                 <div className="tableElem">
                   <OsContainer
                     getData={this.getData}
                     operatingSystems={operatingSystems}
+                    groupBy={groupBy}
                   />
                 </div>
                 <div className="tableElem">
                   <BrowsersContainer
                     getData={this.getData}
                     browsers={browsers}
+                    groupBy={groupBy}
                   />
                 </div>
               </div>
             </div>
             <div className="tableData">
-              <Table
-                rows={rows}
-                total={total}
-                groupBy={groupBy}
-                isLoading={isLoading}
-              />
+              <Table rows={rows} total={total} groupBy={groupBy} />
             </div>
           </div>
           <div className="paginationWrapper">

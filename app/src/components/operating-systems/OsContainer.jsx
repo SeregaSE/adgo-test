@@ -14,7 +14,7 @@ export class OsContainer extends Component {
 
   render() {
     const { osData } = this.state;
-    const { getData, operatingSystems } = this.props;
+    const { getData, operatingSystems, groupBy } = this.props;
     return (
       <Os
         osData={osData.map(item => ({
@@ -23,6 +23,7 @@ export class OsContainer extends Component {
         }))}
         getData={getData}
         operatingSystems={operatingSystems}
+        groupBy={groupBy}
       />
     );
   }

@@ -11,15 +11,16 @@ export class Os extends Component {
   };
 
   render() {
-    const { operatingSystems, osData } = this.props;
+    const { operatingSystems, osData, groupBy } = this.props;
     return (
       <>
         <label>Operating System</label>
         <div className="multiSelectWrapper">
           <MultiSelect
+            disabled={groupBy !== "operatingSystem" ? true : false}
             overrideStrings={multiSelectOs}
             options={osData}
-            selected={operatingSystems}
+            selected={groupBy === "operatingSystem" ? operatingSystems : []}
             onSelectedChanged={this.setDataFrom}
           />
         </div>

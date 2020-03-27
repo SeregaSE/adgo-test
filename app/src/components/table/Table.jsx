@@ -1,12 +1,13 @@
 import React from "react";
 import "./Table.scss";
 import { TableRow } from "./TableRow/TableRow";
-export const Table = ({ rows, total, groupBy, isLoading }) => {
+
+export const Table = ({ rows, total, groupBy }) => {
   return (
     <table>
       <thead>
         <tr>
-          <th>{groupBy}</th>
+          <th>{groupBy === 0 ? null : groupBy}</th>
           <th>Impressions</th>
           <th>Clicks</th>
           <th>Money</th>
@@ -16,7 +17,7 @@ export const Table = ({ rows, total, groupBy, isLoading }) => {
         {rows.map(item => {
           return (
             <TableRow
-              key={`${item.impressions}${item.money}`}
+              key={`${item.impressions}${item.money}${item.groupBy}`}
               filterValue={item[groupBy]}
               impressions={item.impressions}
               clicks={item.clicks}

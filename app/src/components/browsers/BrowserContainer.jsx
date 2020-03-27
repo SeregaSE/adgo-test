@@ -14,12 +14,13 @@ export class BrowsersContainer extends Component {
 
   render() {
     const { browsersData } = this.state;
-    const { getData, browsers } = this.props;
+    const { getData, browsers, groupBy } = this.props;
     return (
       <Browsers
         browsersData={browsersData}
         getData={getData}
         browsers={browsers}
+        groupBy={groupBy}
       />
     );
   }

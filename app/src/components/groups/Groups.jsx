@@ -2,7 +2,7 @@ import React from "react";
 
 export const Groups = ({ groupsData, getData }) => {
   const onSelectGroups = e => {
-    if (e.target.value === 0) return;
+    if (e.target.value === "0") return;
     getData("groupBy", e.target.value);
   };
   return (

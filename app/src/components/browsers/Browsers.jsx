@@ -11,15 +11,16 @@ export class Browsers extends Component {
   };
 
   render() {
-    const { browsers, browsersData } = this.props;
+    const { browsers, browsersData, groupBy } = this.props;
     return (
       <>
         <label>Browsers</label>
         <div className="multiSelectWrapper">
           <MultiSelect
+            disabled={groupBy !== "browser" ? true : false}
             overrideStrings={multiSelectBrowsers}
             options={browsersData}
-            selected={browsers}
+            selected={groupBy === "browser" ? browsers : []}
             onSelectedChanged={this.setDataFrom}
           />
         </div>
