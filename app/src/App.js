@@ -77,7 +77,10 @@ export class App extends Component {
                   <DateInputs getData={this.getData} />
                 </div>
                 <div className="tableElem required">
-                  <GroupsContainer getData={this.getData} />
+                  <GroupsContainer
+                    getData={this.getData}
+                    clearStateRows={this.clearStateRows}
+                  />
                 </div>
               </div>
               <div className="tableRow2">

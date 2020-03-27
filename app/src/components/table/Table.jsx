@@ -3,11 +3,12 @@ import "./Table.scss";
 import { TableRow } from "./TableRow/TableRow";
 
 export const Table = ({ rows, total, groupBy }) => {
+  debugger;
   return (
     <table>
       <thead>
         <tr>
-          <th>{groupBy === 0 ? null : groupBy}</th>
+          <th>{rows.length === 0 ? null : groupBy}</th>
           <th>Impressions</th>
           <th>Clicks</th>
           <th>Money</th>

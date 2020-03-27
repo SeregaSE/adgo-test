@@ -14,7 +14,13 @@ export class GroupsContainer extends Component {
 
   render() {
     const { groupsData } = this.state;
-    const { getData } = this.props;
-    return <Groups groupsData={groupsData} getData={getData} />;
+    const { getData, clearStateRows } = this.props;
+    return (
+      <Groups
+        groupsData={groupsData}
+        getData={getData}
+        clearStateRows={clearStateRows}
+      />
+    );
   }
 }
