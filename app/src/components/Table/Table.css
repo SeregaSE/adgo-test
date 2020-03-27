@@ -20,12 +20,8 @@
     margin-bottom: 40px;
 }
 
-.sort_groupby {
-    padding-top: 20px;
-}
-
-.sort_date_from span, .sort_date_to span {
-   
+.table_sort span {
+    font-size: 12px;
     font-weight: 600;
 }
 

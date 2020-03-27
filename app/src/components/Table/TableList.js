@@ -7,14 +7,18 @@ class TableList extends React.Component {
         this.renderList = this.renderList.bind(this)
     }
 
+    sortList() {
+
+    }
+
     renderList(data) {
         return data.map((i, n) => {
             return(
             <tr key={n}>
             <td >{n + 1}</td>
             <td>{i.platform}</td>
-            <td>android</td>
-            <td>chrome</td>
+            <td>{i.operatingSystem}</td>
+            <td>{i.browser}</td>
             <td>{i.clicks}</td>
             <td>{i.money}</td>
             <td>{i.day}</td>

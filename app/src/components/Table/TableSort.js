@@ -16,6 +16,7 @@ class TableSort extends React.Component {
         this.props.changeUrl(type, value)
         const urlState ={
             ...this.props.urlState,
+            offset: 0,
             [type]: {
                url: this.props.urlState[type].url,
                value: value 
@@ -43,17 +44,21 @@ class TableSort extends React.Component {
                         <DatePicker defaultDate={today} optionType='to' changeUrl={changeUrl} getData={getData} urlState={urlState} />
                     </div> 
                     <div className="sort_groupby elem">
+                    <span>Группировка по</span>
                         <Select onChange={this.setUrl} nameOption="Group by" data={groupby} optionType='groupby'  urlState={urlState} />
                     </div>
                 </div>
                 <div className="table_sort_bottom">
                     <div className="sort_platform elem">
+                    <span>Выбор платформы</span>
                         <Select onChange={this.setUrl} nameOption="Platform" data={platform} optionType='platform' urlState={urlState}  />
                     </div>
                     <div className="sort_os elem">
+                    <span>Выбор ОС</span>
                        <Select onChange={this.setUrl} nameOption="Operating System" data={os} optionType='os' urlState={urlState}  />
                     </div>
                     <div className="sort_browser elem">
+                    <span>Выбор браузера</span>
                         <Select onChange={this.setUrl} nameOption="Browser" data={browser} optionType='browsers' urlState={urlState} />
                     </div>
                 </div>

@@ -45,7 +45,7 @@ let initialState = {
 }
 
 export default function(state = initialState, action) {
-    console.log(state)
+    
     switch(action.type) {
         case 'DEFAULT_DATA' :
           return {
@@ -71,13 +71,14 @@ export default function(state = initialState, action) {
                     [action.urltype] : {
                         url: state.urlState[action.urltype].url,
                         value: action.value
+                        }
                     },
-                    paginate: {
+                paginate: {
                         ...state.paginate,
-                        activePage: 1,
+                        activePage: action.activePage, 
                     }
                 }
-            } 
+            
         case 'CHANGE_PAGE' :
             return {
                 ...state,
@@ -91,7 +92,6 @@ export default function(state = initialState, action) {
                 }
             }       
     }
-    console.log(state)
 
     return state
 }

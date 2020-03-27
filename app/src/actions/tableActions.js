@@ -23,7 +23,7 @@ export const getData = (urlState) => (dispatch) => {
     axios.get(`${url}/api/v1/statistics?groupBy=${groupby.value}&${urlOS.url}${urlOS.value}&${urlPlatform.url}${urlPlatform.value}&${urlBrowsers.url}${urlBrowsers.value}&from=${formatDate(fromDefault)}&to=${formatDate(toDefault)}&offset=${offset}&limit=${limit}`).then(res => {
             
         const items = Math.ceil(Number(res.data.count) / 25) 
-            console.log(items)
+
             dispatch({
                 type: 'DEFAULT_DATA',
                 payload: res.data.rows,
@@ -37,21 +37,22 @@ export const getData = (urlState) => (dispatch) => {
 }
 
 export const changeUrl = (type, value) => (dispatch) => {
-    let gbValue = type == 'groupby' && value == '' ? 'day' : value
-    console.log(gbValue)
+    
     dispatch({
         type: 'SET_URL',
         urltype: type,
-        value: gbValue,
-        offset: 0
+        value: value,
+        offset: 0,
+        activePage: 1
     })
     
 }
 
-export const changePage = (offset) => (dispatch) => {
+export const changePage = (offset, page) => (dispatch) => {
     dispatch({
         type: 'CHANGE_PAGE',
-        offset: offset
+        offset: offset,
+        page: page
     })
 }
 

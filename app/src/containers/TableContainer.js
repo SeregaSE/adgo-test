@@ -25,9 +25,8 @@ const mapDispatchToProps = (dispatch) => {
         changeUrl: (type, value) => {
             dispatch(changeUrl(type, value))
         },
-        changePage: (offset) => {
-            console.log('page')
-            dispatch(changePage(offset))
+        changePage: (offset, page) => {
+            dispatch(changePage(offset, page))
         }
     }
 }

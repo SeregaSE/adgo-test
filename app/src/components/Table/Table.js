@@ -19,16 +19,14 @@ class Table extends React.Component {
     }
 
     clickPaginate(page) {
-        this.props.changePage(page - 1)
+        let offset = page - 1
+        this.props.changePage(offset, page)
          // let offset = this.props.paginate.count * page - this.props.paginate.count
         const urlState = {
             ...this.props.urlState,
-            offset: page - 1
+            offset: offset
         } 
         this.props.getData(urlState)
-        
-        
-        console.log('page')
     }
 
     render() { 
