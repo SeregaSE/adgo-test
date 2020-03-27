@@ -20,5 +20,6 @@
   "homepage": "https://github.com/SeregaSE/adgo-test#readme",
   "devDependencies": {
     "eslint": "^6.3.0"
-  }
+  },
+  "dependencies": {}
 }

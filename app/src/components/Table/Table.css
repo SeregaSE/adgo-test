@@ -1,0 +1,31 @@
+.table {
+    padding: 50px 0;
+}
+
+.table_sort_head, .table_sort_bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.table_sort_head .elem, .table_sort_bottom .elem {
+    width: 250px;
+}
+
+.table_sort_head .sort_date_to, .table_sort_bottom .sort_os {
+    margin: 0 20px;
+}
+
+.tableBlock {
+    margin-bottom: 40px;
+}
+
+.sort_groupby {
+    padding-top: 20px;
+}
+
+.sort_date_from span, .sort_date_to span {
+   
+    font-weight: 600;
+}
+
