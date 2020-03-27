@@ -10,7 +10,7 @@ export const Platforms = ({ platformData, getData, groupBy }) => {
     <>
       <label>Platform</label>
       <select
-        disabled={groupBy !== "platform" ? true : false}
+        disabled={groupBy === "platform" ? false : true}
         onChange={onSelectPlatform}
       >
         <option value="0">Choose platform</option>

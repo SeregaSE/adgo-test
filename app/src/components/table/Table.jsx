@@ -3,7 +3,6 @@ import "./Table.scss";
 import { TableRow } from "./TableRow/TableRow";
 
 export const Table = ({ rows, total, groupBy }) => {
-  debugger;
   return (
     <table>
       <thead>

@@ -2,7 +2,7 @@ import React from "react";
 
 export const Groups = ({ groupsData, getData, clearStateRows }) => {
   const onSelectGroups = e => {
-    if (e.target.value === "0") {
+    if (e.target.value === 0) {
       return clearStateRows();
     }
     getData("groupBy", e.target.value);
