@@ -2,11 +2,6 @@ class APIService {
 
   _apiBase = 'http://localhost:3001/api/v1';
 
-  // getPlatforms = async () => {
-  //   const platforms = await fetch(`${this._apiBase}platforms`)
-  //   return platforms;
-  // }
-
   getResource = async (url) => {
     const response = await fetch(`${this._apiBase}${url}`);
 
