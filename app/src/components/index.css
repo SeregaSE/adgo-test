@@ -1,0 +1,41 @@
+.page {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border: 1px solid rgba(224, 224, 224, 1);
+  margin-bottom: 20px;
+}
+.page.active {
+  background-color: rgba(224, 224, 224, 1);
+}
+.page:hover{
+  background-color: rgba(224, 224, 224, 0.5);
+  cursor: pointer;
+}
+
+.pagination{
+  display: block;
+  margin-top: 20px;
+}
+.pagination.hide{
+  display: none;
+}
+
+.label{
+  display: inline-block; 
+}
+.select{
+  display: block !important;
+}
+.SelectComponent{
+  width: 25%;  
+}
+
+.error{
+  display: block;
+  margin-top: 30px;
+  font-size: 25px;
+  color: red;
+  font-weight: 600;
+}

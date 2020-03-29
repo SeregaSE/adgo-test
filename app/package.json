@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "c",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -31,5 +31,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Решенение мы ждем в данной директории",
+  "main": "cc",
+  "repository": {
+    "type": "git",
+    "url": "c"
+  },
+  "author": "c",
+  "license": "ISC"
 }
