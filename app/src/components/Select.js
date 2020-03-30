@@ -14,8 +14,8 @@ export class SelectComponent extends React.Component {
     }
   }
 
-  onChange = (value) => {
-    this.props.onChange(this.props.type, value)
+  onChange = (value, option) => {
+    this.props.onChange(this.props.type, option)
   }
 
   componentDidMount() {
@@ -34,7 +34,7 @@ export class SelectComponent extends React.Component {
         options => {
           this.setState({options})
           if(this.props.required && options[0])
-            this.onChange(options[0].value)
+            this.onChange('', options[0])
         }, 
         () => {
           notification.error({
@@ -51,19 +51,20 @@ export class SelectComponent extends React.Component {
       <div className="filter-row-element">
         <p>{this.props.title}</p>
         <Select 
-          allowClear
+          allowClear={!this.props.unClear}
           value={this.props.value}
           loading={this.state.loading}
-          disabled={this.props.platforms === '' ? true : false}
+          disabled={this.props.hasOwnProperty('platforms') && !this.props.platforms ? true : false}
           mode={this.props.multy ? 'multiple' : ''}
           placeholder={`Select ${this.props.title}`} 
           className="select"
-          onChange={this.onChange}
+          filterOption={false}
+          onSelect={this.onChange}
         >
           {this.state.options
             .filter(option => {
               if(!option.platform) return true
-              if(!this.props.platforms) return true
+              if(this.props.platforms === undefined) return true
 
               return option.platform === this.props.platforms
             })

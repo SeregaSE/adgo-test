@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { notification } from 'antd';
+import { notification, Table } from 'antd';
 
 import 'antd/dist/antd.css';
 import './app.scss'; 
@@ -19,10 +19,33 @@ export class App extends React.Component {
       browsers: undefined,
       'operating-systems': undefined,
       platforms: undefined,
-      statistics: [],
+      statistics: undefined,
       loading: false,
       limit: 20,
-      offset: 0,
+      currentPage: 1,
+      total: 0,
+      columns: [
+        {
+          title: 'Day',
+          dataIndex: 'day',
+          key: 'day',
+        },
+        {
+          title: 'Impressions',
+          dataIndex: 'impressions',
+          key: 'impressions',
+        },
+        {
+          title: 'Conversions',
+          dataIndex: 'conversions',
+          key: 'conversions',
+        },
+        {
+          title: 'Money',
+          dataIndex: 'money',
+          key: 'money',
+        },
+      ],
     }
   }
 
@@ -30,13 +53,32 @@ export class App extends React.Component {
     this.setState({
       from: date[0],
       to: date[1],
+      currentPage: 1,
     }, this.onLoad)
   }
 
-  onChangeSelect = (type, value) => {
-    this.setState({
-      [type]: value,
+  onChangeSelect = (type, option) => {
+    this.setState(state => {
+      state[type] = option.value
+      state.currentPage = 1
+
+      if(type === 'groups'){
+        state.columns[0].title = option.label || option.children
+        state.columns[0].dataIndex = option.value
+        state.columns[0].key = option.value
+      }
+
+      if (type === 'platforms') {
+        state.browsers = undefined
+        state['operating-systems'] = undefined
+      }
+
+      return state
     }, this.onLoad)
+  }
+
+  onChangePagination = (currentPage) => {
+    this.setState({currentPage}, this.onLoad)
   }
 
   onLoad = () => {
@@ -47,18 +89,22 @@ export class App extends React.Component {
       browsers, 
       platforms,
       limit,
-      offset,
+      currentPage,
     } = this.state
     
     if(!groups) return
 
-    this.setState({loading: true})
+    this.setState({
+      loading: true,
+      statistics: undefined,
+    })
+
     let url = `${baseUrl}/statistics`
     url += `?groupBy=${groups}`
     url += `&from=${from.format('YYYY-MM-DD')}`
     url += `&to=${to.format('YYYY-MM-DD')}`
     url += `&limit=${limit}`
-    url += `&offset${offset}`
+    url += `&offset=${currentPage - 1}`
 
     if(browsers)
       url += `&browsers[]=${browsers}`
@@ -80,7 +126,22 @@ export class App extends React.Component {
         throw new Error('')
       })
       .then(
-        statistics => this.setState({statistics}), 
+        response => {
+          const group = this.state.groups
+          const statistics = response.rows.map((item, index) => {
+            return {
+              key: index,
+              [group]: item[group],
+              impressions: item.impressions,
+              conversions: item.clicks,
+              money: item.money.toFixed(2),
+            }
+          })
+          this.setState({
+            statistics,
+            total: response.count,
+          })
+        }, 
         () => {
           notification.error({
             message: 'Error',
@@ -106,6 +167,7 @@ export class App extends React.Component {
             <Select 
               title='Group by' 
               type='groups' 
+              unClear={true}
               required={true}
               value={this.state.groups}
               onChange={this.onChangeSelect}
@@ -138,7 +200,20 @@ export class App extends React.Component {
               onChange={this.onChangeSelect}
             />
           </div>
+        </div>
 
+        <div className="content">
+          <Table 
+            dataSource={this.state.statistics} 
+            columns={this.state.columns} 
+            loading={this.state.loading}
+            pagination={{
+              defaultPageSize: this.state.limit,
+              current: this.state.currentPage,
+              total: this.state.total,
+              onChange: this.onChangePagination,
+            }}
+          />
         </div>
       </div>
     );
