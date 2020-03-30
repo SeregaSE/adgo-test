@@ -23,12 +23,6 @@ class App extends Component {
   };
 
   onSelectHandler = e => {
-    // console.log("hello", e.target.value);
-    // this.setState({
-    //   currentFilter: e.target.value
-      
-    // })
-    console.log(e, "eeee")
     if (!e) return null
     const arrayOfLabels = e.map((item) => {
       return item.label
@@ -36,6 +30,11 @@ class App extends Component {
     this.setState({
       currentFilter: arrayOfLabels
     })
+    if (!e.length) {
+      this.setState({
+        currentFilter: null
+      })
+    }
   };
 
   componentDidMount() {
