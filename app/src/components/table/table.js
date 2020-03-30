@@ -4,6 +4,7 @@ import withAPIService from "../hoc/with-APIService";
 import generateKey from "../../utils/key-generator";
 import formatDate from "../../utils/format-date-function";
 import TableHeader from "../table-header";
+import Spinner from "../spinner";
 
 const Table = ({
   getStatistics,
@@ -19,11 +20,13 @@ const Table = ({
   const [data, setData] = useState([]);
   const [from, setFrom] = useState(dateFrom);
   const [to, setTo] = useState(dateTo);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setFrom(dateFrom);
     setTo(dateTo);
     const fetchData = async () => {
+      setLoading(true);
       const params = await getGroups();
       const param = params.find(item => item.label === groupBy);
       const result = await getStatistics(
@@ -36,6 +39,7 @@ const Table = ({
       setData(result.rows);
       setTotal(result.count);
       changeTotalItems(total);
+      setLoading(false)
     };
 
     fetchData();
@@ -53,14 +57,13 @@ const Table = ({
   ]);
 
   const rows = data.map((item, index) => {
-    console.log(data)
+
     const key = generateKey(index);
     if (currentFilter === "..." || !currentFilter) {
       return <TableRow key={key} {...item} />;
     } 
 
-    console.log(item.platform, 222)
-    console.log(currentFilter, 333)
+
     
     if ( currentFilter.indexOf(item.platform) !== -1 || !currentFilter) {
       return <TableRow key={key} {...item} />;
@@ -70,6 +73,10 @@ const Table = ({
       return <TableRow key={key} {...item} />;
     }
   });
+
+  if (loading) {
+    return <Spinner/>
+  }
 
   return (
     <TableHeader groupBy={groupBy} rows={rows}/>
