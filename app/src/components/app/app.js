@@ -95,7 +95,6 @@ class App extends Component {
   };
 
   changeOffset = (operation, counter) => {
-    console.log(operation)
     if (operation === "+") {
       this.setState({
         offset:  (this.state.offset < counter - 1) ? this.state.offset + 1 : this.state.offset,
