@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 
-
 class Filters extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            isOSOpen:false,
+            isBrowserOpen:false
+        }
+    }
     changeDateFrom = ({target: {value}}) => {
         this.props.changeFrom(value);
     }
@@ -19,7 +25,7 @@ class Filters extends Component {
     }
     changeBrowser = ({target: {value}}) => {
         this.props.changeBrowser(value);
-    }
+    }   
     render() {
         return (
             <div>
@@ -45,36 +51,30 @@ class Filters extends Component {
                         <div className="col-md-4 mb-3">
                             <label>Platform</label>
                             <select className="custom-select" onChange={this.changePlatform}>
-                                <option defaultValue value=''>Slect Platform</option>
+                                <option defaultValue value=''>Select Platform</option>
                                 <option value='1'>Desktop</option>
                                 <option value='2'>Mobile</option>
                             </select>
                         </div>
                         <div className="col-md-4 mb-3">
-                            <label>Operating System</label>
-                            <select className="custom-select" onChange={this.changeOS}>
-                                <option defaultValue value=''>Slect Operating System</option>
-                                <option value='1'>Windows</option>
-                                <option value='2'>Mac OS</option>
-                                <option value='3'>Linux</option>
-                                <option value='4'>Android</option>
-                                <option value='5'>IOS</option>
-                            </select>
+                            <label>Operating System</label> 
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='1' onChange={this.changeOS}/>Windows</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='2' onChange={this.changeOS}/>Mac OS</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='3' onChange={this.changeOS}/>Linux</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='4' onChange={this.changeOS}/>Android</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='5' onChange={this.changeOS}/>IOS</div>
                         </div>
                         <div className="col-md-4 mb-3">
                             <label>Browser</label>
-                            <select className="custom-select" onChange={this.changeBrowser}>
-                                <option defaultValue value=''>Slect Browser</option>
-                                <option value='1'>Chrome</option>
-                                <option value='2'>Firefox</option>
-                                <option value='3'>UC browser</option>
-                                <option value='4'>Opera</option>
-                                <option value='5'>Chrome Mobile</option>
-                                <option value='6'>Chrome Webview</option>
-                                <option value='7'>Android browse</option>
-                                <option value='8'>UC browser mobile</option>
-                                <option value='9'>Opera Mini</option>
-                            </select>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='1' onChange={this.changeBrowser}/>Chrome</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='2' onChange={this.changeBrowser}/>Firefox</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='3' onChange={this.changeBrowser}/>UC browse</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='4' onChange={this.changeBrowser}/>Opera</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='5' onChange={this.changeBrowser}/>Chrome Mobile</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='6' onChange={this.changeBrowser}/>Chrome Webview</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='7' onChange={this.changeBrowser}/>Android browse</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='8' onChange={this.changeBrowser}/>UC browser mobil</div>
+                                <div className="form-check"><input type="checkbox" className="form-check-input" value='9' onChange={this.changeBrowser}/>Opera Mini</div>
                         </div>
                     </div>
                 </form>

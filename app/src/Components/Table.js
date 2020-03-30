@@ -4,7 +4,7 @@ import TableBody from './TableBody';
 import Pagination from './Pagination';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Base_Path, getStatistics, getDifference } from '../constants';
+import { Base_Path, getStatistics, getDifference, makeString } from '../constants';
 
 class Table extends Component {
     constructor(props){
@@ -53,7 +53,7 @@ class Table extends Component {
             prevProps.OS !== this.props.OS ||
             prevProps.browser !== this.props.browser||
             prevProps.offset !== this.props.offset){
-            this._getData(`${Base_Path}${getStatistics}${this.props.groupBy}&${this.props.platform?`platform=${this.props.platform}&`:''}${this.props.browser?`browsers[]=${this.props.browser}&`:''}${this.props.OS?`operatingSystems[]=${this.props.OS}&`:''}&offset=${this.props.offset[0]}&from=${this.props.dateFrom}&to=${this.props.dateTo}`);
+            this._getData(`${Base_Path}${getStatistics}${this.props.groupBy}&${this.props.platform?`platform=${this.props.platform}&`:''}${this.props.browser?`${makeString(this.props.browser, 'browsers[]')}`:''}${this.props.OS?`${makeString(this.props.OS, 'operatingSystems[]')}`:''}&offset=${this.props.offset[0]}&from=${this.props.dateFrom}&to=${this.props.dateTo}`);
         }
     }
     render() {
@@ -95,16 +95,16 @@ Table.propTypes={
     dateTo: PropTypes.string,
     groupBy: PropTypes.string, 
     platform: PropTypes.string,
-    OS: PropTypes.string,
-    browser: PropTypes.string
+    OS: PropTypes.array,
+    browser: PropTypes.array
 }
 Table.defaultProps={
     dateFrom: '2019-08-09',
     dateTo: '2019-08-10',
     groupBy: 'day', 
     platform: '',
-    OS: '',
-    browser: ''
+    OS: [],
+    browser: []
 }
 
 const mapStateProps = (state) => {

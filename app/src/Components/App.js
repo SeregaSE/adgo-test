@@ -11,8 +11,8 @@ class App extends Component {
       dateTo: '2019-08-10',
       groupBy: 'day',
       platform:'',
-      OS:'',
-      browser:''
+      OS:[],
+      browser:[]
     }
   }
   changeFrom = (value) => {
@@ -36,14 +36,30 @@ class App extends Component {
     })
   }
   changeOS = (value) => {
-    this.setState({
-      OS:value
-    })
+    let { OS } = this.state;
+
+    if(OS.includes(value)){
+      this.setState({
+        OS:OS.filter(el => el!==value)
+      })
+    }else{
+      this.setState({
+        OS:[...this.state.OS, value]
+      })
+    }
   }
   changeBrowser = (value) =>{
-    this.setState({
-      browser:value
-    })
+    let { browser } = this.state;
+
+    if(browser.includes(value)){
+      this.setState({
+        browser:browser.filter(el => el!==value)
+      })
+    }else{
+      this.setState({
+        browser:[...this.state.browser, value]
+      })
+    }
   }
   render() {
     const { dateFrom, dateTo, groupBy, platform, OS, browser} = this.state

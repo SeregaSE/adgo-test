@@ -11,3 +11,11 @@
 .table-container{
     padding-top: 10px;
 }
+.absol{
+    position: absolute;
+}
+.listItem{
+    padding: 0px;
+    height: 30px;
+    width: 185px;
+}

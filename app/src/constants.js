@@ -40,3 +40,11 @@ export function getDifference(date1, date2){
     var days = hours / 24;
     return days
 }
+
+export function makeString(arr, mainField){
+    let string = '';
+    arr.forEach(el => {
+        string += `${mainField}=${el}&`
+    })
+    return string;
+} 
