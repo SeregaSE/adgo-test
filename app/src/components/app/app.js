@@ -4,6 +4,7 @@ import Table from "../table";
 import FiltersField from "../filters-field";
 import Pagination from "../pagination";
 import withAPIService from "../hoc/with-APIService";
+import { string } from "prop-types";
 
 class App extends Component {
   state = {
@@ -93,21 +94,21 @@ class App extends Component {
     });
   };
 
-  changeOffset = (operation) => {
+  changeOffset = (operation, counter) => {
+    console.log(operation)
     if (operation === "+") {
       this.setState({
-        offset: this.state.offset + 1,
+        offset:  (this.state.offset < counter - 1) ? this.state.offset + 1 : this.state.offset,
       })
-    }
-    if (operation === "-") {
+    } else if (operation === "-") {
       this.setState({
-        offset: this.state.offset - 1,
+        offset: (this.state.offset >= 1) ? this.state.offset - 1 : this.state.offset,
       })
-    } else {
+    } else if (typeof operation !== string) {
       this.setState({
         offset: operation
       })
-    }
+    } 
   }
 
   changeTotalItems = (total) => {

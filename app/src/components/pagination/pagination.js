@@ -16,13 +16,14 @@ const Pagination = ({ changeOffset, total }) => {
       <nav className="ml-auto" aria-label="Page navigation example">
         <ul className="pagination">
           <li className="page-item">
-            <a className="page-link" href="#" onClick={() => changeOffset("-")}>
+            <a className="page-link" href="#" onClick={() => changeOffset("-", countOfButtons)}>
               Previous
             </a>
           </li>
+          {/* <PaginationButton label="Previous" changeOffset={changeOffset}/> */}
           {arr}
           <li className="page-item">
-            <a className="page-link" href="#" onClick={() => changeOffset("+")}>
+            <a className="page-link" href="#" onClick={() => changeOffset("+", countOfButtons)}>
               Next
             </a>
           </li>
