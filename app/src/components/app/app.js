@@ -19,13 +19,22 @@ class App extends Component {
     offset: 0,
     totalItems: 0,
 
-    currentFilter: null
+    currentFilter: null,
   };
 
   onSelectHandler = e => {
-    console.log("hello", e.target.value);
+    // console.log("hello", e.target.value);
+    // this.setState({
+    //   currentFilter: e.target.value
+      
+    // })
+    console.log(e, "eeee")
+    if (!e) return null
+    const arrayOfLabels = e.map((item) => {
+      return item.label
+    })
     this.setState({
-      currentFilter: e.target.value
+      currentFilter: arrayOfLabels
     })
   };
 
@@ -108,7 +117,6 @@ class App extends Component {
     })
   }
 
-
   render() {
     const {
       platforms,
@@ -136,6 +144,8 @@ class App extends Component {
             changeDateTo={this.changeDateTo}
             selectedDateFrom={selectedDateFrom}
             selectedDateTo={selectedDateTo}
+            testFunc={this.testFunc}
+            groupBy={groupBy}
           />
           <Table
             groupBy={groupBy}

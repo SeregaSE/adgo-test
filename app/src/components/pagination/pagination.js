@@ -4,7 +4,7 @@ import PaginationButton from "../pagination-button";
 const Pagination = ({ changeOffset, total }) => {
 
   
-  const countOfButtons = Math.floor(total/25) +1
+  const countOfButtons = Math.floor(total/25) + 1
   let arr = [];
   for (let i = 0; i < countOfButtons; i++) {
     arr.push(<PaginationButton label={i} changeOffset={changeOffset} key={i}/>) 

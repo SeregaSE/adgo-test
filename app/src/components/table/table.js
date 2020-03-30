@@ -53,14 +53,20 @@ const Table = ({
   ]);
 
   const rows = data.map((item, index) => {
+    console.log(data)
     const key = generateKey(index);
     if (currentFilter === "..." || !currentFilter) {
       return <TableRow key={key} {...item} />;
-    } else if (item.platform === currentFilter) {
+    } 
+
+    console.log(item.platform, 222)
+    console.log(currentFilter, 333)
+    
+    if ( currentFilter.indexOf(item.platform) !== -1 || !currentFilter) {
       return <TableRow key={key} {...item} />;
-    } else if (item.operatingSystem === currentFilter) {
+    } else if (currentFilter.indexOf(item.operatingSystem) !== -1 || !currentFilter) {
       return <TableRow key={key} {...item} />;
-    } else if (item.browser === currentFilter) {
+    } else if (currentFilter.indexOf(item.browser) !== -1 || !currentFilter) {
       return <TableRow key={key} {...item} />;
     }
   });

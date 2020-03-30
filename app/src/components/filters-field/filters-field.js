@@ -1,14 +1,28 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "./filters-field.scss";
-import 'react-datepicker/dist/react-datepicker.css'
+import "react-datepicker/dist/react-datepicker.css";
+
+import { Dropdown } from 'semantic-ui-react';
+import Select from 'react-select';
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+]
+
 
 class FiltersField extends Component {
 
+  constructor(props) {
+    super(props);
+    this.props = props 
+  }
   state = {
     selectedDateFrom: new Date(),
-    selectedDateTo: new Date()
-  }
+    selectedDateTo: new Date(),
+  };
 
   optionsCreator = objectOfItems => {
     const options = objectOfItems.map((item, index) => {
@@ -24,6 +38,35 @@ class FiltersField extends Component {
     return options;
   };
 
+  optionsCreator2 = (objectOfItems) => {
+    const options = objectOfItems.map((item, index) => {
+      return {value: item.value, label: item.label}
+    })
+    return options
+  }
+
+  onSelect = (selectedList, selectedItem) => {
+    console.log(selectedItem);
+    console.log(selectedList)
+    this.props.testFunc()
+    console.log(selectedList.id)
+  }
+
+  onRemove(selectedList, removedItem) {
+    console.log(removedItem);
+  }
+
+  onChangeSelectHandler = (selectedOption) => {
+    console.log(selectedOption)
+  }
+
+  isDisabled = (label) => {
+    if (label.toLowerCase() === this.props.groupBy.toLowerCase()) {
+      return false
+    } else return true
+  }
+
+
   render() {
     const {
       onSelectHandler,
@@ -37,14 +80,17 @@ class FiltersField extends Component {
       selectedDateFrom,
       selectedDateTo
     } = this.props;
+
     return (
       <div>
         <div className="form-row">
           <div className="form-group col-md-4 childDatePicker">
-            <label className="disBlock" htmlFor="dateFrom">From</label>
+            <label className="disBlock" htmlFor="dateFrom">
+              From
+            </label>
             <DatePicker
               selected={selectedDateFrom}
-              onChange={(date) => changeDateFrom(date)}
+              onChange={date => changeDateFrom(date)}
               id="dateFrom"
               className="customPicker"
               minDate={new Date(2019, 4, 24)}
@@ -52,12 +98,14 @@ class FiltersField extends Component {
           </div>
 
           <div className="form-group col-md-4 childDatePicker">
-            <label className="disBlock" htmlFor="dateTo">To</label>
-            <DatePicker 
+            <label className="disBlock" htmlFor="dateTo">
+              To
+            </label>
+            <DatePicker
               selected={selectedDateTo}
-              onChange={(date) => changeDateTo(date)}
+              onChange={date => changeDateTo(date)}
               id="dateTo"
-              className="customPicker" 
+              className="customPicker"
             />
           </div>
 
@@ -76,36 +124,30 @@ class FiltersField extends Component {
         <div className="form-row">
           <div className="form-group col-md-4">
             <label htmlFor="platfromSelect">Platform</label>
-            <select
-              id="platfromSelect"
-              className="form-control"
+            <Select
+              isMulti
+              options={this.optionsCreator2(platforms)}
               onChange={e => onSelectHandler(e)}
-            >
-              <option>...</option>
-              {this.optionsCreator(platforms)}
-            </select>
+              isDisabled={this.isDisabled("Platform")}
+            />
           </div>
           <div className="form-group col-md-4">
             <label htmlFor="OSSelect">Operating System</label>
-            <select
-              id="OSSelect"
-              className="form-control"
+            <Select
+              isMulti
+              options={this.optionsCreator2(operatingSystems)}
               onChange={e => onSelectHandler(e)}
-            >
-              <option>...</option>
-              {this.optionsCreator(operatingSystems)}
-            </select>
+              isDisabled={this.isDisabled("Operating System")}
+            />
           </div>
           <div className="form-group col-md-4">
             <label htmlFor="browserSelect">Browser</label>
-            <select
-              id="browserSelect"
-              className="form-control"
+            <Select
+              isMulti
+              options={this.optionsCreator2(browsers)}
               onChange={e => onSelectHandler(e)}
-            >
-              <option>...</option>
-              {this.optionsCreator(browsers)}
-            </select>
+              isDisabled={this.isDisabled("Browser")}
+            />
           </div>
         </div>
       </div>
