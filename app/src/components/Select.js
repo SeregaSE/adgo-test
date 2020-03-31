@@ -59,7 +59,7 @@ export class SelectComponent extends React.Component {
           placeholder={`Select ${this.props.title}`} 
           className="select"
           filterOption={false}
-          onSelect={this.onChange}
+          onChange={this.onChange}
         >
           {this.state.options
             .filter(option => {
