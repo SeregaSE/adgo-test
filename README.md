@@ -180,52 +180,52 @@
     "count": 7,
     "rows":[  
         {  
-            "day":"2019-07-01",
-            "impressions":23,
-            "clicks":4,
-            "money":0.15445
+            "day": "2019-07-01",
+            "impressions": 23,
+            "clicks": 4,
+            "money": 0.15445
         },
         {  
-            "day":"2019-07-02",
-            "impressions":11,
-            "clicks":1,
-            "money":0.06262
+            "day": "2019-07-02",
+            "impressions": 11,
+            "clicks": 1,
+            "money": 0.06262
         },
         {  
-            "day":"2019-07-03",
-            "impressions":17,
-            "clicks":1,
-            "money":0.01448
+            "day": "2019-07-03",
+            "impressions": 17,
+            "clicks": 1,
+            "money": 0.01448
         },
         {  
-            "day":"2019-07-04",
-            "impressions":13,
-            "clicks":2,
-            "money":0.17215
+            "day": "2019-07-04",
+            "impressions": 13,
+            "clicks": 2,
+            "money": 0.17215
         },
         {  
-            "day":"2019-07-05",
-            "impressions":24,
-            "clicks":8,
-            "money":0.41402999999999995
+            "day": "2019-07-05",
+            "impressions": 24,
+            "clicks": 8,
+            "money": 0.41402999999999995
         },
         {  
-            "day":"2019-07-06",
-            "impressions":21,
-            "clicks":4,
-            "money":0.33422999999999997
+            "day": "2019-07-06",
+            "impressions": 21,
+            "clicks": 4,
+            "money": 0.33422999999999997
         },
         {  
-            "day":"2019-07-07",
-            "impressions":23,
-            "clicks":4,
-            "money":0.04693
+            "day": "2019-07-07",
+            "impressions": 23,
+            "clicks": 4,
+            "money": 0.04693
         }
     ],
     "total":{  
-        "impressions":132,
-        "clicks":24,
-        "money":1.1988899999999998
+        "impressions": 132,
+        "clicks": 24,
+        "money": 1.1988899999999998
     }
 }
 ```
@@ -241,22 +241,83 @@
     "count": 2,
     "rows":[  
         {  
-            "platform":"Mobile",
-            "impressions":473,
-            "clicks":97,
-            "money":4.42389
+            "platform": "Mobile",
+            "impressions": 473,
+            "clicks": 97,
+            "money": 4.42389
         },
         {  
-            "platform":"Desktop",
-            "impressions":133,
-            "clicks":17,
-            "money":0.97717
+            "platform": "Desktop",
+            "impressions": 133,
+            "clicks": 17,
+            "money": 0.97717
         }
     ],
     "total":{  
-        "impressions":606,
-        "clicks":114,
-        "money":5.40106
+        "impressions": 606,
+        "clicks": 114,
+        "money": 5.40106
+    }
+}
+```
+
+Получаем статистику за первые 7 дней июля, сгруппированную по дням, только по браузерам: Chrome (value=1), Firefox (value=2) и Chrome Mobile (value=5)
+
+`GET /api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07&browsers[]=1&browsers[]=2&browsers[]=5`
+
+Ответ
+
+```json
+{
+    "count": 7,
+    "rows": [
+        {
+            "day": "2019-07-01",
+            "impressions": 2,
+            "clicks": 0,
+            "money": 0
+        },
+        {
+            "day": "2019-07-02",
+            "impressions": 4,
+            "clicks": 2,
+            "money": 0.10963
+        },
+        {
+            "day": "2019-07-03",
+            "impressions": 4,
+            "clicks": 0,
+            "money": 0
+        },
+        {
+            "day": "2019-07-04",
+            "impressions": 4,
+            "clicks": 1,
+            "money": 0.04082
+        },
+        {
+            "day": "2019-07-05",
+            "impressions": 6,
+            "clicks": 1,
+            "money": 0.01814
+        },
+        {
+            "day": "2019-07-06",
+            "impressions": 4,
+            "clicks": 2,
+            "money": 0.10832
+        },
+        {
+            "day": "2019-07-07",
+            "impressions": 9,
+            "clicks": 1,
+            "money": 0.01843
+        }
+    ],
+    "total": {
+        "impressions": 33,
+        "clicks": 7,
+        "money": 0.29534
     }
 }
 ```
