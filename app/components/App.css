@@ -7,3 +7,18 @@
   margin-right: 50px;
   margin-bottom: 30px;
 }
+.dropdown > button {
+  min-width: 210px;
+  max-width: 210px;
+}
+.total {
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+.total .data {
+  display: flex;
+  flex-flow: row wrap;
+}
+.total .data > div{
+  margin-right: 30px;
+}
