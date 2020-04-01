@@ -9,7 +9,7 @@ module.exports = {
 
     parserOptions: {
         ecmaVersion: 9,
-        // sourceType: 'module'
+        sourceType: 'module'
     },
 
     extends: [

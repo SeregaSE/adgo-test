@@ -31,6 +31,7 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
     "concurrently": "^5.1.0",
     "css-loader": "^3.4.2",
     "eslint": "^6.3.0",
@@ -42,7 +43,12 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "lodash": "^4.17.15",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
+    "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1"
   }
 }

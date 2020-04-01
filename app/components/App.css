@@ -1,0 +1,9 @@
+.menu {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: 20px;
+}
+.menu > div {
+  margin-right: 50px;
+  margin-bottom: 30px;
+}
