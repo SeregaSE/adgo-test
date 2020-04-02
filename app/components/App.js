@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../utils/axios';
 import { differenceWith } from 'lodash';
+import Select from 'react-select';
 import dateToString from '../utils/dateToString';
 import stringToDate from '../utils/stringToDate';
 import getPaginationArray from '../utils/getPaginationArray';
@@ -18,9 +19,9 @@ class App extends Component {
       currentGroup: {},
       groupsList: [],
       browsersList: [], 
-      currentBrowser: {}, 
+      currentBrowser: [], 
       operatingSystemsList: [],
-      currentOperatingSystem: {},
+      currentOperatingSystem: [],
       platformsList: [],
       currentPlatform: {},
       limit: 10,
@@ -52,14 +53,14 @@ class App extends Component {
       from: this.state.from,
       to: this.state.to,
       platform: this.state.currentPlatform.value,
-      'browsers[]': this.state.currentBrowser.value,
-      'operatingSystems[]': this.state.currentOperatingSystem.value,
+      browsers: this.state.currentBrowser.map(br => br.value),
+      operatingSystems: this.state.currentOperatingSystem.map(sys => sys.value),
       limit: this.state.limit,
       offset: this.state.offset,
     }
 
     Object.keys(params).forEach(name => {
-      if (params[name] === undefined) delete params[name];
+      if ((params[name] === undefined) || (params[name] === [])) delete params[name];
     })
     axios.get('/statistics', { params }).then(res => {
         if (differenceWith(this.state.currentList, res.data.rows, _.isEqual).length) {
@@ -71,7 +72,17 @@ class App extends Component {
   }
   render() {
     const { currentList, groupsList, currentGroup, from, to, platformsList, currentPlatform, total,
-      browsersList, currentBrowser, operatingSystemsList, currentOperatingSystem, array } = this.state; 
+      browsersList, operatingSystemsList, array } = this.state;
+    let actualBrowsersList = [];
+    if (currentPlatform.value) {
+      actualBrowsersList = browsersList.filter(browser => browser.platform === currentPlatform.value);
+    }
+    else { actualBrowsersList = browsersList };
+    let actualSystemsList = [];
+    if (currentPlatform.value) {
+      actualSystemsList = operatingSystemsList.filter(system => system.platform === currentPlatform.value);
+    }
+    else { actualSystemsList = operatingSystemsList };
     return(
       <div>
         <div className="menu">
@@ -99,47 +110,29 @@ class App extends Component {
               return (
                 <Dropdown.Item onSelect={() => {
                   this.setState({ currentPlatform: platform });
-                  this.setState({ currentBrowser: {} });
-                  this.setState({ currentOperatingSystem: {} });
+                  this.setState({ currentBrowser: [] });
+                  this.setState({ currentOperatingSystem: [] });
                 }}>{platform.label}</Dropdown.Item>
               )
             })}
           </DropdownButton>
-          <DropdownButton id="browser" title={currentBrowser.label || 'choose browser'}>
-            {browsersList.map(browser => {
-              if (currentPlatform.value) {
-                if (browser.platform === currentPlatform.value) {
-                  return (
-                    <Dropdown.Item onSelect={() => {
-                      this.setState({ currentBrowser: browser });
-                    }}>{browser.label}</Dropdown.Item>
-                  )
-                }
-              } else return (
-                <Dropdown.Item onSelect={() => {
-                  this.setState({ currentBrowser: browser });
-                }}>{browser.label}</Dropdown.Item>
-              )
-            })}
-          </DropdownButton>
-          <DropdownButton id="operatingSystem" title={currentOperatingSystem.label || 'choose operatingSystem'}>
-            {operatingSystemsList.map(system => {
-              if (currentPlatform.value) {
-                if (system.platform === currentPlatform.value) {
-                  return (
-                    <Dropdown.Item onSelect={() => {
-                      this.setState({ currentOperatingSystem: system });
-                    }}>{system.label}</Dropdown.Item>
-                  )
-                }
-              } else return (
-                <Dropdown.Item onSelect={() => {
-                  this.setState({ currentOperatingSystem: system });
-                }}>{system.label}</Dropdown.Item>
-              )
-            })}
-          </DropdownButton>
         </div>
+          <Select
+            placeholder="choose browsers"
+            isMulti
+            name="select"
+            onChange={(ev) => this.setState({ currentBrowser: ev || [] })}
+            options={actualBrowsersList}
+            className="select"
+          />
+          <Select
+            placeholder="choose operating systems"
+            isMulti
+            name="select"
+            onChange={(ev) => this.setState({ currentOperatingSystem: ev || [] })}
+            options={actualSystemsList}
+            className="select"
+          />
 
         <div className="total">
           <h5>Summary:</h5>

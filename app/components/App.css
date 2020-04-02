@@ -22,3 +22,8 @@
 .total .data > div{
   margin-right: 30px;
 }
+.select {
+  max-width: 350px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+}
