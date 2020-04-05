@@ -1,0 +1,39 @@
+tbody th {
+    font-weight: 400;
+}
+
+.wrapper {
+    width: 1000px;
+    margin: 20px auto;
+}
+
+.container > div {
+    margin: 20px 0;
+}
+
+.wrapper__sort {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrapper__sort > div {
+    margin-right: 10px;
+}
+
+.wrapper__sort input {
+    width: 200px;
+}
+
+.btn {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.pagination {
+    cursor: pointer;
+}
+
+.page-item.disabled,
+.page-item.active {
+    cursor: auto;
+}
