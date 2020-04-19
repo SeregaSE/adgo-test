@@ -9,21 +9,22 @@ module.exports = {
 
     parserOptions: {
         ecmaVersion: 9,
-        // sourceType: 'module'
+        sourceType: 'module',
     },
 
-    extends: [
-        'eslint:recommended',
-    ],
+    extends: ['eslint:recommended', 'standard', 'standard-react'],
 
     rules: {
-        'quotes': ['error', 'single'],
+        quotes: ['error', 'single'],
         'comma-dangle': ['error', 'never'],
-        'no-unused-vars': ['error', {
-            'vars': 'all',
-            'args': 'after-used',
-            'argsIgnorePattern': '^_',
-            'ignoreRestSiblings': true
-        }]
+        'no-unused-vars': [
+            'error',
+            {
+                vars: 'all',
+                args: 'after-used',
+                argsIgnorePattern: '^_',
+                ignoreRestSiblings: true,
+            },
+        ],
     },
 };
