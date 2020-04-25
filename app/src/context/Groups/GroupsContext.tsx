@@ -11,6 +11,5 @@ export const initialState = {
 }
 
 const GroupsContext = React.createContext<ContextState>(initialState)
-// TODO: tests
-// TODO: README MD
+
 export default GroupsContext
