@@ -14,11 +14,11 @@ import { StatisticsResponse } from '../../types'
 import { TableContainer } from './styled'
 
 const Statistics = () => {
-  const {groupBy, fromDate, platform, operatingSystem, browsers, toDate} = React.useContext(FilterContext)
+  const {groupBy, fromDate, platform, operatingSystems, browsers, toDate} = React.useContext(FilterContext)
   const {groups} = React.useContext(GroupsContext)
   const {response, doFetch, error, isLoading} = useFetch()
 
-  const searchQuery = generateSearchParamsQuery({groupBy, fromDate, platform, operatingSystem, browsers, toDate})
+  const searchQuery = generateSearchParamsQuery({groupBy, fromDate, platform, operatingSystems, browsers, toDate})
 
   React.useEffect(() => {
     doFetch(requestStatistics(searchQuery))

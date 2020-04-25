@@ -51,12 +51,13 @@ export interface StatisticsResponse {
 }
 
 export type BrowsersFilterState = Array<number>
+export type OSFilterState = Array<number>
 
 export interface FilterState {
   fromDate: Date,
   toDate: Date,
   groupBy: GroupBy,
   platform: number,
-  operatingSystem: number,
+  operatingSystems: OSFilterState,
   browsers: BrowsersFilterState,
 }

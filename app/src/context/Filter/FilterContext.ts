@@ -12,7 +12,7 @@ export const initialFilterState = {
   toDate: new Date(Date.now() + ONE_WEEK_IN_MS),
   groupBy: GroupBy.Platform,
   platform: NOT_SELECTED_VALUE,
-  operatingSystem: NOT_SELECTED_VALUE,
+  operatingSystems: [],
   browsers: []
 }
 

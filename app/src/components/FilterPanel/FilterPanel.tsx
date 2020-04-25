@@ -1,6 +1,5 @@
 import * as React from 'react'
 import FilterContext from '../../context/Filter/FilterContext'
-import { NOT_SELECTED_VALUE } from '../../constants'
 import InputDate from './InputDate'
 import InputGroupBy from './InputGroupBy'
 import InputBrowser from './InputBrowser'
@@ -14,7 +13,7 @@ const FilterPanel = () => {
   React.useEffect(
     () => {
       setFilterFields({
-        operatingSystem: NOT_SELECTED_VALUE,
+        operatingSystems: [],
         browsers: []
       })
     },

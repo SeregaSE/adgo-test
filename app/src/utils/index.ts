@@ -4,12 +4,21 @@ import { Browsers, Clicks, FilterState, Impressions, OperatingSystems } from '..
 import { FilterField, PlatformValue } from '../models'
 
 export const generateSearchParamsQuery = (params: FilterState) => {
-  const groupByQuery = `${FilterField.GroupBy}=${params.groupBy}`
-  const fromDateQuery = `${FilterField.FromDate}=${formatDateToServer(params.fromDate)}`
-  const toDateQuery = `${FilterField.ToDate}=${formatDateToServer(params.toDate)}`
-  const platformQuery = params.platform && `${FilterField.Platform}=${params.platform}`
-  const browserQuery = params.browsers.length && params.browsers.map(browser => `${FilterField.Browser}=${browser}`).join('&')
-  const operatingSystemQuery = params.operatingSystem && `${FilterField.OperatingSystems}=${params.operatingSystem}`
+  const {
+    groupBy,
+    operatingSystems,
+    platform,
+    browsers,
+    fromDate,
+    toDate
+  } = params
+
+  const groupByQuery = `${FilterField.GroupBy}=${groupBy}`
+  const fromDateQuery = `${FilterField.FromDate}=${formatDateToServer(fromDate)}`
+  const toDateQuery = `${FilterField.ToDate}=${formatDateToServer(toDate)}`
+  const platformQuery = platform && `${FilterField.Platform}=${platform}`
+  const browserQuery = browsers.length && browsers.map(browser => `${FilterField.Browser}=${browser}`).join('&')
+  const operatingSystemQuery = operatingSystems.length && operatingSystems.map(os => `${FilterField.OperatingSystems}=${os}`).join('&')
 
   return [groupByQuery, fromDateQuery, toDateQuery, platformQuery, browserQuery, operatingSystemQuery]
     .filter(_query => !!_query)
