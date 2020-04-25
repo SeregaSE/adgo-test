@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { NOT_SELECTED_VALUE, ONE_WEEK_IN_MS } from '../../constants'
-import { GroupBy, PlatformValue } from '../../models'
+import { GroupBy } from '../../models'
 import { FilterState } from '../../types'
 
 interface ContextState extends FilterState {
@@ -11,7 +11,7 @@ export const initialFilterState = {
   fromDate: new Date(Date.now()),
   toDate: new Date(Date.now() + ONE_WEEK_IN_MS),
   groupBy: GroupBy.Platform,
-  platform: PlatformValue.Desktop,
+  platform: NOT_SELECTED_VALUE,
   operatingSystem: NOT_SELECTED_VALUE,
   browser: NOT_SELECTED_VALUE
 }

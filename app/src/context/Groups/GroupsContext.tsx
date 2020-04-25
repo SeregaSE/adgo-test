@@ -14,6 +14,5 @@ const GroupsContext = React.createContext<ContextState>(initialState)
 // TODO: multiple select
 // TODO: pagination
 // TODO: tests
-// TODO: platform does not required
 // TODO: README MD
 export default GroupsContext

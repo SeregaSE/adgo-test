@@ -8,6 +8,7 @@ import { FilterField, PlatformValue } from '../../../models'
 import { useFetch } from '../../../hooks/useFetch'
 import { requestPlatforms } from '../../../api'
 import { Platforms } from '../../../types'
+import { NOT_SELECTED_VALUE } from '../../../constants'
 
 const InputPlatform = () => {
   const {setFilterFields, platform} = React.useContext(FilterContext)
@@ -37,6 +38,9 @@ const InputPlatform = () => {
         value={platform}
         onChange={handleChangePlatform}
       >
+        <MenuItem value={NOT_SELECTED_VALUE}>
+          <em>None</em>
+        </MenuItem>
         {platforms.map(_platform =>
           <MenuItem
             value={_platform.value}

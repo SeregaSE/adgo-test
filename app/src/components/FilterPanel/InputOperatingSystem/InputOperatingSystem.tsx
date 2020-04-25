@@ -4,11 +4,12 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import FilterContext from '../../../context/Filter/FilterContext'
-import { FilterField } from '../../../models'
+import { filterResponseByPlatform } from '../../../utils'
 import { useFetch } from '../../../hooks/useFetch'
 import { requestOperatingSystems } from '../../../api'
-import { OperatingSystems } from '../../../types'
 import { NOT_SELECTED_VALUE } from '../../../constants'
+import { FilterField } from '../../../models'
+import { OperatingSystems } from '../../../types'
 
 const InputOperatingSystem = () => {
   const {setFilterFields, operatingSystem, platform} = React.useContext(FilterContext)
@@ -26,7 +27,7 @@ const InputOperatingSystem = () => {
 
   if (!response) return null
 
-  const operatingSystems = (response as OperatingSystems).filter(os => os.platform === platform)
+  const operatingSystems = filterResponseByPlatform(platform, response as OperatingSystems)
 
   return (
     <FormControl>

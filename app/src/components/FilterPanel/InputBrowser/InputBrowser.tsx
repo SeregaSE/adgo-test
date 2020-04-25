@@ -9,6 +9,7 @@ import { requestBrowsers } from '../../../api'
 import { FilterField } from '../../../models'
 import { Browsers } from '../../../types'
 import { NOT_SELECTED_VALUE } from '../../../constants'
+import { filterResponseByPlatform } from '../../../utils'
 
 const InputBrowser = () => {
   const {setFilterFields, browser, platform} = React.useContext(FilterContext)
@@ -25,7 +26,8 @@ const InputBrowser = () => {
   }
 
   if (!response) return null
-  const browsers = (response as Browsers).filter(_browser => _browser.platform === platform)
+
+  const browsers = filterResponseByPlatform(platform, response as Browsers)
 
   return (
     <FormControl>

@@ -48,8 +48,8 @@ const Statistics = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {statistics?.rows.map(statistic =>
-              <TableRow>
+            {statistics?.rows.map((statistic, index) =>
+              <TableRow key={index}>
                 <TableCell>{statistic[groupBy]}</TableCell>
                 <TableCell>{statistic.impressions}</TableCell>
                 <TableCell>{getConversions(statistic.impressions, statistic.clicks)}</TableCell>
