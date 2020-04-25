@@ -1,18 +1,18 @@
 import axios from 'axios'
 import { APIResponse, Browsers, Groups, OperatingSystems, Platforms, StatisticsResponse } from '../types'
-import { routePrefix } from '../constants'
+import { ROUTE_PREFIX } from '../constants'
 
 export const requestPlatforms = (): APIResponse<Platforms> =>
-  axios.get(`${routePrefix}/platforms`)
+  axios.get(`${ROUTE_PREFIX}/platforms`)
 
 export const requestBrowsers = (): APIResponse<Browsers> =>
-  axios.get(`${routePrefix}/browsers`)
+  axios.get(`${ROUTE_PREFIX}/browsers`)
 
 export const requestOperatingSystems = (): APIResponse<OperatingSystems> =>
-  axios.get(`${routePrefix}/operating-systems`)
+  axios.get(`${ROUTE_PREFIX}/operating-systems`)
 
 export const requestGroups = (): APIResponse<Groups> =>
-  axios.get(`${routePrefix}/groups`)
+  axios.get(`${ROUTE_PREFIX}/groups`)
 
 export const requestStatistics = (searchParams: string): APIResponse<StatisticsResponse> =>
-  axios.get(`${routePrefix}/statistics?${searchParams}`)
+  axios.get(`${ROUTE_PREFIX}/statistics?${searchParams}`)
