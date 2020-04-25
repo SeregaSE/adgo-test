@@ -32,7 +32,7 @@ const FilterProvider: React.FC<Props> = ({children}) => {
     },
     [filterState.platform, filterState.setFilterFields, setFilterFields]
   )
-  //TODO search pagination set state
+
   return (
     <FilterContext.Provider value={filterState}>
       {children}

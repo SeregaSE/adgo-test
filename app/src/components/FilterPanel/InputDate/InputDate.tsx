@@ -1,20 +1,21 @@
 import * as React from 'react'
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date'
 import FilterContext from '../../../context/Filter/FilterContext'
 import { FilterField } from '../../../models'
 
 const InputDate = () => {
   const {setFilterFields, toDate, fromDate} = React.useContext(FilterContext)
 
-  // @ts-ignore
-  const handleChangeFromDate = (date) => {
-    setFilterFields({fromDate: date})
+  const handleChangeFromDate = (date: MaterialUiPickersDate) => {
+    const value = date as unknown as Date
+    setFilterFields({fromDate: value})
   }
 
-  // @ts-ignore
-  const handleChangeToDate = (date) => {
-    setFilterFields({toDate: date})
+  const handleChangeToDate = (date: MaterialUiPickersDate) => {
+    const value = date as unknown as Date
+    setFilterFields({toDate: value})
   }
 
   return (

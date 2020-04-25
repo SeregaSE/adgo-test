@@ -10,33 +10,24 @@ import { generateSearchParamsQuery, getConversions } from '../../utils'
 import { useFetch } from '../../hooks/useFetch'
 import { requestStatistics } from '../../api'
 import DataHandler from '../DataHandler'
+import Pagination from '../FilterPanel/Pagination'
 import { StatisticsResponse } from '../../types'
 import { TableContainer } from './styled'
-import Pagination from '../FilterPanel/Pagination'
 
 const Statistics = () => {
-  const {groupBy, fromDate, platform, operatingSystems, browsers, toDate, limit, offset} = React.useContext(FilterContext)
+  const filterState = React.useContext(FilterContext)
   const {groups} = React.useContext(GroupsContext)
   const {response, doFetch, error, isLoading} = useFetch()
 
-  const searchQuery = generateSearchParamsQuery({
-    groupBy,
-    fromDate,
-    platform,
-    operatingSystems,
-    browsers,
-    toDate,
-    limit,
-    offset
-  })
+  const searchQuery = generateSearchParamsQuery(filterState)
 
   React.useEffect(() => {
     doFetch(requestStatistics(searchQuery))
   }, [searchQuery, doFetch])
 
   const groupByLabel = React.useMemo(
-    () => groups?.find(group => group.value === groupBy)?.label,
-    [groupBy, groups]
+    () => groups?.find(group => group.value === filterState.groupBy)?.label,
+    [filterState.groupBy, groups]
   )
 
   const statistics = response as StatisticsResponse
@@ -61,7 +52,7 @@ const Statistics = () => {
             <TableBody>
               {statistics?.rows.map((statistic, index) =>
                 <TableRow key={index}>
-                  <TableCell>{statistic[groupBy]}</TableCell>
+                  <TableCell>{statistic[filterState.groupBy]}</TableCell>
                   <TableCell>{statistic.impressions}</TableCell>
                   <TableCell>{getConversions(statistic.impressions, statistic.clicks)}</TableCell>
                   <TableCell>{statistic.money}</TableCell>

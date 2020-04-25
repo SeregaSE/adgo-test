@@ -4,7 +4,7 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import FilterContext from '../../../context/Filter/FilterContext'
-import { FilterField, PlatformValue } from '../../../models'
+import { FilterField } from '../../../models'
 import { useFetch } from '../../../hooks/useFetch'
 import { requestPlatforms } from '../../../api'
 import { Platforms } from '../../../types'
@@ -20,7 +20,7 @@ const InputPlatform = () => {
   }, [response, doFetch])
 
   const handleChangePlatform = (event: React.ChangeEvent<{value: unknown}>) => {
-    const _platform = event.target.value as PlatformValue
+    const _platform = event.target.value as number
     setFilterFields({platform: _platform})
   }
 

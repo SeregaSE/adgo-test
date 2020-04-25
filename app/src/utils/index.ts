@@ -1,7 +1,7 @@
 import moment from 'moment'
-import { NOT_SELECTED_VALUE } from '../constants'
+import { DATE_SERVER_FORMAT } from '../constants'
 import { Browsers, Clicks, FilterState, Impressions, OperatingSystems } from '../types'
-import { FilterField, PlatformValue } from '../models'
+import { FilterField } from '../models'
 
 export const generateSearchParamsQuery = (params: FilterState) => {
   const {
@@ -14,7 +14,7 @@ export const generateSearchParamsQuery = (params: FilterState) => {
     limit,
     offset
   } = params
-// TODO: query string
+
   const groupByQuery = `${FilterField.GroupBy}=${groupBy}`
   const fromDateQuery = `${FilterField.FromDate}=${formatDateToServer(fromDate)}`
   const toDateQuery = `${FilterField.ToDate}=${formatDateToServer(toDate)}`
@@ -29,12 +29,12 @@ export const generateSearchParamsQuery = (params: FilterState) => {
     .join('&')
 }
 
-const formatDateToServer = (date: Date) => moment(date).format('YYYY-MM-DD')
+const formatDateToServer = (date: Date) => moment(date).format(DATE_SERVER_FORMAT)
 
 export const getConversions = (impressions: Impressions, clicks: Clicks): number =>
   clicks === 0 ? 0 : impressions / clicks
 
-export const filterResponseByPlatform = (platform: PlatformValue | typeof NOT_SELECTED_VALUE, response: OperatingSystems | Browsers) =>
+export const filterResponseByPlatform = (platform: number, response: OperatingSystems | Browsers) =>
   platform
     ? response.filter(os => os.platform === platform)
     : response

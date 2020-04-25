@@ -1,24 +1,25 @@
-import { GroupBy, PlatformLabel, PlatformValue } from '../models'
+import { GroupBy } from '../models'
+import { Moment } from 'moment'
 
 export type APIResponse<T> = Promise<{ data: T }>
 
 export interface Platform {
-  label: PlatformLabel,
-  value: PlatformValue
+  label: string,
+  value: number
 }
 export type Platforms = Array<Platform>
 
 export interface Browser {
   label: string,
   value: number,
-  platform: PlatformValue
+  platform: number
 }
 export type Browsers = Array<Browser>
 
 export interface OperatingSystem {
   label: string,
   value: number,
-  platform: PlatformValue
+  platform: number
 }
 export type OperatingSystems = Array<OperatingSystem>
 
@@ -41,7 +42,7 @@ export interface Statistic extends GeneralStatistic {
   [GroupBy.Browser]?: string,
   [GroupBy.Day]?: string,
   [GroupBy.OperatingSystem]?: string
-  [GroupBy.Platform]?: PlatformLabel
+  [GroupBy.Platform]?: string
 }
 
 export interface StatisticsResponse {
