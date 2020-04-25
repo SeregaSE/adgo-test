@@ -50,11 +50,13 @@ export interface StatisticsResponse {
   total: GeneralStatistic
 }
 
+export type BrowsersFilterState = Array<number>
+
 export interface FilterState {
   fromDate: Date,
   toDate: Date,
   groupBy: GroupBy,
   platform: number,
   operatingSystem: number,
-  browser: number,
+  browsers: BrowsersFilterState,
 }

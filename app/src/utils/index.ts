@@ -8,7 +8,7 @@ export const generateSearchParamsQuery = (params: FilterState) => {
   const fromDateQuery = `${FilterField.FromDate}=${formatDateToServer(params.fromDate)}`
   const toDateQuery = `${FilterField.ToDate}=${formatDateToServer(params.toDate)}`
   const platformQuery = params.platform && `${FilterField.Platform}=${params.platform}`
-  const browserQuery = params.browser && `${FilterField.Browser}=${params.browser}`
+  const browserQuery = params.browsers.length && params.browsers.map(browser => `${FilterField.Browser}=${browser}`).join('&')
   const operatingSystemQuery = params.operatingSystem && `${FilterField.OperatingSystems}=${params.operatingSystem}`
 
   return [groupByQuery, fromDateQuery, toDateQuery, platformQuery, browserQuery, operatingSystemQuery]

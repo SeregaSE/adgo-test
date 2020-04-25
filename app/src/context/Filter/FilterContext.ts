@@ -13,7 +13,7 @@ export const initialFilterState = {
   groupBy: GroupBy.Platform,
   platform: NOT_SELECTED_VALUE,
   operatingSystem: NOT_SELECTED_VALUE,
-  browser: NOT_SELECTED_VALUE
+  browsers: []
 }
 
 const FilterContext = React.createContext<ContextState>({

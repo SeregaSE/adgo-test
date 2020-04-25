@@ -30,7 +30,7 @@ const InputPlatform = () => {
   return (
     <FormControl>
       <InputLabel id={FilterField.Platform}>
-        platform
+        Platform
       </InputLabel>
       <Select
         labelId={FilterField.Platform}

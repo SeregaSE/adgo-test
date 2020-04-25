@@ -32,7 +32,7 @@ const InputOperatingSystem = () => {
   return (
     <FormControl>
       <InputLabel id={FilterField.OperatingSystems}>
-        operating-systems
+        Operating Systems
       </InputLabel>
       <Select
         labelId={FilterField.OperatingSystems}

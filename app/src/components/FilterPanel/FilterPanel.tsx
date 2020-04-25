@@ -15,7 +15,7 @@ const FilterPanel = () => {
     () => {
       setFilterFields({
         operatingSystem: NOT_SELECTED_VALUE,
-        browser: NOT_SELECTED_VALUE
+        browsers: []
       })
     },
     [platform, setFilterFields]

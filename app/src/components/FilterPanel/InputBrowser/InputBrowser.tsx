@@ -4,15 +4,15 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import FilterContext from '../../../context/Filter/FilterContext'
+import Input from '@material-ui/core/Input'
 import { useFetch } from '../../../hooks/useFetch'
+import { filterResponseByPlatform } from '../../../utils'
 import { requestBrowsers } from '../../../api'
 import { FilterField } from '../../../models'
-import { Browsers } from '../../../types'
-import { NOT_SELECTED_VALUE } from '../../../constants'
-import { filterResponseByPlatform } from '../../../utils'
+import { Browsers, BrowsersFilterState } from '../../../types'
 
 const InputBrowser = () => {
-  const {setFilterFields, browser, platform} = React.useContext(FilterContext)
+  const {setFilterFields, browsers, platform} = React.useContext(FilterContext)
   const {doFetch, response} = useFetch()
 
   React.useEffect(() => {
@@ -21,13 +21,13 @@ const InputBrowser = () => {
   }, [response, doFetch])
 
   const handleChangeBrowser = (event: React.ChangeEvent<{ value: unknown }>) => {
-    const _browser = event.target.value as number
-    setFilterFields({browser: _browser})
+    const values = event.target.value as BrowsersFilterState
+    setFilterFields({browsers: values})
   }
 
   if (!response) return null
 
-  const browsers = filterResponseByPlatform(platform, response as Browsers)
+  const _browsers = filterResponseByPlatform(platform, response as Browsers)
 
   return (
     <FormControl>
@@ -37,13 +37,12 @@ const InputBrowser = () => {
       <Select
         labelId={FilterField.Browser}
         id={FilterField.Browser}
-        value={browser}
+        value={browsers}
         onChange={handleChangeBrowser}
+        multiple
+        input={<Input/>}
       >
-        <MenuItem value={NOT_SELECTED_VALUE}>
-          <em>None</em>
-        </MenuItem>
-        {browsers.map(_browser =>
+        {_browsers.map(_browser =>
           <MenuItem
             value={_browser.value}
             key={_browser.value}
