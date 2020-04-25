@@ -60,4 +60,6 @@ export interface FilterState {
   platform: number,
   operatingSystems: OSFilterState,
   browsers: BrowsersFilterState,
+  limit: number,
+  offset: number
 }

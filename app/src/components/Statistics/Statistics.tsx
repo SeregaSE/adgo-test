@@ -12,13 +12,23 @@ import { requestStatistics } from '../../api'
 import DataHandler from '../DataHandler'
 import { StatisticsResponse } from '../../types'
 import { TableContainer } from './styled'
+import Pagination from '../FilterPanel/Pagination'
 
 const Statistics = () => {
-  const {groupBy, fromDate, platform, operatingSystems, browsers, toDate} = React.useContext(FilterContext)
+  const {groupBy, fromDate, platform, operatingSystems, browsers, toDate, limit, offset} = React.useContext(FilterContext)
   const {groups} = React.useContext(GroupsContext)
   const {response, doFetch, error, isLoading} = useFetch()
 
-  const searchQuery = generateSearchParamsQuery({groupBy, fromDate, platform, operatingSystems, browsers, toDate})
+  const searchQuery = generateSearchParamsQuery({
+    groupBy,
+    fromDate,
+    platform,
+    operatingSystems,
+    browsers,
+    toDate,
+    limit,
+    offset
+  })
 
   React.useEffect(() => {
     doFetch(requestStatistics(searchQuery))
@@ -37,28 +47,31 @@ const Statistics = () => {
       error={error}
       isEmptyResponse={!statistics?.count}
     >
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell className='th'>{groupByLabel}</TableCell>
-              <TableCell className='th'>Impressions</TableCell>
-              <TableCell className='th'>Conversions</TableCell>
-              <TableCell className='th'>Money</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {statistics?.rows.map((statistic, index) =>
-              <TableRow key={index}>
-                <TableCell>{statistic[groupBy]}</TableCell>
-                <TableCell>{statistic.impressions}</TableCell>
-                <TableCell>{getConversions(statistic.impressions, statistic.clicks)}</TableCell>
-                <TableCell>{statistic.money}</TableCell>
+      <>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className='th'>{groupByLabel}</TableCell>
+                <TableCell className='th'>Impressions</TableCell>
+                <TableCell className='th'>Conversions</TableCell>
+                <TableCell className='th'>Money</TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {statistics?.rows.map((statistic, index) =>
+                <TableRow key={index}>
+                  <TableCell>{statistic[groupBy]}</TableCell>
+                  <TableCell>{statistic.impressions}</TableCell>
+                  <TableCell>{getConversions(statistic.impressions, statistic.clicks)}</TableCell>
+                  <TableCell>{statistic.money}</TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Pagination count={statistics?.count}/>
+      </>
     </DataHandler>
   )
 }

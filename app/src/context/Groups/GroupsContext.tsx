@@ -11,8 +11,6 @@ export const initialState = {
 }
 
 const GroupsContext = React.createContext<ContextState>(initialState)
-// TODO: multiple select
-// TODO: pagination
 // TODO: tests
 // TODO: README MD
 export default GroupsContext

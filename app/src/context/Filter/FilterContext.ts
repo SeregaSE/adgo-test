@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { NOT_SELECTED_VALUE, ONE_WEEK_IN_MS } from '../../constants'
+import { NOT_SELECTED_VALUE, ONE_WEEK_IN_MS, PAGINATION_LIMIT } from '../../constants'
 import { GroupBy } from '../../models'
 import { FilterState } from '../../types'
 
@@ -13,7 +13,9 @@ export const initialFilterState = {
   groupBy: GroupBy.Platform,
   platform: NOT_SELECTED_VALUE,
   operatingSystems: [],
-  browsers: []
+  browsers: [],
+  limit: PAGINATION_LIMIT,
+  offset: 0
 }
 
 const FilterContext = React.createContext<ContextState>({

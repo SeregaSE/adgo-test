@@ -10,17 +10,21 @@ export const generateSearchParamsQuery = (params: FilterState) => {
     platform,
     browsers,
     fromDate,
-    toDate
+    toDate,
+    limit,
+    offset
   } = params
-
+// TODO: query string
   const groupByQuery = `${FilterField.GroupBy}=${groupBy}`
   const fromDateQuery = `${FilterField.FromDate}=${formatDateToServer(fromDate)}`
   const toDateQuery = `${FilterField.ToDate}=${formatDateToServer(toDate)}`
   const platformQuery = platform && `${FilterField.Platform}=${platform}`
   const browserQuery = browsers.length && browsers.map(browser => `${FilterField.Browser}=${browser}`).join('&')
   const operatingSystemQuery = operatingSystems.length && operatingSystems.map(os => `${FilterField.OperatingSystems}=${os}`).join('&')
+  const limitQuery = `${FilterField.Limit}=${limit}`
+  const offsetQuery = `${FilterField.Offset}=${offset}`
 
-  return [groupByQuery, fromDateQuery, toDateQuery, platformQuery, browserQuery, operatingSystemQuery]
+  return [groupByQuery, fromDateQuery, toDateQuery, platformQuery, browserQuery, operatingSystemQuery, limitQuery, offsetQuery]
     .filter(_query => !!_query)
     .join('&')
 }

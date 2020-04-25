@@ -21,5 +21,7 @@ export enum FilterField {
   ToDate = 'to',
   Browser = 'browsers[]',
   Platform= 'platform',
-  OperatingSystems = 'operatingSystems[]'
+  OperatingSystems = 'operatingSystems[]',
+  Limit = 'limit',
+  Offset = 'offset'
 }

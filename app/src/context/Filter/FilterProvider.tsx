@@ -19,6 +19,20 @@ const FilterProvider: React.FC<Props> = ({children}) => {
 
   const [filterState, updateFilterState] = useState(filterInitialState)
 
+  React.useEffect(() => {
+    setFilterFields({offset: 0})
+  }, [filterState.browsers, filterState.fromDate, filterState.groupBy, filterState.operatingSystems, filterState.platform, setFilterFields])
+
+  React.useEffect(
+    () => {
+      setFilterFields({
+        operatingSystems: [],
+        browsers: []
+      })
+    },
+    [filterState.platform, filterState.setFilterFields, setFilterFields]
+  )
+  //TODO search pagination set state
   return (
     <FilterContext.Provider value={filterState}>
       {children}
