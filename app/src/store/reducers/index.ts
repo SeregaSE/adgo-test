@@ -1,7 +1,7 @@
-import { Store, Action } from '../types'
+import { AppState, Action } from '../types'
 import { CHANGE_QUERY } from '../constants'
 
-const initialState: Store = {
+const initialState: AppState = {
     data: [],
     query: {
         groupBy: 'day',
@@ -12,17 +12,21 @@ const initialState: Store = {
         platform: 'Desktop',
         browsers: 'Chrome',
         operatingSystems: 'Windows',
-    }
+    },
+    groups: [],
+    browsers: [],
+    operatingSystems: []
 }
 
 
-export default function (state: Store = initialState, action: Action): Store {
+export default function (state: AppState = initialState, action: Action): AppState {
     switch(action.type) {
         case CHANGE_QUERY:
             return {
                 ...state,
                 ...action.payload
             }
-
+        default:
+            return state
     }
 }

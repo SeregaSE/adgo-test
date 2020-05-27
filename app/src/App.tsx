@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { DatePicker, Select, Table } from 'antd'
 import 'antd/dist/antd.css'
 
+import { AppState } from './store/types'
+import { StatisticsService } from './api/v1/statistics'
 import styles from './App.css'
 
 
@@ -26,7 +29,25 @@ const columns = [
   }
 ]
 
-export class App extends Component<any, any> {
+interface Props extends AppState {
+
+}
+
+class App extends Component<Props> {
+    private statisticsService = new StatisticsService()
+
+    componentDidMount(): void {
+        Promise
+            .all([
+                this.statisticsService.getGroupsList(),
+                this.statisticsService.getPlatformsList(),
+                this.statisticsService.getOperatingSystemsList(),
+                this.statisticsService.getStatistics(this.props.query)
+            ])
+            .then(data => console.log(data))
+
+    }
+
     render(): React.ReactNode {
         return (
             <>
@@ -47,3 +68,13 @@ export class App extends Component<any, any> {
         )
     }
 }
+
+const mapStateToProps = (state: AppState) => ({
+    query: state.query
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+export default connect(mapStateToProps)(App)

@@ -1,8 +1,11 @@
-import { DataRow, SearchParams } from '../api/v1/statistics/interfaces'
+import { DataRow, SearchParams, ListItem } from '../api/v1/statistics/interfaces'
 
-export interface Store {
+export interface AppState {
   data: DataRow[]
   query: SearchParams
+  groups: ListItem[]
+  browsers: ListItem[]
+  operatingSystems: ListItem[]
 }
 
 export interface Action<T = any> {
