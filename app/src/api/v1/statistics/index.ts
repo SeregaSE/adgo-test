@@ -2,6 +2,9 @@ import { ApiService } from '../../ApiService'
 import { SearchParams, ListItem, Statistics } from './interfaces'
 
 export class StatisticsService extends ApiService {
+    constructor() {
+        super()
+    }
 
     getPlatformsList() {
         return this.http
@@ -27,7 +30,7 @@ export class StatisticsService extends ApiService {
             .then(response => response.data)
     }
 
-    getStatistics(params?: SearchParams) {
+    getStatistics(params?: Partial<SearchParams>) {
         return this.http
             .get<Statistics>(`${this.url}/statistics`, { params })
             .then(response => response.data)
