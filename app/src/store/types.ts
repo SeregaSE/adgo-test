@@ -6,7 +6,7 @@ export interface Store {
   query: SearchParams
 }
 
-export interface Action<T> {
+export interface Action<T = any> {
   type: string
   payload: T
 }

@@ -16,7 +16,7 @@ const initialState: Store = {
 }
 
 
-export default function (state: Store = initialState, action: Action<any>): Store {
+export default function (state: Store = initialState, action: Action): Store {
     switch(action.type) {
         case CHANGE_QUERY:
             return {
