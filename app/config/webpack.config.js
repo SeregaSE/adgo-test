@@ -1,9 +1,10 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
     mode: 'development',
-    entry: path.resolve(__dirname, '../src/'),
+    entry: path.resolve(__dirname, '../src/index.tsx'),
     module: {
         rules: [
             {
@@ -30,6 +31,7 @@ module.exports = {
         path: path.resolve(__dirname, '../dist'),
     },
     plugins: [
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin(),
+        new CleanWebpackPlugin()
     ]
 };
