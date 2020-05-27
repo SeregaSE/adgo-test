@@ -1,4 +1,13 @@
-.row {
+.filtersRow {
     display: flex;
     flex-direction: row;
+    padding-bottom: 32px;
+}
+
+.filtersRow > * {
+    margin-right: 16px;
+}
+
+.wideSelect {
+    width: 180px;
 }
