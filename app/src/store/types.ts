@@ -1,6 +1,5 @@
 import { DataRow, SearchParams } from '../api/v1/statistics/interfaces'
 
-
 export interface Store {
   data: DataRow[]
   query: SearchParams
