@@ -8,7 +8,7 @@ export abstract class ApiService {
 
   protected constructor({ version = API_VERSION }: { version: string }) {
     this._http = axios.create({ baseURL: 'http://127.0.0.1:3000' })
-    this._url = `/${version}`
+    this._url = `api/${version}`
   }
 
   get http() {
