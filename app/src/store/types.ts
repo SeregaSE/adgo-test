@@ -33,3 +33,8 @@ export interface Store {
   data: DataRow[]
   query: Query
 }
+
+export interface Action<T> {
+  type: string
+  payload: T
+}
