@@ -7,6 +7,7 @@ import {
 
 
 type QueryParam = { [K in keyof SearchParams]?: SearchParams[K] }
+type FilterKey = keyof Omit<AppState, 'data' | 'query'>
 
 export function changeQuery(queryParam: QueryParam): Action<QueryParam> {
     return {
@@ -15,7 +16,7 @@ export function changeQuery(queryParam: QueryParam): Action<QueryParam> {
     }
 }
 
-export function setFilterList(list: ListItem[], key: keyof Omit<AppState, 'data' | 'query'>): Action {
+export function setFilterList(list: ListItem[], key: FilterKey): Action<{ [key in FilterKey]?: ListItem[] }> {
     return {
         type: SET_FILTER_LIST,
         payload: {

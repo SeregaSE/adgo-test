@@ -62,7 +62,8 @@ class App extends Component<Props> {
                     <Select
                         className={styles.wideSelect}
                         defaultValue={this.props.query.groupBy}
-                        options={this.props.groups} />
+                        options={this.props.groups}
+                    />
                 </div>
                 <div className={styles.filtersRow}>
                     <Select
@@ -81,7 +82,7 @@ class App extends Component<Props> {
                         options={this.props.browsers}
                     />
                 </div>
-                <Table columns={columns} />
+                <Table columns={columns} dataSource={this.props.data} />
             </>
         )
     }
