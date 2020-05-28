@@ -14,9 +14,9 @@ export interface SearchParams {
     to: string
     limit: number
     offset: number
-    platform: string
-    browsers: string | string[]
-    operatingSystems: string | string[]
+    platform: number
+    browsers: number
+    operatingSystems: number
 }
 
 export interface ListItem {

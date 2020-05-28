@@ -66,7 +66,7 @@ class App extends Component<Props> {
     }
 
     private changeFilter(key: keyof SearchParams) {
-        return async (value: string) => {
+        return async (value: number | string) => {
             await this.props.dispatch(changeQuery({ [key]: value }))
             await this.fetchStatistics()
         }
@@ -111,63 +111,55 @@ class App extends Component<Props> {
                     </div>
                     <div>
                         <label>{'Group by'}</label>
-                        {!!groups.length &&
-                            <Select
-                                  className={styles.wideSelect}
-                                  defaultValue={groups[0].value}
-                                  options={groups}
-                                  onChange={this.changeFilter('groupBy')}
-                            />
-                        }
+                        <Select
+                            className={styles.wideSelect}
+                            value={query.groupBy}
+                            options={groups}
+                            onChange={this.changeFilter('groupBy')}
+                        />
                     </div>
                 </div>
                 <div className={styles.filtersRow}>
                     <div>
                         <label>{'Platform'}</label>
-                        {!!platforms.length &&
-                            <Select
-                                  className={styles.wideSelect}
-                                  defaultValue={platforms[0].value}
-                                  options={platforms}
-                                  onChange={this.changeFilter('platform')}
-                            />
-                        }
+                        <Select
+                            className={styles.wideSelect}
+                            value={query.platform}
+                            options={platforms}
+                            onChange={this.changeFilter('platform')}
+                        />
+
                     </div>
                     <div>
                         <label>{'Operating System'}</label>
-                        {!!operatingSystems.length &&
-                            <Select
-                                  className={styles.wideSelect}
-                                  defaultValue={operatingSystems[0].value}
-                                  options={operatingSystems}
-                                  onChange={this.changeFilter('operatingSystems')}
-                            />
-                        }
+                        <Select
+                              className={styles.wideSelect}
+                              value={query.operatingSystems}
+                              options={operatingSystems}
+                              onChange={this.changeFilter('operatingSystems')}
+                        />
                     </div>
                     <div>
                         <label>{'Browsers'}</label>
-                        {!!browsers.length &&
-                            <Select
-                                  className={styles.wideSelect}
-                                  defaultValue={browsers[0].value}
-                                  options={browsers}
-                                  onChange={this.changeFilter('browsers')}
-                            />
-                        }
+                        <Select
+                            className={styles.wideSelect}
+                            value={query.browsers}
+                            options={browsers}
+                            onChange={this.changeFilter('browsers')}
+                        />
+
                     </div>
                 </div>
-                {!!data &&
-                    <Table
-                        columns={this.generateColumns()}
-                        pagination={{
-                            total: data.count,
-                            onChange: (page, size) => {
-                                this.fetchStatistics(page * size)
-                            }
-                        }}
-                        dataSource={data.rows.map((row, i) => ({ key: i, ...row }))}
-                    />
-                }
+                <Table
+                    columns={this.generateColumns()}
+                    pagination={{
+                        total: data && data.count,
+                        onChange: (page, size) => {
+                            this.fetchStatistics(page * size)
+                        }
+                    }}
+                    dataSource={data && data.rows && data.rows.map((row, i) => ({ key: i, ...row }))}
+                />
             </div>
         )
     }
