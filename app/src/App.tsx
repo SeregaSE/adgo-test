@@ -37,15 +37,22 @@ interface Props extends AppState {
 class App extends Component<Props> {
     private statisticsService = new StatisticsService()
 
+    private async fetchStatistics() {
+        const { rows } = await this.statisticsService.getStatistics(this.props.query)
+        this.props.dispatch(setStatisticsData(rows))
+    }
+
     private changeDate(key: keyof Pick<SearchParams, 'from' | 'to'>) {
-        return (date: moment.Moment) => {
-            this.props.dispatch(changeQuery({ [key]: date.format('YYYY-MM-DD') }))
+        return async (date: moment.Moment) => {
+            await this.props.dispatch(changeQuery({ [key]: date.format('YYYY-MM-DD') }))
+            await this.fetchStatistics()
         }
     }
 
     private changeFilter(key: keyof SearchParams) {
-        return (value: string) => {
-            this.props.dispatch(changeQuery({ [key]: value }))
+        return async (value: string) => {
+            await this.props.dispatch(changeQuery({ [key]: value }))
+            await this.fetchStatistics()
         }
     }
 
@@ -57,14 +64,13 @@ class App extends Component<Props> {
                 this.statisticsService.getPlatformsList(),
                 this.statisticsService.getOperatingSystemsList(),
                 this.statisticsService.getBrowsersList(),
-                this.statisticsService.getStatistics(this.props.query)
+                this.fetchStatistics()
             ])
             .then(([ groups, platforms, operatingSystems, browsers, statistics ]) => {
                 dispatch(setFilterList(groups, 'groups'))
                 dispatch(setFilterList(platforms, 'platforms'))
                 dispatch(setFilterList(operatingSystems, 'operatingSystems'))
                 dispatch(setFilterList(browsers, 'browsers'))
-                dispatch(setStatisticsData(statistics.rows))
             })
     }
 
