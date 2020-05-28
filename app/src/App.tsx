@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { DatePicker, Select, Table } from 'antd'
+import moment from 'moment'
 import 'antd/dist/antd.css'
 
 import { Action, AppState } from './store/types'
 import { StatisticsService } from './api/v1/statistics'
-import { setFilterList, changeQuery, setStatisticsData } from './store/actions'
+import { SearchParams } from './api/v1/statistics/interfaces'
+import { setFilterList, changeQuery, setStatisticsData, FilterKey } from './store/actions'
 import styles from './App.css'
 
 const columns = [
@@ -29,12 +31,23 @@ const columns = [
 ]
 
 interface Props extends AppState {
-    loadFilterList: (action: Action) => void
-    loadStatistics: (action: Action) => void
+   dispatch: Dispatch
 }
 
 class App extends Component<Props> {
     private statisticsService = new StatisticsService()
+
+    private changeDate(key: keyof Pick<SearchParams, 'from' | 'to'>) {
+        return (date: moment.Moment) => {
+            this.props.dispatch(changeQuery({ [key]: date.format('YYYY-MM-DD') }))
+        }
+    }
+
+    private changeFilter(key: keyof SearchParams) {
+        return (value: string) => {
+            this.props.dispatch(changeQuery({ [key]: value }))
+        }
+    }
 
     componentDidMount(): void {
         console.log(this.props, 'props')
@@ -47,11 +60,11 @@ class App extends Component<Props> {
                 this.statisticsService.getStatistics(this.props.query)
             ])
             .then(([ groups, platforms, operatingSystems, browsers, statistics ]) => {
-                this.props.loadFilterList(setFilterList(groups, 'groups'))
-                this.props.loadFilterList(setFilterList(platforms, 'platforms'))
-                this.props.loadFilterList(setFilterList(operatingSystems, 'operatingSystems'))
-                this.props.loadFilterList(setFilterList(browsers, 'browsers'))
-                this.props.loadStatistics(setStatisticsData(statistics.rows))
+                this.props.dispatch(setFilterList(groups, 'groups'))
+                this.props.dispatch(setFilterList(platforms, 'platforms'))
+                this.props.dispatch(setFilterList(operatingSystems, 'operatingSystems'))
+                this.props.dispatch(setFilterList(browsers, 'browsers'))
+                this.props.dispatch(setStatisticsData(statistics.rows))
             })
     }
 
@@ -59,12 +72,19 @@ class App extends Component<Props> {
         return (
             <>
                 <div className={styles.filtersRow}>
-                    <DatePicker />
-                    <DatePicker />
+                    <DatePicker
+                        defaultValue={moment(new Date(this.props.query.from))}
+                        onChange={this.changeDate('from')}
+                    />
+                    <DatePicker
+                        defaultValue={moment(new Date(this.props.query.to))}
+                        onChange={this.changeDate('to')}
+                    />
                     <Select
                         className={styles.wideSelect}
                         defaultValue={this.props.query.groupBy}
                         options={this.props.groups}
+                        onChange={this.changeFilter('groupBy')}
                     />
                 </div>
                 <div className={styles.filtersRow}>
@@ -72,16 +92,19 @@ class App extends Component<Props> {
                         className={styles.wideSelect}
                         defaultValue={this.props.query.platform}
                         options={this.props.platforms}
+                        onChange={this.changeFilter('platform')}
                     />
                     <Select
                         className={styles.wideSelect}
                         defaultValue={this.props.query.operatingSystems}
                         options={this.props.operatingSystems}
+                        onChange={this.changeFilter('operatingSystems')}
                     />
                     <Select
                         className={styles.wideSelect}
                         defaultValue={this.props.query.browsers}
                         options={this.props.browsers}
+                        onChange={this.changeFilter('browsers')}
                     />
                 </div>
                 <Table
@@ -100,9 +123,4 @@ const mapStateToProps = (state: AppState) => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch)  => ({
-    loadFilterList: (action: Action) => dispatch(action),
-    loadStatistics: (action: Action) => dispatch(action)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)
