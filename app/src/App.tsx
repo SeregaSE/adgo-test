@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import { DatePicker, Select, Table } from 'antd'
 import 'antd/dist/antd.css'
 
-import { AppState } from './store/types'
+import { Action, AppState } from './store/types'
 import { StatisticsService } from './api/v1/statistics'
 import { setFilterList, changeQuery } from './store/actions'
 import styles from './App.css'
@@ -29,7 +29,7 @@ const columns = [
 ]
 
 interface Props extends AppState {
-    loadFilterList: (action: typeof setFilterList) => void
+    loadFilterList: (action: Action) => void
 }
 
 class App extends Component<Props> {
@@ -95,7 +95,7 @@ const mapStateToProps = (state: AppState) => {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch)  => ({
-    loadFilterList: (action: typeof setFilterList) => dispatch(action),
+    loadFilterList: (action: Action) => dispatch(action),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
