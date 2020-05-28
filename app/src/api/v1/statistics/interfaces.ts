@@ -1,6 +1,8 @@
 export interface DataRow {
     day?: string
     platform?: string
+    operatingSystem?: string
+    browser?: string
     impressions: number
     clicks: number
     money: number

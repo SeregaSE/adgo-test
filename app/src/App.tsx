@@ -7,28 +7,15 @@ import 'antd/dist/antd.css'
 
 import { AppState } from './store/types'
 import { StatisticsService } from './api/v1/statistics'
-import { SearchParams } from './api/v1/statistics/interfaces'
+import { SearchParams, DataRow } from './api/v1/statistics/interfaces'
 import { setFilterList, changeQuery, setStatisticsData } from './store/actions'
 import styles from './App.css'
 
-const columns = [
-  {
-    title: 'Day',
-    dataIndex: 'day'
-  },
-  {
-    title: 'Impressions',
-    dataIndex: 'impressions'
-  },
-  {
-    title: 'Conversions',
-    dataIndex: 'clicks'
-  },
-  {
-    title: 'Money',
-    dataIndex: 'money'
-  }
-]
+
+interface Column {
+    title: string
+    dataIndex: keyof DataRow
+}
 
 interface Props extends AppState {
    dispatch: Dispatch
@@ -37,14 +24,39 @@ interface Props extends AppState {
 class App extends Component<Props> {
     private statisticsService = new StatisticsService()
 
-    private async fetchStatistics(offset: number = this.props.query.offset) {
+    private async fetchStatistics(offset: number = this.props.query.offset): Promise<void> {
         const statistics = await this.statisticsService.getStatistics({ ...this.props.query, offset })
         this.props.dispatch(setStatisticsData(statistics))
     }
 
+    private generateColumns(): Column[] {
+        const base: Column[] =  [
+            {
+                title: 'Impressions',
+                dataIndex: 'impressions'
+            },
+            {
+                title: 'Conversions',
+                dataIndex: 'clicks'
+            },
+            {
+                title: 'Money',
+                dataIndex: 'money'
+            }
+        ]
+        switch (this.props.query.groupBy) {
+            case 'day':
+                return [{ title: 'Day', dataIndex: 'day' }, ...base]
+            case 'platform':
+                return [{ title: 'Platform', dataIndex: 'platform'}, ...base]
+            case 'operatingSystem':
+                return [{ title: 'Operating System', dataIndex: 'operatingSystem'}, ...base]
+        }
+    }
+
     private changeDate(key: keyof Pick<SearchParams, 'from' | 'to'>) {
         return async (date: moment.Moment) => {
-            await this.props.dispatch(changeQuery({ 
+            await this.props.dispatch(changeQuery({
                 [key]: date ? date.format('YYYY-MM-DD') : this.props.query[key]
             }))
             await this.fetchStatistics()
@@ -144,7 +156,7 @@ class App extends Component<Props> {
                 </div>
                 {!!data &&
                     <Table
-                        columns={columns}
+                        columns={this.generateColumns()}
                         pagination={{
                             total: data.count,
                             onChange: (page, size) => {
