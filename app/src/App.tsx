@@ -6,30 +6,31 @@ import 'antd/dist/antd.css'
 
 import { Action, AppState } from './store/types'
 import { StatisticsService } from './api/v1/statistics'
-import { setFilterList, changeQuery } from './store/actions'
+import { setFilterList, changeQuery, setStatisticsData } from './store/actions'
 import styles from './App.css'
 
 const columns = [
   {
     title: 'Day',
-    key: 'day'
+    dataIndex: 'day'
   },
   {
     title: 'Impressions',
-    key: 'impressions'
+    dataIndex: 'impressions'
   },
   {
     title: 'Conversions',
-    key: 'conversions'
+    dataIndex: 'clicks'
   },
   {
     title: 'Money',
-    key: 'money'
+    dataIndex: 'money'
   }
 ]
 
 interface Props extends AppState {
     loadFilterList: (action: Action) => void
+    loadStatistics: (action: Action) => void
 }
 
 class App extends Component<Props> {
@@ -50,6 +51,7 @@ class App extends Component<Props> {
                 this.props.loadFilterList(setFilterList(platforms, 'platforms'))
                 this.props.loadFilterList(setFilterList(operatingSystems, 'operatingSystems'))
                 this.props.loadFilterList(setFilterList(browsers, 'browsers'))
+                this.props.loadStatistics(setStatisticsData(statistics.rows))
             })
     }
 
@@ -82,7 +84,10 @@ class App extends Component<Props> {
                         options={this.props.browsers}
                     />
                 </div>
-                <Table columns={columns} dataSource={this.props.data} />
+                <Table
+                    columns={columns}
+                    dataSource={this.props.data}
+                />
             </>
         )
     }
@@ -97,6 +102,7 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch)  => ({
     loadFilterList: (action: Action) => dispatch(action),
+    loadStatistics: (action: Action) => dispatch(action)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

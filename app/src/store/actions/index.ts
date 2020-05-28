@@ -1,8 +1,8 @@
-import { SearchParams, ListItem } from '../../api/v1/statistics/interfaces'
+import { SearchParams, ListItem, DataRow } from '../../api/v1/statistics/interfaces'
 import { Action, AppState } from '../types'
 import {
     CHANGE_QUERY,
-    SET_FILTER_LIST,
+    SET_FILTER_LIST, SET_STATISTICS_DATA,
 } from '../constants'
 
 
@@ -22,5 +22,12 @@ export function setFilterList(list: ListItem[], key: FilterKey): Action<{ [key i
         payload: {
             [key]: list
         }
+    }
+}
+
+export function setStatisticsData(list: DataRow[]): Action<DataRow[]> {
+    return {
+        type: SET_STATISTICS_DATA,
+        payload: list
     }
 }

@@ -2,6 +2,7 @@ import { AppState, Action } from '../types'
 import {
     CHANGE_QUERY,
     SET_FILTER_LIST,
+    SET_STATISTICS_DATA
 } from '../constants'
 
 const initialState: AppState = {
@@ -34,6 +35,11 @@ export default function (state: AppState = initialState, action: Action): AppSta
             return {
                 ...state,
                 ...action.payload
+            }
+        case SET_STATISTICS_DATA:
+            return {
+                ...state,
+                data: action.payload
             }
         default:
             return state
