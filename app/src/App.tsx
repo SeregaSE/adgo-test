@@ -5,10 +5,10 @@ import { DatePicker, Select, Table } from 'antd'
 import moment from 'moment'
 import 'antd/dist/antd.css'
 
-import { Action, AppState } from './store/types'
+import { AppState } from './store/types'
 import { StatisticsService } from './api/v1/statistics'
 import { SearchParams } from './api/v1/statistics/interfaces'
-import { setFilterList, changeQuery, setStatisticsData, FilterKey } from './store/actions'
+import { setFilterList, changeQuery, setStatisticsData } from './store/actions'
 import styles from './App.css'
 
 const columns = [
@@ -50,7 +50,7 @@ class App extends Component<Props> {
     }
 
     componentDidMount(): void {
-        console.log(this.props, 'props')
+        const { dispatch } = this.props
         Promise
             .all([
                 this.statisticsService.getGroupsList(),
@@ -60,56 +60,57 @@ class App extends Component<Props> {
                 this.statisticsService.getStatistics(this.props.query)
             ])
             .then(([ groups, platforms, operatingSystems, browsers, statistics ]) => {
-                this.props.dispatch(setFilterList(groups, 'groups'))
-                this.props.dispatch(setFilterList(platforms, 'platforms'))
-                this.props.dispatch(setFilterList(operatingSystems, 'operatingSystems'))
-                this.props.dispatch(setFilterList(browsers, 'browsers'))
-                this.props.dispatch(setStatisticsData(statistics.rows))
+                dispatch(setFilterList(groups, 'groups'))
+                dispatch(setFilterList(platforms, 'platforms'))
+                dispatch(setFilterList(operatingSystems, 'operatingSystems'))
+                dispatch(setFilterList(browsers, 'browsers'))
+                dispatch(setStatisticsData(statistics.rows))
             })
     }
 
     render(): React.ReactNode {
+        const { query, groups, platforms, operatingSystems, browsers, data } = this.props
         return (
             <>
                 <div className={styles.filtersRow}>
                     <DatePicker
-                        defaultValue={moment(new Date(this.props.query.from))}
+                        defaultValue={moment(new Date(query.from))}
                         onChange={this.changeDate('from')}
                     />
                     <DatePicker
-                        defaultValue={moment(new Date(this.props.query.to))}
+                        defaultValue={moment(new Date(query.to))}
                         onChange={this.changeDate('to')}
                     />
                     <Select
                         className={styles.wideSelect}
-                        defaultValue={this.props.query.groupBy}
-                        options={this.props.groups}
+                        defaultValue={groups[0].label}
+                        options={groups}
                         onChange={this.changeFilter('groupBy')}
                     />
                 </div>
                 <div className={styles.filtersRow}>
                     <Select
                         className={styles.wideSelect}
-                        defaultValue={this.props.query.platform}
-                        options={this.props.platforms}
+                        defaultValue={platforms[0].label}
+                        options={platforms}
                         onChange={this.changeFilter('platform')}
                     />
                     <Select
                         className={styles.wideSelect}
-                        defaultValue={this.props.query.operatingSystems}
-                        options={this.props.operatingSystems}
+                        defaultValue={operatingSystems[0].label}
+                        options={operatingSystems}
                         onChange={this.changeFilter('operatingSystems')}
                     />
                     <Select
                         className={styles.wideSelect}
-                        defaultValue={this.props.query.browsers}
-                        options={this.props.browsers}
+                        defaultValue={browsers[0].label}
+                        options={browsers}
                         onChange={this.changeFilter('browsers')}
                     />
                 </div>
                 <Table
                     columns={columns}
-                    dataSource={this.props.data}
+                    dataSource={data}
                 />
             </>
         )

@@ -13,9 +13,9 @@ const initialState: AppState = {
         to: '2019-08-10',
         limit: 10,
         offset: 0,
-        platform: 'Desktop',
-        browsers: 'Chrome',
-        operatingSystems: 'Windows',
+        platform: '1',
+        browsers: '1',
+        operatingSystems: '1',
     },
     groups: [],
     browsers: [],
@@ -29,7 +29,10 @@ export default function (state: AppState = initialState, action: Action): AppSta
         case CHANGE_QUERY:
             return {
                 ...state,
-                ...action.payload
+                query: {
+                    ...state.query,
+                    ...action.payload
+                }
             }
         case SET_FILTER_LIST:
             return {

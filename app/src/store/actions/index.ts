@@ -7,7 +7,7 @@ import {
 
 
 type QueryParam = { [K in keyof SearchParams]?: SearchParams[K] }
-export type FilterKey = keyof Omit<AppState, 'data' | 'query'>
+type FilterKey = keyof Omit<AppState, 'data' | 'query'>
 
 export function changeQuery(queryParam: QueryParam): Action<QueryParam> {
     return {
