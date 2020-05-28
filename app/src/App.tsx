@@ -44,7 +44,9 @@ class App extends Component<Props> {
 
     private changeDate(key: keyof Pick<SearchParams, 'from' | 'to'>) {
         return async (date: moment.Moment) => {
-            await this.props.dispatch(changeQuery({ [key]: date.format('YYYY-MM-DD') }))
+            await this.props.dispatch(changeQuery({ 
+                [key]: date ? date.format('YYYY-MM-DD') : this.props.query[key]
+            }))
             await this.fetchStatistics()
         }
     }
