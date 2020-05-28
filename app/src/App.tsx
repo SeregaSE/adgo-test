@@ -81,7 +81,7 @@ class App extends Component<Props> {
                         defaultValue={moment(new Date(query.to))}
                         onChange={this.changeDate('to')}
                     />
-                    {groups.length &&
+                    {!!groups.length &&
                         <Select
                             className={styles.wideSelect}
                             defaultValue={groups[0].value}
@@ -91,7 +91,7 @@ class App extends Component<Props> {
                     }
                 </div>
                 <div className={styles.filtersRow}>
-                    {platforms.length &&
+                    {!!platforms.length &&
                         <Select
                             className={styles.wideSelect}
                             defaultValue={platforms[0].value}
@@ -99,7 +99,7 @@ class App extends Component<Props> {
                             onChange={this.changeFilter('platform')}
                         />
                     }
-                    {operatingSystems.length &&
+                    {!!operatingSystems.length &&
                         <Select
                             className={styles.wideSelect}
                             defaultValue={operatingSystems[0].value}
@@ -107,7 +107,7 @@ class App extends Component<Props> {
                             onChange={this.changeFilter('operatingSystems')}
                         />
                     }
-                    {browsers.length &&
+                    {!!browsers.length &&
                         <Select
                             className={styles.wideSelect}
                             defaultValue={browsers[0].value}
