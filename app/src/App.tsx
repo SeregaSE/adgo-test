@@ -37,8 +37,8 @@ interface Props extends AppState {
 class App extends Component<Props> {
     private statisticsService = new StatisticsService()
 
-    private async fetchStatistics(limit: number = this.props.query.limit, offset: number = this.props.query.offset) {
-        const statistics = await this.statisticsService.getStatistics({ ...this.props.query, limit, offset })
+    private async fetchStatistics(offset: number = this.props.query.offset) {
+        const statistics = await this.statisticsService.getStatistics({ ...this.props.query, offset })
         this.props.dispatch(setStatisticsData(statistics))
     }
 
@@ -66,7 +66,7 @@ class App extends Component<Props> {
                 this.statisticsService.getBrowsersList(),
                 this.fetchStatistics()
             ])
-            .then(([ groups, platforms, operatingSystems, browsers, statistics ]) => {
+            .then(([ groups, platforms, operatingSystems, browsers ]) => {
                 dispatch(setFilterList(groups, 'groups'))
                 dispatch(setFilterList(platforms, 'platforms'))
                 dispatch(setFilterList(operatingSystems, 'operatingSystems'))
@@ -128,7 +128,7 @@ class App extends Component<Props> {
                         pagination={{
                             total: data.count,
                             onChange: (page, size) => {
-                                this.fetchStatistics(size, page * size)
+                                this.fetchStatistics(page * size)
                             }
                         }}
                         dataSource={data.rows.map((row, i) => ({ key: i, ...row }))}
