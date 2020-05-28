@@ -9,7 +9,7 @@ export interface DataRow {
 }
 
 export interface SearchParams {
-    groupBy: string
+    groupBy: Group.DAY | Group.BROWSER | Group.PLATFORM | Group.OPERATING_SYSTEM
     from: string
     to: string
     limit: number
@@ -29,4 +29,11 @@ export interface Statistics {
     count: number
     rows: DataRow[]
     total: number
+}
+
+export enum Group {
+    DAY = 'day',
+    BROWSER = 'browser',
+    OPERATING_SYSTEM = 'operatingSystem',
+    PLATFORM = 'platform'
 }

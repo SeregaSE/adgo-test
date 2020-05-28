@@ -7,8 +7,8 @@ import 'antd/dist/antd.css'
 
 import { AppState } from './store/types'
 import { StatisticsService } from './api/v1/statistics'
-import { SearchParams, DataRow } from './api/v1/statistics/interfaces'
-import { setFilterList, changeQuery, setStatisticsData } from './store/actions'
+import { DataRow, Group, SearchParams } from './api/v1/statistics/interfaces'
+import { changeQuery, setFilterList, setStatisticsData } from './store/actions'
 import styles from './App.css'
 
 
@@ -30,7 +30,7 @@ class App extends Component<Props> {
     }
 
     private generateColumns(): Column[] {
-        const base: Column[] =  [
+        const base: Column[] = [
             {
                 title: 'Impressions',
                 dataIndex: 'impressions'
@@ -45,14 +45,14 @@ class App extends Component<Props> {
             }
         ]
         switch (this.props.query.groupBy) {
-            case 'day':
-                return [{ title: 'Day', dataIndex: 'day' }, ...base]
-            case 'platform':
-                return [{ title: 'Platform', dataIndex: 'platform' }, ...base]
-            case 'operatingSystem':
-                return [{ title: 'Operating System', dataIndex: 'operatingSystem' }, ...base]
-            case 'browser':
-                return [{ title: 'Browser', dataIndex: 'browser' }, ...base]
+            case Group.DAY:
+                return [{ title: 'Day', dataIndex: Group.DAY }, ...base]
+            case Group.PLATFORM:
+                return [{ title: 'Platform', dataIndex: Group.PLATFORM }, ...base]
+            case Group.OPERATING_SYSTEM:
+                return [{ title: 'Operating System', dataIndex: Group.OPERATING_SYSTEM }, ...base]
+            case Group.BROWSER:
+                return [{ title: 'Browser', dataIndex: Group.BROWSER }, ...base]
         }
     }
 
