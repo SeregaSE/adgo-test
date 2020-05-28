@@ -51,6 +51,8 @@ class App extends Component<Props> {
                 return [{ title: 'Platform', dataIndex: 'platform' }, ...base]
             case 'operatingSystem':
                 return [{ title: 'Operating System', dataIndex: 'operatingSystem' }, ...base]
+            case 'browser':
+                return [{ title: 'Browser', dataIndex: 'browser' }, ...base]
         }
     }
 
