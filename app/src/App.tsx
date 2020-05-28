@@ -77,50 +77,68 @@ class App extends Component<Props> {
     render(): React.ReactNode {
         const { query, groups, platforms, operatingSystems, browsers, data } = this.props
         return (
-            <>
+            <div className={styles.container}>
                 <div className={styles.filtersRow}>
-                    <DatePicker
-                        defaultValue={moment(new Date(query.from))}
-                        onChange={this.changeDate('from')}
-                    />
-                    <DatePicker
-                        defaultValue={moment(new Date(query.to))}
-                        onChange={this.changeDate('to')}
-                    />
-                    {!!groups.length &&
-                        <Select
-                            className={styles.wideSelect}
-                            defaultValue={groups[0].value}
-                            options={groups}
-                            onChange={this.changeFilter('groupBy')}
+                    <div>
+                        <label>{'From'}</label>
+                        <DatePicker
+                            defaultValue={moment(new Date(query.from))}
+                            onChange={this.changeDate('from')}
                         />
-                    }
+                    </div>
+                    <div>
+                        <label>{'To'}</label>
+                        <DatePicker
+                            defaultValue={moment(new Date(query.to))}
+                            onChange={this.changeDate('to')}
+                        />
+                    </div>
+                    <div>
+                        <label>{'Group by'}</label>
+                        {!!groups.length &&
+                            <Select
+                                  className={styles.wideSelect}
+                                  defaultValue={groups[0].value}
+                                  options={groups}
+                                  onChange={this.changeFilter('groupBy')}
+                            />
+                        }
+                    </div>
                 </div>
                 <div className={styles.filtersRow}>
-                    {!!platforms.length &&
-                        <Select
-                            className={styles.wideSelect}
-                            defaultValue={platforms[0].value}
-                            options={platforms}
-                            onChange={this.changeFilter('platform')}
-                        />
-                    }
-                    {!!operatingSystems.length &&
-                        <Select
-                            className={styles.wideSelect}
-                            defaultValue={operatingSystems[0].value}
-                            options={operatingSystems}
-                            onChange={this.changeFilter('operatingSystems')}
-                        />
-                    }
-                    {!!browsers.length &&
-                        <Select
-                            className={styles.wideSelect}
-                            defaultValue={browsers[0].value}
-                            options={browsers}
-                            onChange={this.changeFilter('browsers')}
-                        />
-                    }
+                    <div>
+                        <label>{'Platform'}</label>
+                        {!!platforms.length &&
+                            <Select
+                                  className={styles.wideSelect}
+                                  defaultValue={platforms[0].value}
+                                  options={platforms}
+                                  onChange={this.changeFilter('platform')}
+                            />
+                        }
+                    </div>
+                    <div>
+                        <label>{'Operating System'}</label>
+                        {!!operatingSystems.length &&
+                            <Select
+                                  className={styles.wideSelect}
+                                  defaultValue={operatingSystems[0].value}
+                                  options={operatingSystems}
+                                  onChange={this.changeFilter('operatingSystems')}
+                            />
+                        }
+                    </div>
+                    <div>
+                        <label>{'Browsers'}</label>
+                        {!!browsers.length &&
+                            <Select
+                                  className={styles.wideSelect}
+                                  defaultValue={browsers[0].value}
+                                  options={browsers}
+                                  onChange={this.changeFilter('browsers')}
+                            />
+                        }
+                    </div>
                 </div>
                 {!!data &&
                     <Table
@@ -134,7 +152,7 @@ class App extends Component<Props> {
                         dataSource={data.rows.map((row, i) => ({ key: i, ...row }))}
                     />
                 }
-            </>
+            </div>
         )
     }
 }

@@ -1,3 +1,7 @@
+.container {
+    padding: 60px 100px;
+}
+
 .filtersRow {
     display: flex;
     flex-direction: row;
@@ -10,4 +14,8 @@
 
 .wideSelect {
     width: 180px;
+}
+
+label {
+    display: block;
 }
