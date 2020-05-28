@@ -48,9 +48,9 @@ class App extends Component<Props> {
             case 'day':
                 return [{ title: 'Day', dataIndex: 'day' }, ...base]
             case 'platform':
-                return [{ title: 'Platform', dataIndex: 'platform'}, ...base]
+                return [{ title: 'Platform', dataIndex: 'platform' }, ...base]
             case 'operatingSystem':
-                return [{ title: 'Operating System', dataIndex: 'operatingSystem'}, ...base]
+                return [{ title: 'Operating System', dataIndex: 'operatingSystem' }, ...base]
         }
     }
 
@@ -171,11 +171,8 @@ class App extends Component<Props> {
     }
 }
 
-const mapStateToProps = (state: AppState) => {
-    console.log(state, 'state')
-    return {
-        ...state
-    }
-}
+const mapStateToProps = (state: AppState) => ({
+    ...state
+})
 
 export default connect(mapStateToProps)(App)
