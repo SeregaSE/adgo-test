@@ -1,5 +1,8 @@
 import { AppState, Action } from '../types'
-import { CHANGE_QUERY } from '../constants'
+import {
+    CHANGE_QUERY,
+    SET_FILTER_LIST,
+} from '../constants'
 
 const initialState: AppState = {
     data: [],
@@ -15,6 +18,7 @@ const initialState: AppState = {
     },
     groups: [],
     browsers: [],
+    platforms: [],
     operatingSystems: []
 }
 
@@ -22,6 +26,11 @@ const initialState: AppState = {
 export default function (state: AppState = initialState, action: Action): AppState {
     switch(action.type) {
         case CHANGE_QUERY:
+            return {
+                ...state,
+                ...action.payload
+            }
+        case SET_FILTER_LIST:
             return {
                 ...state,
                 ...action.payload

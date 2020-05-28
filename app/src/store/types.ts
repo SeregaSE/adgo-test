@@ -4,6 +4,7 @@ export interface AppState {
   data: DataRow[]
   query: SearchParams
   groups: ListItem[]
+  platforms: ListItem[]
   browsers: ListItem[]
   operatingSystems: ListItem[]
 }

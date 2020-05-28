@@ -1,1 +1,2 @@
 export const CHANGE_QUERY = 'CHANGE_QUERY'
+export const SET_FILTER_LIST = 'SET_FILTER_LIST'
