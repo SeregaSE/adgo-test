@@ -81,36 +81,44 @@ class App extends Component<Props> {
                         defaultValue={moment(new Date(query.to))}
                         onChange={this.changeDate('to')}
                     />
-                    <Select
-                        className={styles.wideSelect}
-                        defaultValue={groups[0].label}
-                        options={groups}
-                        onChange={this.changeFilter('groupBy')}
-                    />
+                    {groups.length &&
+                        <Select
+                            className={styles.wideSelect}
+                            defaultValue={groups[0].value}
+                            options={groups}
+                            onChange={this.changeFilter('groupBy')}
+                        />
+                    }
                 </div>
                 <div className={styles.filtersRow}>
-                    <Select
-                        className={styles.wideSelect}
-                        defaultValue={platforms[0].label}
-                        options={platforms}
-                        onChange={this.changeFilter('platform')}
-                    />
-                    <Select
-                        className={styles.wideSelect}
-                        defaultValue={operatingSystems[0].label}
-                        options={operatingSystems}
-                        onChange={this.changeFilter('operatingSystems')}
-                    />
-                    <Select
-                        className={styles.wideSelect}
-                        defaultValue={browsers[0].label}
-                        options={browsers}
-                        onChange={this.changeFilter('browsers')}
-                    />
+                    {platforms.length &&
+                        <Select
+                            className={styles.wideSelect}
+                            defaultValue={platforms[0].value}
+                            options={platforms}
+                            onChange={this.changeFilter('platform')}
+                        />
+                    }
+                    {operatingSystems.length &&
+                        <Select
+                            className={styles.wideSelect}
+                            defaultValue={operatingSystems[0].value}
+                            options={operatingSystems}
+                            onChange={this.changeFilter('operatingSystems')}
+                        />
+                    }
+                    {browsers.length &&
+                        <Select
+                            className={styles.wideSelect}
+                            defaultValue={browsers[0].value}
+                            options={browsers}
+                            onChange={this.changeFilter('browsers')}
+                        />
+                    }
                 </div>
                 <Table
                     columns={columns}
-                    dataSource={data}
+                    dataSource={data.map((row, i) => ({ key: i, ...row }))}
                 />
             </>
         )
