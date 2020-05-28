@@ -37,9 +37,9 @@ interface Props extends AppState {
 class App extends Component<Props> {
     private statisticsService = new StatisticsService()
 
-    private async fetchStatistics() {
-        const { rows } = await this.statisticsService.getStatistics(this.props.query)
-        this.props.dispatch(setStatisticsData(rows))
+    private async fetchStatistics(limit: number = this.props.query.limit, offset: number = this.props.query.offset) {
+        const statistics = await this.statisticsService.getStatistics({ ...this.props.query, limit, offset })
+        this.props.dispatch(setStatisticsData(statistics))
     }
 
     private changeDate(key: keyof Pick<SearchParams, 'from' | 'to'>) {
@@ -122,10 +122,18 @@ class App extends Component<Props> {
                         />
                     }
                 </div>
-                <Table
-                    columns={columns}
-                    dataSource={data.map((row, i) => ({ key: i, ...row }))}
-                />
+                {!!data &&
+                    <Table
+                        columns={columns}
+                        pagination={{
+                            total: data.count,
+                            onChange: (page, size) => {
+                                this.fetchStatistics(size, page * size)
+                            }
+                        }}
+                        dataSource={data.rows.map((row, i) => ({ key: i, ...row }))}
+                    />
+                }
             </>
         )
     }

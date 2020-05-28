@@ -1,4 +1,4 @@
-import { SearchParams, ListItem, DataRow } from '../../api/v1/statistics/interfaces'
+import { SearchParams, ListItem, Statistics } from '../../api/v1/statistics/interfaces'
 import { Action, AppState } from '../types'
 import {
     CHANGE_QUERY,
@@ -25,9 +25,9 @@ export function setFilterList(list: ListItem[], key: FilterKey): Action<{ [key i
     }
 }
 
-export function setStatisticsData(list: DataRow[]): Action<DataRow[]> {
+export function setStatisticsData(statistics: Statistics): Action<Statistics> {
     return {
         type: SET_STATISTICS_DATA,
-        payload: list
+        payload: statistics
     }
 }

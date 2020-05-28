@@ -1,7 +1,7 @@
-import { DataRow, SearchParams, ListItem } from '../api/v1/statistics/interfaces'
+import { Statistics, SearchParams, ListItem } from '../api/v1/statistics/interfaces'
 
 export interface AppState {
-  data: DataRow[]
+  data: Statistics
   query: SearchParams
   groups: ListItem[]
   platforms: ListItem[]

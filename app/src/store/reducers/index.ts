@@ -6,7 +6,7 @@ import {
 } from '../constants'
 
 const initialState: AppState = {
-    data: [],
+    data: null,
     query: {
         groupBy: 'day',
         from: '2019-08-09',
