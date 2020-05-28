@@ -9,7 +9,7 @@ export interface DataRow {
 }
 
 export interface SearchParams {
-    groupBy: Group.DAY | Group.BROWSER | Group.PLATFORM | Group.OPERATING_SYSTEM
+    groupBy: 'day' | 'browser' | 'operatingSystem' | 'platform'
     from: string
     to: string
     limit: number
