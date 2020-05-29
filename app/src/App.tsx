@@ -140,7 +140,7 @@ class App extends Component<Props> {
                         />
                     </div>
                     <div>
-                        <label>{'Browsers'}</label>
+                        <label>{'Browser'}</label>
                         <Select
                             className={styles.wideSelect}
                             value={query.browsers}
