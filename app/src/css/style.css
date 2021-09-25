@@ -1,0 +1,297 @@
+
+
+/*** 
+
+====================================================================
+  Google fonts
+====================================================================
+
+***/
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700');
+
+/*** 
+
+====================================================================
+  Import All Css
+====================================================================
+
+***/
+
+@import 'bootstrap.min.css';
+/*** 
+
+====================================================================
+  General css style
+====================================================================
+
+***/
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    outline: none;
+}
+
+.page-link {
+    color: black;
+}
+
+.page-item :hover {
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+p {
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 15px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+.section-header{
+    position: relative;
+    margin-bottom: 50px
+}
+.section-title {
+    font-size: 44px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    position: relative;
+    text-align: center;
+    color: #fff;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+.mt-15 {
+    margin-top: 15px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.mt-50 {
+    margin-top: 50px;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
+.mt-150 {
+    margin-top: 150px;
+}
+
+.mr-15 {
+    margin-right: 15px;
+}
+
+.mr-30 {
+    margin-right: 30px;
+}
+
+.mr-50 {
+    margin-right: 50px;
+}
+
+.mr-100 {
+    margin-right: 100px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.mb-50 {
+    margin-bottom: 50px;
+}
+
+.mb-100 {
+    margin-bottom: 100px;
+}
+
+.ml-15 {
+    margin-left: 15px;
+}
+
+.ml-30 {
+    margin-left: 30px;
+}
+
+.ml-50 {
+    margin-left: 50px;
+}
+
+.ml-100 {
+    margin-left: 100px;
+}
+
+.section-padding-100 {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.relative{
+    position: relative;
+}
+.section-padding-0-100 {
+    padding-top: 0;
+    padding-bottom: 100px;
+}
+
+.section-padding-100-0 {
+    padding-top: 100px;
+    padding-bottom: 0;
+}
+.section-padding-100-85 {
+    padding-top: 100px;
+    padding-bottom: 85px;
+}
+.section-padding-70-0 {
+    padding-top: 70px;
+    padding-bottom: 0;
+}
+.section-padding-0-70 {
+    padding-top: 0px;
+    padding-bottom: 70px;
+}
+.section-padding-0-0{
+    padding-top: 0;
+    padding-bottom: 0
+}
+.section-padding-100-50 {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+.section-padding-100-70 {
+    padding-top: 100px;
+    padding-bottom: 70px;
+}
+.section-padding-0-50 {
+    padding-top: 0;
+    padding-bottom: 50px;
+}
+
+.section-padding-50-0 {
+    padding-top: 50px;
+    padding-bottom: 0;
+}
+
+.section-padding-200 {
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+
+.section-padding-0-200 {
+    padding-top: 0;
+    padding-bottom: 200px;
+}
+
+.section-padding-200-0 {
+    padding-top: 200px;
+    padding-bottom: 0;
+}
+
+.section-padding-200-100 {
+    padding-top: 200px;
+    padding-bottom: 100px;
+}
+
+.section-padding-150 {
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.section-padding-150-0 {
+    padding-top: 150px;
+    padding-bottom: 0;
+}
+
+.section-padding-0-150 {
+    padding-top: 0;
+    padding-bottom: 150px;
+}
+
+.section-padding-50-150 {
+    padding-top: 50px;
+    padding-bottom: 150px;
+}
+
+.section-heading {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 80px;
+}
+
+.section-heading h2 {
+    font-size: 30px;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+.section-heading > p {
+    margin-bottom: 0;
+    line-height: 2;
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.flex{
+    display: flex
+}
