@@ -1,6 +1,7 @@
 import {AjaxApi} from "../lib/AjaxApi";
 import FiltersService from "../lib/FiltersService";
 import {initDataFilters,initCurrentValueFilters} from "../actions/filters";
+import {setData} from "../actions/table";
 
 const ajaxMiddleware = () => {
     return store => next => action => {
@@ -28,6 +29,11 @@ const ajaxMiddleware = () => {
                     const filtersService = new FiltersService();
                     const currentValueFilters = filtersService.makeCurrentValueFilters(dataFilters);
                     store.dispatch(initCurrentValueFilters(currentValueFilters));
+
+                    let dataUrl = `statistics?groupBy=${currentValueFilters.groups.value}&from=${currentValueFilters.from}&to=${currentValueFilters.to}`;
+                    return AjaxApi.ajaxGet(dataUrl);
+                }).then(res => {
+                    store.dispatch(setData(res.rows))
                 })
                 break;
             }

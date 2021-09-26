@@ -1,5 +1,6 @@
+import {connect} from "react-redux";
 
-const Table = () => {
+const Table = (props) => {
     return (
         <div className="table-responsive mt-30">
             <div className="info">
@@ -7,35 +8,40 @@ const Table = () => {
             <table className="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Day</th>
+                    <th scope="col">{props.currentValueFilters.groups.label}</th>
                     <th scope="col">Impressions</th>
                     <th scope="col">Conversions</th>
                     <th scope="col">Money</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                </tr>
-                <tr>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                </tr>
-                <tr>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                    <td>ndjfjdn</td>
-                </tr>
+                {props.data.length > 0 ?
+                    props.data.map(item => {
+                        return (
+                            <tr>
+                                <td>{item[props.currentValueFilters.groups.value]}</td>
+                                <td>{item.impressions}</td>
+                                <td>{item.clicks}</td>
+                                <td>{item.money}</td>
+                            </tr>
+                        )
+                    })
+                    : ""
+                }
                 </tbody>
             </table>
         </div>
     )
 }
 
-export default Table;
+export default connect(
+    state => ({
+        currentValueFilters: state.filters.currentValueFilters,
+        data: state.table.data
+    }),
+    dispatch => ({
+        // onAjaxGetDataForFilters: () => {
+        //     dispatch(ajaxGetDataForFilters());
+        // },
+    })
+)(Table);
