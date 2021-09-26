@@ -2,10 +2,23 @@
 
 const initialState = {
     // данные по фильтрам
-    dataFilters: {},
+    dataFilters: {
+        groups: [],
+        platforms: [],
+        operatingSystems: [],
+        browsers: []
+    },
     // значения выбранных фильтров
     currentValueFilters: {
         to: 0,
+        groups: {
+            value: 0,
+            label: ""
+        },
+        platforms: {
+            value: 0,
+            label: ""
+        }
     }
 };
 

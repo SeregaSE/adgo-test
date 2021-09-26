@@ -10,6 +10,7 @@ const ajaxMiddleware = () => {
                 let dataUrl = "platforms";
                 AjaxApi.ajaxGet(dataUrl).then((res) => {
                     dataFilters.platforms = res;
+                    dataFilters.platforms.unshift({label: "All", value: 0})
                     let dataUrl = "browsers";
                     return AjaxApi.ajaxGet(dataUrl);
                 }).then(res => {
