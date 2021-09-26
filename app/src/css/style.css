@@ -68,6 +68,22 @@ a:active {
     color: black;
 }
 
+.drop-down-list-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.drop-down-list {
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    left: 0;
+    background-color: white;
+    overflow: auto;
+    max-height: 300px;
+    z-index: 1;
+}
+
 li {
     list-style: none;
 }
