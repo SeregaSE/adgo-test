@@ -2,6 +2,7 @@ import {AjaxApi} from "../lib/AjaxApi";
 import FiltersService from "../lib/FiltersService";
 import {initDataFilters,initCurrentValueFilters} from "../actions/filters";
 import {setData} from "../actions/table";
+import {setPagination} from "../actions/pagination";
 
 const ajaxMiddleware = () => {
     return store => next => action => {
@@ -30,6 +31,11 @@ const ajaxMiddleware = () => {
                     return AjaxApi.ajaxGet(dataUrl);
                 }).then(res => {
                     store.dispatch(setData(res.rows))
+                    let paginationData = {
+                        count: res.count,
+                        page: 0
+                    }
+                    store.dispatch(setPagination(paginationData));
                 })
                 break;
             }
@@ -90,9 +96,19 @@ const ajaxMiddleware = () => {
                 if(checkedOS || checkedBrowser) {
                     AjaxApi.ajaxGet(paramUrl).then((res) => {
                         store.dispatch(setData(res.rows))
+                        let paginationData = {
+                            count: res.count,
+                            page: 0
+                        }
+                        store.dispatch(setPagination(paginationData));
                     })
                 } else {
                     store.dispatch(setData([]))
+                    let paginationData = {
+                        count: 1,
+                        page: 0
+                    }
+                    store.dispatch(setPagination(paginationData));
                 }
 
                 break;

@@ -10,7 +10,6 @@ import {useEffect} from "react";
 
 const App = (props) => {
   useEffect(() => {
-      console.log(12)
     props.onAjaxGetDataForFilters();
   },[])
   return (
