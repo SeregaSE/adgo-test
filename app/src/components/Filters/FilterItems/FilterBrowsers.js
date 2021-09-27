@@ -12,6 +12,11 @@ const FilterBrowsers = (props) => {
         }
     }
 
+
+    const onChangeFilterFrom = (e) => {
+        props.onFiltersChange("browsers", e.currentTarget.value)
+    }
+
     return (
         <div className="col-md mt-10">
             <label>Browsers</label>
@@ -24,7 +29,7 @@ const FilterBrowsers = (props) => {
                         return (
                             <div className="form-check" key={item.value}>
                                 <input className="form-check-input" type="checkbox" value={item.value} id={item.label}
-                                       checked={item.check}/>
+                                       checked={item.check} onChange={onChangeFilterFrom}/>
                                 <label className="form-check-label" htmlFor={item.label}>
                                     {item.label}
                                 </label>

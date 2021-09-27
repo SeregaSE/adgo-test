@@ -6,7 +6,8 @@ import FilterGroupBy from "./FilterItems/FilterGroupBy";
 import FilterPlatform from "./FilterItems/FilterPlatform";
 import FilterOS from "./FilterItems/FilterOS";
 import FilterBrowsers from "./FilterItems/FilterBrowsers";
-import {changeFilterFrom, changeFilterTo, changeFilterGroups, changeFilterPlatform} from "../../actions/filters";
+import {changeFilterFrom, changeFilterTo, changeFilterGroups, changeFilterPlatform, changeOS, changeBrowsers} from "../../actions/filters";
+import {ajaxGetNewData} from "../../actions/ajax";
 
 const Filters = (props) => {
     const [viewOperatingSystem, changeViewOperatingSystem] = useState(false);
@@ -58,9 +59,13 @@ const Filters = (props) => {
             case "platform":
                 props.onChangeFilterPlatform(data);
                 break;
+            case "os":
+                props.onChangeOS(data);
+                break;
             default:
-                alert("error filter")
+                props.onChangeBrowsers(data);
         }
+        props.onAjaxGetNewData();
     }
 
     return (
@@ -91,12 +96,14 @@ const Filters = (props) => {
                     viewOperatingSystem={viewOperatingSystem}
                     dataFilters={props.filters.dataFilters}
                     currentValueFilters={props.filters.currentValueFilters}
+                    onFiltersChange = {onFiltersChange}
                 />
                 <FilterBrowsers
                     onChangeViewsBrowsers={onChangeViewsBrowsers}
                     viewBrowsers={viewBrowsers}
                     dataFilters={props.filters.dataFilters}
                     currentValueFilters={props.filters.currentValueFilters}
+                    onFiltersChange = {onFiltersChange}
                 />
             </div>
         </form>
@@ -106,9 +113,6 @@ const Filters = (props) => {
 export default connect(
     state => ({
         filters: state.filters,
-        // currentValueFilters: state.filters.currentValueFilters,
-        // dataFilters: state.filters.dataFilters,
-
     }),
     dispatch => ({
         onChangeFilterFrom: (data) => {
@@ -122,6 +126,15 @@ export default connect(
         },
         onChangeFilterPlatform: (data) => {
             dispatch(changeFilterPlatform(data));
+        },
+        onChangeOS: (data) => {
+            dispatch(changeOS(data));
+        },
+        onChangeBrowsers: (data) => {
+            dispatch(changeBrowsers(data));
+        },
+        onAjaxGetNewData: () => {
+            dispatch(ajaxGetNewData());
         },
     })
 )(Filters);

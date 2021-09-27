@@ -13,6 +13,10 @@ const FilterOS = (props) => {
         }
     }
 
+    const onChangeFilterFrom = (e) => {
+        props.onFiltersChange("os", e.currentTarget.value)
+    }
+
     return (
         <div className="col-md mt-10">
             <label>Operating system</label>
@@ -26,7 +30,7 @@ const FilterOS = (props) => {
                         return (
                             <div className="form-check" key={item.value}>
                                 <input className="form-check-input" type="checkbox" value={item.value} id={item.label}
-                                       checked={item.check}/>
+                                       checked={item.check} onChange={onChangeFilterFrom}/>
                                 <label className="form-check-label" htmlFor={item.label}>
                                     {item.label}
                                 </label>

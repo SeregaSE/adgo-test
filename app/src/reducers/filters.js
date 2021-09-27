@@ -53,6 +53,24 @@ export default function filters(state = initialState, action) {
             })
             newState.currentValueFilters.platforms = platform;
             return newState;
+        case 'CHANGE_OS':
+        {
+
+            let targetOS = newState.currentValueFilters.operatingSystems.find((item, i) => {
+                return  Number(item.value) === Number(action.data)
+            })
+            targetOS.check = !targetOS.check
+        }
+            return newState;
+        case 'CHANGE_BROWSERS':
+        {
+
+            let targetBrowser = newState.currentValueFilters.browsers.find((item, i) => {
+                return  Number(item.value) === Number(action.data)
+            })
+            targetBrowser.check = !targetBrowser.check
+        }
+            return newState;
         default:
             return state;
     }
