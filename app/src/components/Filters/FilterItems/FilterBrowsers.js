@@ -11,7 +11,7 @@ const FilterBrowsers = (props) => {
                     {props.dataFilters.browsers.map(item => {
                         return (
                             <div className="form-check" key={item.value}>
-                                <input className="form-check-input" type="checkbox" value={item.value} id={item.label} />
+                                <input className="form-check-input" type="checkbox" value={item.value} id={item.label} checked={true}/>
                                 <label className="form-check-label" htmlFor={item.label}>
                                     {item.label}
                                 </label>

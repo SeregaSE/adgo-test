@@ -18,7 +18,7 @@ const Table = (props) => {
                 {props.data.length > 0 ?
                     props.data.map(item => {
                         return (
-                            <tr>
+                            <tr key={props.data.indexOf(item)}>
                                 <td>{item[props.currentValueFilters.groups.value]}</td>
                                 <td>{item.impressions}</td>
                                 <td>{item.clicks}</td>
@@ -26,7 +26,7 @@ const Table = (props) => {
                             </tr>
                         )
                     })
-                    : ""
+                    : <tr> </tr>
                 }
                 </tbody>
             </table>
