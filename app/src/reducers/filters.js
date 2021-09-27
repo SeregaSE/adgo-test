@@ -19,7 +19,9 @@ const initialState = {
         platforms: {
             value: 0,
             label: ""
-        }
+        },
+        operatingSystems: [],
+        browsers: []
     }
 };
 

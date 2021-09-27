@@ -13,6 +13,18 @@ class FiltersService {
 
         currentValueFilters.platforms = dataFilters.platforms[0];
 
+        currentValueFilters.browsers = dataFilters.browsers;
+
+        currentValueFilters.browsers.forEach(item => {
+            item.check = true;
+        })
+
+        currentValueFilters.operatingSystems = dataFilters.operatingSystems;
+
+        currentValueFilters.operatingSystems.forEach(item => {
+            item.check = true;
+        })
+
         return currentValueFilters;
     }
 }

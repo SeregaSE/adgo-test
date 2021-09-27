@@ -1,5 +1,17 @@
 
 const FilterBrowsers = (props) => {
+
+    let listBrowsers = props.currentValueFilters.browsers;
+
+    if (listBrowsers.length > 0) {
+        let newListBrowsers = listBrowsers.filter(item => {
+            return item.platform === props.currentValueFilters.platforms.value
+        })
+        if (newListBrowsers.length > 0) {
+            listBrowsers = newListBrowsers;
+        }
+    }
+
     return (
         <div className="col-md mt-10">
             <label>Browsers</label>
@@ -8,10 +20,11 @@ const FilterBrowsers = (props) => {
                 <div
                     style={{display: props.viewBrowsers ? "block" : "none"}}
                     className="drop-down-list form-control">
-                    {props.dataFilters.browsers.map(item => {
+                    {listBrowsers.map(item => {
                         return (
                             <div className="form-check" key={item.value}>
-                                <input className="form-check-input" type="checkbox" value={item.value} id={item.label} checked={true}/>
+                                <input className="form-check-input" type="checkbox" value={item.value} id={item.label}
+                                       checked={item.check}/>
                                 <label className="form-check-label" htmlFor={item.label}>
                                     {item.label}
                                 </label>

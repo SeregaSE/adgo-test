@@ -90,11 +90,13 @@ const Filters = (props) => {
                     onChangeViewOperatingSystem={onChangeViewOperatingSystem}
                     viewOperatingSystem={viewOperatingSystem}
                     dataFilters={props.filters.dataFilters}
+                    currentValueFilters={props.filters.currentValueFilters}
                 />
                 <FilterBrowsers
                     onChangeViewsBrowsers={onChangeViewsBrowsers}
                     viewBrowsers={viewBrowsers}
                     dataFilters={props.filters.dataFilters}
+                    currentValueFilters={props.filters.currentValueFilters}
                 />
             </div>
         </form>

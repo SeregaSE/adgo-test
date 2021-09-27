@@ -1,4 +1,4 @@
-import filters from "../../../reducers/filters";
+
 
 
 const FilterFrom = (props) => {
