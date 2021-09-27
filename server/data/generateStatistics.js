@@ -154,7 +154,7 @@ const generateStatistics = url => {
     const cacheKey = query.to.getTime() + query.from.getTime();
 
     if (days < 0) {
-        throw new Error('Date from must be before date to');
+        throw new Error('Day from must be before date to');
     }
 
     if (days > 365) {

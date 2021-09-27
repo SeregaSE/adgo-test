@@ -1,0 +1,49 @@
+.App{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+.container{
+  width: 1110px;
+}
+.inputsRow{
+  display: flex;
+  margin-bottom: 2em;
+  & div{
+    display: flex;
+    flex-direction: column;
+    margin-right: 3em;
+  }
+}
+table {
+  border: 1px solid grey;
+  width: 100%;
+}
+th {
+  border: 1px solid grey;
+}
+td {
+  border: 1px solid grey;
+}
+
+.pagination{
+  & ul{
+    list-style: none;
+    display: flex;
+    padding-left: 0;
+    margin-top: 50px;
+    & li{
+      background: #bbbbbb;
+      border: 1px solid #696969;
+      height: 30px;
+      min-width: 30px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover{
+        background: #7a7a7a;
+      }
+    }
+  }
+}
