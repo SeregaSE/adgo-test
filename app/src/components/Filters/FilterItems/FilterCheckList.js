@@ -14,7 +14,7 @@ const FilterCheckList = (props) => {
     }
 
     const onChangeFilter= (e) => {
-        props.onFiltersChange("os", e.currentTarget.value)
+        props.onFiltersChange(props.type, e.currentTarget.value)
     }
 
     return (
