@@ -6,6 +6,8 @@ const Pagination = (props) => {
     let pageList = []
     let countPage = Math.ceil(props.pagination.count / props.pagination.limit);
 
+    // пагинация выдом 3 страниц
+    // если до 3 страниц
     if(countPage <= 3) {
         for(let i=0; i < countPage; i++) {
             if(i === props.pagination.page) {
@@ -15,12 +17,14 @@ const Pagination = (props) => {
             }
         }
     } else if(countPage > 3) {
+        // если выбрана первая
         if(props.pagination.page === 0) {
             pageList = [
                 {id: props.pagination.page, active: true},
                 {id: props.pagination.page + 1, active: false},
                 {id: props.pagination.page + 2, active: false}
             ]
+            // если последняя
         } else if(props.pagination.page + 1 === countPage) {
             pageList = [
                 {id: props.pagination.page - 2, active: false},
@@ -28,6 +32,7 @@ const Pagination = (props) => {
                 {id: props.pagination.page, active: true}
             ]
         } else {
+            // между первой и последней
             pageList = [
                 {id: props.pagination.page - 1, active: false},
                 {id: props.pagination.page, active: true},

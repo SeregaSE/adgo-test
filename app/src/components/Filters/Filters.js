@@ -1,11 +1,8 @@
 import {connect} from "react-redux";
 import {useEffect, useState, useCallback} from "react";
-import FilterFrom from "./FilterItems/FilterFrom";
-import FilterTo from "./FilterItems/FilterTo";
-import FilterGroupBy from "./FilterItems/FilterGroupBy";
-import FilterPlatform from "./FilterItems/FilterPlatform";
-import FilterOS from "./FilterItems/FilterOS";
-import FilterBrowsers from "./FilterItems/FilterBrowsers";
+import FilterSelect from "./FilterItems/FilterSelect";
+import FilterCheckList from "./FilterItems/FilterCheckList";
+import FilterDate from "./FilterItems/FilterDate";
 import {changeFilterFrom, changeFilterTo, changeFilterGroups, changeFilterPlatform, changeOS, changeBrowsers} from "../../actions/filters";
 import {ajaxGetNewData} from "../../actions/ajax";
 
@@ -71,38 +68,54 @@ const Filters = (props) => {
     return (
         <form>
             <div className="row">
-                <FilterFrom
-                    currentValueFilters={props.filters.currentValueFilters}
+                <FilterDate
+                    type = "from"
+                    label = "From"
+                    value = {props.filters.currentValueFilters.from}
+                    max = {props.filters.currentValueFilters.to}
                     onFiltersChange = {onFiltersChange}
                 />
-                <FilterTo
-                    currentValueFilters={props.filters.currentValueFilters}
+                <FilterDate
+                    type = "to"
+                    label = "To"
+                    value = {props.filters.currentValueFilters.to}
+                    min = {props.filters.currentValueFilters.from}
                     onFiltersChange = {onFiltersChange}
                 />
-                <FilterGroupBy
-                    currentValueFilters={props.filters.currentValueFilters}
-                    dataFilters={props.filters.dataFilters}
+                <FilterSelect
+                    type = "groups"
+                    label = "Group by"
+                    value = {props.filters.currentValueFilters.groups.value}
+                    data = {props.filters.dataFilters.groups}
                     onFiltersChange = {onFiltersChange}
                 />
             </div>
             <div className="row mt-20">
-                <FilterPlatform
-                    currentValueFilters={props.filters.currentValueFilters}
-                    dataFilters={props.filters.dataFilters}
+                <FilterSelect
+                    type = "platform"
+                    label = "Platform"
+                    value = {props.filters.currentValueFilters.platforms.value}
+                    data = {props.filters.dataFilters.platforms}
                     onFiltersChange = {onFiltersChange}
                 />
-                <FilterOS
-                    onChangeViewOperatingSystem={onChangeViewOperatingSystem}
-                    viewOperatingSystem={viewOperatingSystem}
-                    dataFilters={props.filters.dataFilters}
-                    currentValueFilters={props.filters.currentValueFilters}
+                <FilterCheckList
+                    type = "os"
+                    onChangeView={onChangeViewOperatingSystem}
+                    view={viewOperatingSystem}
+                    label = "Operating system"
+                    labelButton = "Choose operating system"
+                    platform = {props.filters.currentValueFilters.platforms.value}
+                    data = {props.filters.currentValueFilters.operatingSystems}
                     onFiltersChange = {onFiltersChange}
                 />
-                <FilterBrowsers
-                    onChangeViewsBrowsers={onChangeViewsBrowsers}
-                    viewBrowsers={viewBrowsers}
-                    dataFilters={props.filters.dataFilters}
-                    currentValueFilters={props.filters.currentValueFilters}
+                <FilterCheckList
+                    type = "browsers"
+                    onChangeView={onChangeViewsBrowsers}
+                    view={viewBrowsers}
+                    label = "Browsers"
+                    labelButton = "Choose browsers"
+                    platform = {props.filters.currentValueFilters.platforms.value}
+                    data = {props.filters.currentValueFilters.browsers}
                     onFiltersChange = {onFiltersChange}
                 />
             </div>

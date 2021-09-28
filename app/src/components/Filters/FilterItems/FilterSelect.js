@@ -1,19 +1,18 @@
+const FilterSelect = (props) => {
 
-const FilterPlatform = (props) => {
-
-    const onChangeFilterFrom = (e) => {
-        props.onFiltersChange("platform", e.currentTarget.value)
+    const onChangeFilter = (e) => {
+        props.onFiltersChange(props.type, e.currentTarget.value)
     }
 
     return (
         <div className="col-md mt-10">
-            <label>Platform</label>
+            <label>{props.label}</label>
             <select
                 className="form-control"
-                value={props.currentValueFilters.platforms.value}
-                onChange={onChangeFilterFrom}
+                value={props.value}
+                onChange={onChangeFilter}
             >
-                {props.dataFilters.platforms.map(item => {
+                {props.data.map(item => {
                     return <option
                         key={item.value}
                         value={item.value}
@@ -26,4 +25,4 @@ const FilterPlatform = (props) => {
     )
 }
 
-export default FilterPlatform;
+export default FilterSelect;
