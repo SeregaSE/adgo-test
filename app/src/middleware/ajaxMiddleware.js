@@ -67,49 +67,54 @@ const ajaxMiddleware = () => {
                 })
 
 
-                let checkedBrowser = false;
+                // let checkedBrowser = false;
 
                 if(noCheckBrowsers) {
                     browsers.forEach(item => {
                         if(item.check === true) {
-                            checkedBrowser = true;
+                            // checkedBrowser = true;
                             paramUrl = paramUrl + `&browsers[]=${item.value}`
                         }
                     })
-                } else {
-                    checkedBrowser = true;
                 }
+                // else {
+                //     checkedBrowser = true;
+                // }
 
-                let checkedOS = false;
+                // let checkedOS = false;
 
                 if(noCheckOS) {
                     operatingSystems.forEach(item => {
                         if(item.check === true) {
-                            checkedOS = true;
+                            // checkedOS = true;
                             paramUrl = paramUrl + `&operatingSystems[]=${item.value}`
                         }
                     })
-                } else {
-                    checkedOS = true;
                 }
+                // else {
+                //     checkedOS = true;
+                // }
 
-                if(checkedOS || checkedBrowser) {
+                // if(checkedOS || checkedBrowser) {
                     AjaxApi.ajaxGet(paramUrl).then((res) => {
                         store.dispatch(setData(res.rows))
                         let paginationData = {
                             count: res.count,
                             page: 0
                         }
+                        if(action.data !== null) {
+                            paginationData.page = Number(action.data);
+                        }
                         store.dispatch(setPagination(paginationData));
                     })
-                } else {
-                    store.dispatch(setData([]))
-                    let paginationData = {
-                        count: 1,
-                        page: 0
-                    }
-                    store.dispatch(setPagination(paginationData));
-                }
+                // } else {
+                //     store.dispatch(setData([]))
+                //     let paginationData = {
+                //         count: 1,
+                //         page: 0
+                //     }
+                //     store.dispatch(setPagination(paginationData));
+                // }
 
                 break;
             }
