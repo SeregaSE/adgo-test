@@ -2,7 +2,7 @@ import './App.scss';
 import Table from "./Components/Table";
 import {useEffect, useState} from "react";
 import Pagination from "./Components/Pagination";
-import Date from "./Components/Date";
+import Date from "./Components/Inputs/Date";
 import Select from "react-select/base";
 import Filter from "./Components/Inputs/Filter";
 
