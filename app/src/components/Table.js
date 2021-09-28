@@ -26,7 +26,7 @@ const Table = (props) => {
                             </tr>
                         )
                     })
-                    : <tr> </tr>
+                    : <tr></tr>
                 }
                 </tbody>
             </table>

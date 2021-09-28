@@ -9,7 +9,7 @@ const FilterDate = (props) => {
         <div className="col-md mt-10">
             <label>{props.label}</label>
             <input
-                onInput={onChangeFilter}
+                onChange={onChangeFilter}
                 type="date"
                 className="form-control"
                 value={props.value}
