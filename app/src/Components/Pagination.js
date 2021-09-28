@@ -20,17 +20,22 @@ const Pagination = ({count, limit, setOffset, offset}) => {
     const changePage = (e) => {
         setOffset(e.target.value)
     }
-    return (
-        <div className="pagination">
-            <ul>
-                <li onClick={prevPage}>Prev</li>
-                {pageList.map(item => {
-                    return <li key={item} value={item} onClick={changePage}>{item+1}</li>
-                })}
-                <li onClick={nextPage}>Next</li>
-            </ul>
-        </div>
-    );
+    if(count >= limit){
+        return (
+            <div className="pagination">
+                <ul>
+                    <li onClick={prevPage}>Prev</li>
+                    {pageList.map(item => {
+                        return <li key={item} value={item} onClick={changePage}>{item+1}</li>
+                    })}
+                    <li onClick={nextPage}>Next</li>
+                </ul>
+            </div>
+        );
+    } else {
+        return null;
+    }
+
 };
 
 export default Pagination;

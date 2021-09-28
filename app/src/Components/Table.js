@@ -1,13 +1,12 @@
 import React from 'react';
-import {useGroupBy} from "./Hooks/useFilters";
 
-const Table = ({items, groupBy}) => {
-    const groups = useGroupBy();
+const Table = ({items, groupBy, filter}) => {
+
     return(<table>
         <thead>
         <tr>
-            {groups.map(item => {
-                if (item.value === groupBy) {
+            {groupBy.map(item => {
+                if (item.value === filter) {
                     return <th key={item.value}>{item.label}</th>
                 }
             })}
