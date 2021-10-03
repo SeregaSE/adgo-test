@@ -1,0 +1,60 @@
+#root{
+  width: 90%;
+  margin: 0 auto;
+}
+.page{
+  border: 1px solid #000;
+  margin-top: 15%;
+}
+.page__header{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #000;
+  padding: 10px;
+}
+.page__body{
+  padding: 0 10px;
+}
+.page__body-item{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+.page__body-span{
+  text-align: center;
+}
+.form{
+  margin-top: 15%;
+}
+.form__header-date,
+.form__header-system{
+  display: flex;
+  justify-content: center;
+}
+.form__header-system{
+  margin-top: 25px;
+}
+#dateStop,
+#operatingSystem{
+  margin: 0 30px;
+}
+.form__header-date input{
+    max-width: 200px;
+    width: 100%;
+}
+.form__header-date select{
+  max-width: 200px;
+  width: 100%;
+}
+.form__header-system select{
+    max-width: 200px;
+    width: 100%;
+}
+@media(min-width:1024px){
+  #root{
+    width: 60%;
+    
+  }
+}
+
+
