@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Helvetica Regular';
+  src: url('../fonts/Helvetica.ttf');
+}
+
+@font-face {
+  font-family: 'Helvetica Bold';
+  src: url('../fonts/Helvetica-Bold.ttf');
+}
+
+html, body, #root {
+  min-height: 100%;
+  margin: 0;
+  padding: 10px;
+  overscroll-behavior-x: none;
+  font-family: 'Helvetica Regular', sans-serif;    
+  background-color: #efefef;
+}
+
+h1, .MuiTableHead-root .MuiTableCell-root {
+  font-size: 16px;
+  font-family: 'Helvetica Bold', sans-serif;    
+}
