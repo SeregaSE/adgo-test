@@ -1,6 +1,5 @@
 import React from "react";
 import { useTable, usePagination } from "react-table";
-import styled from "styled-components";
 
 export const Table = ({ columns, data }) => {
   const tableInstance = useTable(
@@ -40,6 +39,7 @@ export const Table = ({ columns, data }) => {
           borderSpacing: 0,
           border: "1px solid black",
           borderRadius: "4px",
+          width: "100%",
         }}
         {...getTableProps()}
       >
