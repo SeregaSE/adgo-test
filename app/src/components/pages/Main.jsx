@@ -96,7 +96,7 @@ export const Main = () => {
           <div className="select">
             <div className="select__label">From *</div>
             <input
-              className="select__pole"
+              className="select__poleDate"
               type="date"
               value={dateOne}
               onChange={(e) => setDateOne(e.target.value)}
@@ -105,7 +105,7 @@ export const Main = () => {
           <div className="select">
             <div className="select__label">To *</div>
             <input
-              className="select__pole"
+              className="select__poleDate"
               min={dateOne}
               type="date"
               value={dateTwo}

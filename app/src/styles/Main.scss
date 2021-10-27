@@ -1,4 +1,5 @@
 .main {
+  padding: 0 5%;
   &__selectbar {
     display: flex;
     flex-direction: column;
@@ -9,10 +10,11 @@
 }
 
 .button {
-  border-radius: 2px;
-  border: black 1px solid;
+  border-radius: 6px;
+  border: black 2px solid;
   background: white;
   margin-bottom: 20px;
+
   &:hover {
     background: whitesmoke;
   }

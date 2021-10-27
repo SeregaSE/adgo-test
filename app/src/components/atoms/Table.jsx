@@ -30,7 +30,7 @@ export const Table = ({ columns, data }) => {
   } = tableInstance;
 
   return (
-    <div style={{ width: "100%", margin: "20px 40px 20px 40px" }}>
+    <div>
       <div>
         {" "}
         <button className="button" onClick={() => previousPage()}>
@@ -41,7 +41,11 @@ export const Table = ({ columns, data }) => {
         </button>
       </div>
       <table
-        style={{ borderSpacing: 0, border: "1px solid black" }}
+        style={{
+          borderSpacing: 0,
+          border: "1px solid black",
+          borderRadius: "4px",
+        }}
         {...getTableProps()}
       >
         <thead>
@@ -53,8 +57,8 @@ export const Table = ({ columns, data }) => {
                     margin: 0,
                     width: "300px",
                     padding: "0.5rem",
-                    borderBottom: "1px solid black",
-                    borderRight: "1px solid black",
+                    border: "1px solid black",
+                    background: "#f0c9c9",
                   }}
                   {...column.getHeaderProps()}
                 >
@@ -75,9 +79,8 @@ export const Table = ({ columns, data }) => {
                       style={{
                         margin: 0,
                         padding: "0.5rem",
-                        width: "300px",
-                        borderBottom: "1px solid black",
-                        borderRight: "1px solid black",
+                        minWidth: "200px",
+                        border: "1px solid black",
                       }}
                       {...cell.getCellProps()}
                     >
