@@ -19,9 +19,6 @@ export const Main = () => {
   const [dateOne, setDateOne] = useState();
   const [dateTwo, setDateTwo] = useState();
 
-  //хук пагинации
-  const [page, setPage] = useState(0);
-
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/v1/platforms")
@@ -64,13 +61,11 @@ export const Main = () => {
     tableCallback();
   }, [tableCallback]);
 
-  console.log(data);
-
   const columns = useMemo(
     () => [
       {
         Header: "Day",
-        accessor: "day", // accessor is the "key" in the data
+        accessor: "day",
       },
       {
         Header: "Impressions",
@@ -144,7 +139,7 @@ export const Main = () => {
           />
         </div>
       </div>
-      {data && <Table columns={columns} data={data.rows} />}
+      {data && <Table columns={columns} data={data?.rows} />}
     </div>
   );
 };

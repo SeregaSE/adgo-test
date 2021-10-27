@@ -11,21 +11,11 @@ export const Table = ({ columns, data }) => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     prepareRow,
-
-    page, // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-
-    // The rest of these things are super handy, too ;)
-    canPreviousPage,
-    canNextPage,
+    page,
     pageOptions,
-    pageCount,
-    gotoPage,
     nextPage,
     previousPage,
-    setPageSize,
     state: { pageIndex },
   } = tableInstance;
 
@@ -36,9 +26,14 @@ export const Table = ({ columns, data }) => {
         <button className="button" onClick={() => previousPage()}>
           {"<"}
         </button>{" "}
-        <button className="button" onClick={() => nextPage()}>
+        <button
+          style={{ marginRight: "8px" }}
+          className="button"
+          onClick={() => nextPage()}
+        >
           {">"}
         </button>
+        {pageIndex + 1} of {pageOptions.length}
       </div>
       <table
         style={{
