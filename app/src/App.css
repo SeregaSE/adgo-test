@@ -1,0 +1,51 @@
+.Group {
+  margin-left: 50px;
+  
+}
+
+.platform {
+  margin-left: 370px;
+  margin-top: -55px;
+  
+}
+
+.operate{
+  margin-left: 200px;
+  margin-top: -55px;
+}
+
+.to1 {
+  display: flex;
+}
+
+.fromto {
+  display: flex;
+  margin-top: 50px;
+}
+
+.picker{
+  margin-left: -1185px;
+}
+
+.to{
+  margin-left: 255px;
+}
+
+.main{
+  margin-left: 160px;
+}
+
+
+.groupBy {
+  margin-left: 40px;
+  /* margin-top: -50px; */
+}
+
+
+.Browsers{
+  margin-top: 50px;
+}
+
+.table {
+  margin-top: 50px;
+}
