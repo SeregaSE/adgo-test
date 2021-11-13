@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+}
+
+body {
+    font-size: 16px !important;
+    font-weight: 400;
+    background:
+        linear-gradient(rgb(231, 228, 228), transparent 1px),
+        linear-gradient(90deg, rgb(231, 228, 228), transparent 1px);
+    background-size: 15px 15px;
+    background-position: center center;
+}
+
+.App {
+    width: 960px;
+    margin: 100px auto 0 auto;
+}
+
+.block_date,
+.block_platform {
+    ul {
+        display: flex;
+    }
+
+    li {
+        width: 250px;
+        margin-right: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.block_date {
+    li {
+        width: 200px;
+    }
+}
+
+.table_analysis {
+    display: flex;
+    flex-direction: column;
+
+    .time_line {
+        span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #238df1;
+        }
+    }
+}
+
+.spin {
+    position: absolute;
+    left: 45%;
+    top: 0;
+    span {
+        color: #238df1;
+    }
+}
