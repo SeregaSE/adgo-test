@@ -5,6 +5,12 @@ import Data from './date'
 import FilterMenu from './filterMenu'
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      data: [{}],
+    }
+  }
   render() {
     return (
       <div>

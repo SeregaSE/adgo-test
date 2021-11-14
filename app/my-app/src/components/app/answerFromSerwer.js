@@ -8,53 +8,25 @@ class Answer extends Component {
     super()
     this.server = new Server()
     this.state = {
-      browsers: [],
-      platform: [],
-      os: [],
-      groups: [],
       statistics: [],
     }
   }
+
   componentDidMount() {
-    fetch('http://localhost:3000/api/v1/browsers')
+    fetch(
+      'http://localhost:3000/api/v1/statistics?groupBy=platform&from=2019-06-01&to=2019-06-30'
+    )
       .then((res) => res.json())
       .then((result) => {
         this.setState({
-          browsers: result,
-        })
-      })
-    fetch('http://localhost:3000/api/v1/platforms')
-      .then((res) => res.json())
-      .then((result) => {
-        this.setState({
-          platform: result,
-        })
-      })
-    fetch('http://localhost:3000/api/v1/operating-systems')
-      .then((res) => res.json())
-      .then((result) => {
-        this.setState({
-          os: result,
-        })
-      })
-    fetch('http://localhost:3000/api/v1/groups')
-      .then((res) => res.json())
-      .then((result) => {
-        this.setState({
-          groups: result,
-        })
-      })
-    fetch('http://localhost:3000/api/v1/statistics?searchParams')
-      .then((res) => res.json())
-      .then((result) => {
-        this.setState({
-          statistics: result,
+          statistics: [result],
         })
       })
   }
 
   render() {
-    const { browsers, platform, os, groups, statistics } = this.state
+    const { statistics } = this.state
+
     return (
       <div>
         <Table striped bordered hover>
@@ -69,34 +41,32 @@ class Answer extends Component {
           <tbody>
             <tr>
               <td>Браузеры</td>
-              {browsers.map((i) => (
-                <td>{i.label}</td>
-                // <td>{i.value}</td>
-              ))}
+
+              <td>
+                {/* {statistics.map((i) =>
+                  Object.values(i.rows[0]).map((item) => Object.values(item))
+                )} */}
+                {statistics.map((i) =>
+                  Object.entries(i.rows[0]).map((item) => Object.entries(item))
+                )}
+              </td>
             </tr>
-            {/* <tr>
-              <td>value.browser</td>
-              {browsers.map((i) => (
-                <td>{i.value}</td>
-              ))}
-            </tr> */}
             <tr>
               <td>platform</td>
-              {platform.map((i) => (
-                <td>{i.label}</td>
-              ))}
+              <td>
+                {statistics.map((i) =>
+                  Object.keys(i.rows[0]).map((item) => Object.keys(item))
+                )}
+              </td>
             </tr>
             <tr>
               <td>os</td>
-              {os.map((i) => (
-                <td>{i.label}</td>
-              ))}
+              {statistics.map((i) =>
+                Object.values(i.rows[0]).map((item) => Object.values(item))
+              )}
             </tr>
             <tr>
               <td>groups</td>
-              {groups.map((i) => (
-                <td>{i.label}</td>
-              ))}
             </tr>
           </tbody>
         </Table>
