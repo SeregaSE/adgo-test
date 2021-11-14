@@ -1,0 +1,27 @@
+.pagination__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.pagination__bar {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination__button {
+  padding: 4px;
+  cursor: pointer;
+
+  overflow: hidden;
+  border: 1px solid rgb(95, 89, 89);
+  border-right: none;
+}
+.pagination__button:first-child {
+  border-radius: 5px 0 0 5px;
+}
+.pagination__button:last-child {
+  border-right: 1px solid rgb(95, 89, 89);
+  border-radius: 0 5px 5px 0;
+}

@@ -1,0 +1,21 @@
+.table {
+  margin-top: 10px;
+  width: 100%;
+
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  border: 1px solid black;
+  padding: 3px;
+}
+
+.table thead {
+  background: rgb(163, 162, 162);
+}
+
+.table tr:nth-child(even) {
+  background: rgb(219, 218, 218);
+}
