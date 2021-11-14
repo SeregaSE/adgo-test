@@ -12,6 +12,7 @@ class Answer extends Component {
       platform: [],
       os: [],
       groups: [],
+      statistics: [],
     }
   }
   componentDidMount() {
@@ -43,10 +44,17 @@ class Answer extends Component {
           groups: result,
         })
       })
+    fetch('http://localhost:3000/api/v1/statistics?searchParams')
+      .then((res) => res.json())
+      .then((result) => {
+        this.setState({
+          statistics: result,
+        })
+      })
   }
 
   render() {
-    const { browsers, platform, os, groups } = this.state
+    const { browsers, platform, os, groups, statistics } = this.state
     return (
       <div>
         <Table striped bordered hover>
