@@ -67,12 +67,15 @@ export const ItemReducers = (state = initialState, action) => {
                 activeGroups: action.payload
             };
         case 'SET_STATISTICS_LIST':
+            state.statistics = [];
+            newRows = [];
             if(action.payload.rows.length > 0) {
-                // это копирование элемента, для избежания мутации
+                // копирование элемента, для избежания мутации
                 newRows = JSON.parse(JSON.stringify(action.payload.rows));
+                // добавление поля id в  каждый объект. Используется для назначения ключей в строках таблицы анализа.  
+                newRows.filter((elem, index) =>  elem.id = index);
             }
-            // добавление поля id в  каждый объект. Используется для назначения ключей в строках таблицы анализа.  
-            newRows.filter((elem, index) =>  elem.id = index);
+            
             return {
                 ...state,
                 statistics: newRows ? newRows : null,

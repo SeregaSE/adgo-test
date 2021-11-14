@@ -43,7 +43,7 @@ function App() {
         dispatch(getOperatingList());
         dispatch(getBrowserList());
         dispatch(getGroupsList());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         // исходя из описания api, поля (groupBy, from, to) - обязательны. Добавил условие. 
@@ -58,7 +58,7 @@ function App() {
                 currentPage
             ));
         }
-    }, [activePlatform, activeOperatingSystems, activeBrowser, activeGroups, dateFrom, dateTo, currentPage])
+    }, [activePlatform, activeOperatingSystems, activeBrowser, activeGroups, dateFrom, dateTo, currentPage, dispatch])
 
     let onChangeFrom = (_, dateString) => setDateFrom(dateString);
 
@@ -81,19 +81,19 @@ function App() {
     const getValueGroup = (groupBy) => {
         let title = '';
         let dataIndex = '';
-        if (groupBy && groupBy == 'day') {
+        if (groupBy && groupBy === 'day') {
             title = 'Day';
             dataIndex = 'day';
         }
-        if (groupBy && groupBy == 'platform') {
+        if (groupBy && groupBy === 'platform') {
             title = 'Platform';
             dataIndex = 'platform';
         }
-        if (groupBy && groupBy == 'operatingSystem') {
+        if (groupBy && groupBy === 'operatingSystem') {
             title = 'Oprating Systems';
             dataIndex = 'operatingSystem';
         }
-        if (groupBy && groupBy == 'browser') {
+        if (groupBy && groupBy === 'browser') {
             title = 'Browser';
             dataIndex = 'browser';
         }
