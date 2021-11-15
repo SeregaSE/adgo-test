@@ -7,8 +7,8 @@ import {
 } from 'reactstrap'
 import '../.././index.css'
 export default class FilterMenu extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       isOpenBrowser: false,
       isOpenOs: false,
@@ -74,7 +74,7 @@ export default class FilterMenu extends Component {
             <DropdownToggle caret>browsers</DropdownToggle>
             <DropdownMenu dark flip={true}>
               {browsers.map((i) => (
-                <DropdownItem onClick={() => console.log(i.label)} caret>
+                <DropdownItem onClick={() => i.label} caret>
                   {i.label}
                 </DropdownItem>
               ))}
@@ -86,7 +86,7 @@ export default class FilterMenu extends Component {
             <DropdownToggle caret>operating system</DropdownToggle>
             <DropdownMenu dark flip={false}>
               {os.map((i) => (
-                <DropdownItem onClick={() => console.log(i.label)} caret>
+                <DropdownItem onClick={() => i.label} caret>
                   {i.label}
                 </DropdownItem>
               ))}

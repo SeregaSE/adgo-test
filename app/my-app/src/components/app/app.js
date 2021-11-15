@@ -1,22 +1,34 @@
 import React, { Component } from 'react'
-// import Server from '../../services/server.js'
+
 import Answer from './answerFromSerwer'
 import Data from './date'
 import FilterMenu from './filterMenu'
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      data: [{}],
+      inputValue: '',
+      inputToValue: '',
+      isOpenBrowser: false,
+      isOpenOs: false,
+      isOpenPlatform: false,
+      isOpenGroup: false,
+      browsers: [],
+      platform: [],
+      os: [],
+      groups: [],
+      statistics: [],
     }
   }
+
   render() {
+    const state = this.state
     return (
       <div>
         <Data />
         <FilterMenu />
-        <Answer />
+        <Answer state={state} />
       </div>
     )
   }

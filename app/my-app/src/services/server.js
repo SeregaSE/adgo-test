@@ -3,7 +3,6 @@ import config from '../config'
 class Server extends Component {
   constructor() {
     super()
-    // this.__apiBase = `${config}/api/v1`
     this.__apiBase = `${config}/api/v1`
   }
   async getResource(url) {

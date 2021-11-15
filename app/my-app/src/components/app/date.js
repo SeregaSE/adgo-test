@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Form, FormGroup, Label, Input } from 'reactstrap'
 class Data extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       inputValue: '',
       inputToValue: '',
@@ -19,8 +19,25 @@ class Data extends Component {
       inputToValue: e.target.value,
     })
   }
+  stringToDate(_date, _format, _delimiter) {
+    let formatLowerCase = _format.toLowerCase()
+    let formatItems = formatLowerCase.split(_delimiter)
+    let dateItems = _date.split(_delimiter)
+    let monthIndex = formatItems.indexOf('mm')
+    let dayIndex = formatItems.indexOf('dd')
+    let yearIndex = formatItems.indexOf('yyyy')
+    let year = parseInt(dateItems[yearIndex])
+
+    if (year < 100) {
+      year += 2000
+    }
+    let month = parseInt(dateItems[monthIndex])
+    month -= 1
+    let formatedDate = new Date(year, month, dateItems[dayIndex])
+    return formatedDate
+  }
   render() {
-    const inputValue = this.state
+    const { inputValue, inputToValue } = this.state
     return (
       <Form>
         <FormGroup>
@@ -30,17 +47,20 @@ class Data extends Component {
             name="date"
             placeholder="date placeholder"
             type="date"
-            value={this.state.inputValue}
             onChange={(e) => this.updateInputValue(e)}
+            value={this.stringToDate(inputValue, 'mm-dd-yyyy', '-')}
           />
+
           <Label for="exampleDate">To</Label>
           <Input
             id="exampleDate2"
             name="date"
             placeholder="date placeholder"
             type="date"
-            value={this.state.inputToValue}
-            onChange={(e) => this.updateInputToValue(e)}
+            value={this.stringToDate(inputToValue, 'mm-dd-yyyy', '-')}
+            onChange={(e) => {
+              this.updateInputToValue(e)
+            }}
           />
         </FormGroup>
       </Form>

@@ -1,20 +1,29 @@
 import React, { Component } from 'react'
 import { Table } from 'reactstrap'
 import Server from '../../services/server.js'
-import FilterMenu from './filterMenu.js'
 
 class Answer extends Component {
-  constructor() {
-    super()
-    this.server = new Server()
+  constructor(props) {
+    super(props)
+
     this.state = {
+      inputValue: '',
+      inputToValue: '',
+      isOpenBrowser: false,
+      isOpenOs: false,
+      isOpenPlatform: false,
+      isOpenGroup: false,
+      browsers: [],
+      platform: [],
+      os: [],
+      groups: [],
       statistics: [],
     }
   }
 
   componentDidMount() {
     fetch(
-      'http://localhost:3000/api/v1/statistics?groupBy=platform&from=2019-06-01&to=2019-06-30'
+      `http://localhost:3000/api/v1/statistics?groupBy=platform&from=2019-06-01&to=2019-06-01`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -26,7 +35,6 @@ class Answer extends Component {
 
   render() {
     const { statistics } = this.state
-
     return (
       <div>
         <Table striped bordered hover>
@@ -40,7 +48,7 @@ class Answer extends Component {
           </thead>
           <tbody>
             <tr>
-              <td>Браузеры</td>
+              <td>общие данные</td>
 
               <td>
                 {/* {statistics.map((i) =>
@@ -52,7 +60,7 @@ class Answer extends Component {
               </td>
             </tr>
             <tr>
-              <td>platform</td>
+              <td>просмотры</td>
               <td>
                 {statistics.map((i) =>
                   Object.keys(i.rows[0]).map((item) => Object.keys(item))
@@ -60,13 +68,12 @@ class Answer extends Component {
               </td>
             </tr>
             <tr>
-              <td>os</td>
-              {statistics.map((i) =>
-                Object.values(i.rows[0]).map((item) => Object.values(item))
-              )}
-            </tr>
-            <tr>
-              <td>groups</td>
+              <td>платформа</td>
+              <td>
+                {statistics.map((i) =>
+                  Object.values(i.rows[0]).map((item) => Object.values(item))
+                )}
+              </td>
             </tr>
           </tbody>
         </Table>
