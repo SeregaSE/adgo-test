@@ -26,6 +26,7 @@ export const Select: FC<SelectProps> = ({
   hidden = false,
 }) => {
   const select = useRef<HTMLSelectElement>(null);
+
   useEffect(() => {
     if (select.current) {
       select.current.focus();

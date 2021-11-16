@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 
-import { OptionType, Select } from '../Select/Select';
+import { OptionType, Select } from '../Select';
 
 import './MultipleSelect.css';
 
@@ -15,7 +15,6 @@ const INITIAL_INPUT_VALUE: InputValue = [];
 export const MultipleSelect: FC<MultipleSelectProps> = ({ options }) => {
   const [hidden, setHidden] = useState(true);
   const [value, setValue] = useState(INITIAL_INPUT_VALUE);
-  console.log(options);
 
   const handleFocus = (event: any) => {
     setHidden(false);
@@ -26,7 +25,6 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({ options }) => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(Array.from(event.currentTarget.selectedOptions));
     setValue(Array.from(event.currentTarget.selectedOptions).map((option) => Number(option.value)));
   };
 
