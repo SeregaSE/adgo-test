@@ -1,0 +1,20 @@
+.Button {
+  align-self: flex-end;
+  display: block;
+  min-width: 120px;
+  min-height: 40px;
+  padding: 5px 10px;
+  border: 2px solid #ccc;
+  background-color: lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Button:hover {
+  background-color: #aaa;
+  border-color: gray;
+}
+
+.Button:focus {
+  border-color: #333;
+}

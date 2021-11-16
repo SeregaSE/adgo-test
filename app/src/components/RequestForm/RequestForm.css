@@ -1,0 +1,13 @@
+.RequestForm {
+  width: 100%;
+}
+
+.RequestForm__fieldset {
+  display: flex;
+  gap: 20px;
+  border: none;
+}
+
+.RequestForm__field {
+  flex-grow: 1;
+}
