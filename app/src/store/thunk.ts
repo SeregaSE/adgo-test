@@ -1,5 +1,12 @@
+import { format } from 'path';
 import { Dispatch } from 'redux';
-import { GET_BROWSERS, GET_GROUPS, GET_OPERATING_SYSTEMS, GET_PLATFORMS } from './actions';
+import {
+  getBrowsersSuccess,
+  getGroupsSuccess,
+  getOperatingSystemsSuccess,
+  getPlatformsSuccess,
+} from './actions';
+import { RequestFormType } from './store.types';
 
 export const getPlatforms = () => {
   return async (dispatch: Dispatch) => {
@@ -7,7 +14,7 @@ export const getPlatforms = () => {
       const response = await fetch('http://localhost:3000/api/v1/platforms');
       const platforms = await response.json();
 
-      dispatch({ type: GET_PLATFORMS, platforms });
+      dispatch(getPlatformsSuccess(platforms));
     } catch (err) {
       console.log(err);
     }
@@ -20,7 +27,7 @@ export const getBrowsers = () => {
       const response = await fetch('http://localhost:3000/api/v1/browsers');
       const browsers = await response.json();
 
-      dispatch({ type: GET_BROWSERS, browsers });
+      dispatch(getBrowsersSuccess(browsers));
     } catch (err) {
       console.log(err);
     }
@@ -33,7 +40,7 @@ export const getOperatingSystems = () => {
       const response = await fetch('http://localhost:3000/api/v1/operating-systems');
       const operatingSystems = await response.json();
 
-      dispatch({ type: GET_OPERATING_SYSTEMS, operatingSystems });
+      dispatch(getOperatingSystemsSuccess(operatingSystems));
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +53,54 @@ export const getGroups = () => {
       const response = await fetch('http://localhost:3000/api/v1/groups');
       const groups = await response.json();
 
-      dispatch({ type: GET_GROUPS, groups });
+      dispatch(getGroupsSuccess(groups));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getStatisticsData = (form: RequestFormType) => {
+  const isFormKey = (key: string): key is keyof RequestFormType => form.hasOwnProperty(key);
+  const keyList = Object.keys(form).filter(isFormKey);
+
+  return async (dispatch: Dispatch) => {
+    const parameters: string[] = [];
+
+    keyList.forEach((key) => {
+      const value = form[key];
+
+      if (!value || (Array.isArray(value) && value.length === 0)) {
+        return;
+      }
+
+      switch (key) {
+        case 'platforms':
+        case 'browsers':
+        case 'operatingSystems':
+          if (Array.isArray(value)) {
+            value.forEach((el) => {
+              parameters.push(`${key}[]=${el}`);
+            });
+          } else {
+            console.log(key + ' wrong data type');
+          }
+          break;
+        default:
+          parameters.push(`${key}=${value}`);
+          break;
+      }
+    });
+
+    console.log(parameters);
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/v1/statistics?${parameters.join('&')}`
+      );
+      const data = await response.json();
+
+      console.log(data);
     } catch (err) {
       console.log(err);
     }

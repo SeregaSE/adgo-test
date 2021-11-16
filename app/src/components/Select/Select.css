@@ -1,6 +1,7 @@
 .Select {
   display: block;
   width: 100%;
+  min-width: 200px;
   min-height: 40px;
   padding: 5px 10px;
   border: 2px solid lightgrey;

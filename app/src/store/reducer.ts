@@ -5,6 +5,8 @@ import {
   GroupDataType,
   OperatingSystemsDataType,
   PlatformDataType,
+  RequestFormType,
+  ResponseDataType,
 } from './store.types';
 
 export type STATE_TYPE = {
@@ -12,6 +14,8 @@ export type STATE_TYPE = {
   browsers: BrowserDataType[];
   operatingSystems: OperatingSystemsDataType[];
   groups: GroupDataType[];
+  form: RequestFormType;
+  data: ResponseDataType[];
 };
 
 export const INITIAL_STATE: STATE_TYPE = {
@@ -19,6 +23,17 @@ export const INITIAL_STATE: STATE_TYPE = {
   browsers: [],
   operatingSystems: [],
   groups: [],
+  form: {
+    from: '',
+    to: '',
+    limit: 10,
+    offset: 0,
+    groupBy: '',
+    platforms: [],
+    browsers: [],
+    operatingSystems: [],
+  },
+  data: [],
 };
 
 export const reducer = (state = INITIAL_STATE, action: AnyAction): STATE_TYPE => {
