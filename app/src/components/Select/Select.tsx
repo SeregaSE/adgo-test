@@ -20,10 +20,11 @@ export type SelectProps = {
   required?: boolean;
   multiple?: boolean;
   hidden?: boolean;
-  platforms?: number[];
+  platform?: number;
   clear?: boolean;
   setClear?: Dispatch<SetStateAction<boolean>>;
   absolute?: boolean;
+  emptyValue?: boolean;
 };
 
 export const Select: FC<SelectProps> = ({
@@ -35,10 +36,11 @@ export const Select: FC<SelectProps> = ({
   required = false,
   multiple = false,
   hidden = false,
-  platforms,
+  platform,
   clear,
   setClear,
   absolute = false,
+  emptyValue = false,
 }) => {
   const select = useRef<HTMLSelectElement>(null);
 
@@ -69,11 +71,15 @@ export const Select: FC<SelectProps> = ({
       required={required}
       value={value}
     >
+      {emptyValue ? (
+        <option key="empty" value="">
+          Choose...
+        </option>
+      ) : null}
       {options
-        .filter(
-          (el) =>
-            !el.platform || !platforms || platforms.length === 0 || platforms?.includes(el.platform)
-        )
+        .filter((el) => {
+          return !el.platform || !platform || Number(platform) === el.platform;
+        })
         .map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

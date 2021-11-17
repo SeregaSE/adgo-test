@@ -11,13 +11,13 @@ export type MultipleSelectProps = {
   options: OptionType[];
   name: keyof RequestFormType;
   setForm: React.Dispatch<React.SetStateAction<RequestFormType>>;
-  platforms?: number[];
+  platform?: number;
 };
 
 export type InputValue = number[];
 const INITIAL_INPUT_VALUE: InputValue = [];
 
-export const MultipleSelect: FC<MultipleSelectProps> = ({ options, name, setForm, platforms }) => {
+export const MultipleSelect: FC<MultipleSelectProps> = ({ options, name, setForm, platform }) => {
   const [hidden, setHidden] = useState(true);
   const [value, setValue] = useState(INITIAL_INPUT_VALUE);
   const [clear, setClear] = useState(false);
@@ -49,19 +49,17 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({ options, name, setForm
   );
 
   useEffect(() => {
-    console.log(platforms);
-
     setValue((prev) =>
       prev.filter((index) => {
-        if (!platforms || platforms.length === 0) {
+        if (platform === undefined) {
           return true;
         }
 
         const currentPlatform = options.filter((el) => el.value === index)[0].platform;
-        return currentPlatform === undefined || platforms.includes(currentPlatform);
+        return currentPlatform === undefined || platform === currentPlatform;
       })
     );
-  }, [options, platforms]);
+  }, [options, platform]);
 
   const printInputValues = () =>
     options
@@ -98,7 +96,7 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({ options, name, setForm
         multiple={true}
         onChange={handleChange}
         onBlur={handleBlur}
-        platforms={platforms}
+        platform={platform}
         clear={clear}
         setClear={setClear}
         absolute={true}

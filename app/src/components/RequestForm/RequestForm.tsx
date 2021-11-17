@@ -46,10 +46,12 @@ export const RequestForm: FC = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setForm((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
+    setForm((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+      };
+    });
   };
 
   return (
@@ -90,7 +92,13 @@ export const RequestForm: FC = () => {
       <fieldset className="RequestForm__fieldset">
         <div className="RequestForm__field">
           <label>Platform</label>
-          <MultipleSelect options={platforms} name="platforms" setForm={setForm} />
+          <Select
+            options={platforms}
+            name="platform"
+            value={form.platform?.toString()}
+            onChange={handleChange}
+            emptyValue={true}
+          />
         </div>
         <div className="RequestForm__field">
           <label>Operating system</label>
@@ -98,7 +106,7 @@ export const RequestForm: FC = () => {
             options={operatingSystems}
             name="operatingSystems"
             setForm={setForm}
-            platforms={form.platforms}
+            platform={form.platform}
           />
         </div>
         <div className="RequestForm__field">
@@ -107,7 +115,7 @@ export const RequestForm: FC = () => {
             options={browsers}
             name="browsers"
             setForm={setForm}
-            platforms={form.platforms}
+            platform={form.platform}
           />
         </div>
         <div className="RequestForm__field">

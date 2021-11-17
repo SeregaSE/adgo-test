@@ -78,7 +78,6 @@ export const getStatistics = (form: RequestFormType) => {
       }
 
       switch (key) {
-        case 'platforms':
         case 'browsers':
         case 'operatingSystems':
           if (Array.isArray(value)) {
@@ -89,21 +88,18 @@ export const getStatistics = (form: RequestFormType) => {
             console.log(key + ' wrong data type');
           }
           break;
+
         default:
           parameters.push(`${key}=${value}`);
           break;
       }
     });
 
-    console.log(parameters);
-
     try {
       const response = await fetch(
         `http://localhost:3000/api/v1/statistics?${parameters.join('&')}`
       );
       const statistics = await response.json();
-
-      console.log(statistics);
 
       dispatch(getStatisticsSuccess(statistics));
     } catch (err) {

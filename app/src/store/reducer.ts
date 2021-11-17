@@ -39,7 +39,6 @@ export const INITIAL_STATE: STATE_TYPE = {
     limit: 10,
     offset: 0,
     groupBy: 'day',
-    platforms: [],
     browsers: [],
     operatingSystems: [],
   },

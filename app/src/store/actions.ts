@@ -2,7 +2,7 @@ import {
   BrowserDataType,
   GroupDataType,
   OperatingSystemsDataType,
-  PartialRequestFormType,
+  RequestFormType,
   PlatformDataType,
   StatisticsResponseDataType,
 } from './store.types';
@@ -40,6 +40,6 @@ export const getStatisticsSuccess = (statistics: StatisticsResponseDataType) => 
   return { type: GET_STATISTICS, statistics };
 };
 
-export const saveFormData = (form: PartialRequestFormType) => {
+export const saveFormData = (form: RequestFormType) => {
   return { type: SAVE_FORM_DATA, form };
 };
