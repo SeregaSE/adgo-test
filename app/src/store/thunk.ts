@@ -66,7 +66,7 @@ export const getStatistics = (form: RequestFormType) => {
   const keyList = Object.keys(form).filter(isFormKey);
 
   return async (dispatch: Dispatch) => {
-    dispatch(saveFormData(form));
+    dispatch(saveFormData({ ...form, limit: Number(form.limit) }));
 
     const parameters: string[] = [];
 

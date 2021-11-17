@@ -108,7 +108,7 @@ export const RequestForm: FC = () => {
           />
         </div>
         <div className="RequestForm__field">
-          <label>Group by</label>
+          <label>Limit</label>
           <Select
             options={limits}
             name="limit"

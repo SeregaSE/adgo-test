@@ -13,6 +13,7 @@ export const DataTable: FC = () => {
   const statistics = useSelector((state: RootState) => state.statistics);
 
   const headers = [
+    '№',
     groups.filter((el) => el.value === form.groupBy)[0]?.label || 'Day',
     'Impressions',
     'Conversions',
@@ -24,13 +25,14 @@ export const DataTable: FC = () => {
   return (
     <div className="DataTable">
       <DataRow data={headers} title={true} />
-      {statistics.rows.map((data) => {
+      {statistics.rows.map((data, i) => {
         const isDataKey = (key: string): key is keyof StatisticsDataType =>
           data.hasOwnProperty(key);
 
         const groupTitle = isDataKey(form.groupBy) ? data[form.groupBy] : '';
 
         const dataArray = [
+          (form.offset * form.limit + i + 1).toString(),
           groupTitle.toString(),
           data.impressions.toString(),
           data.clicks.toString(),

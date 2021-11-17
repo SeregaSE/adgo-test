@@ -1,6 +1,6 @@
 .DataRow {
   display: grid;
-  grid-template-columns: 150px 1fr 1fr 1fr;
+  grid-template-columns: 50px 150px 1fr 1fr 1fr;
   /* gap: 2px; */
   width: 100%;
   padding: 0;
