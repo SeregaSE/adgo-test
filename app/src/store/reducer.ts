@@ -1,12 +1,19 @@
 import { AnyAction } from 'redux';
-import { GET_BROWSERS, GET_GROUPS, GET_OPERATING_SYSTEMS, GET_PLATFORMS } from './actions';
+import {
+  GET_BROWSERS,
+  GET_GROUPS,
+  GET_OPERATING_SYSTEMS,
+  GET_PLATFORMS,
+  GET_STATISTICS,
+  SAVE_FORM_DATA,
+} from './actions';
 import {
   BrowserDataType,
   GroupDataType,
   OperatingSystemsDataType,
   PlatformDataType,
   RequestFormType,
-  ResponseDataType,
+  StatisticsResponseDataType,
 } from './store.types';
 
 export type STATE_TYPE = {
@@ -15,8 +22,11 @@ export type STATE_TYPE = {
   operatingSystems: OperatingSystemsDataType[];
   groups: GroupDataType[];
   form: RequestFormType;
-  data: ResponseDataType[];
+  statistics: StatisticsResponseDataType;
 };
+
+const timezoneOffset = new Date().getTimezoneOffset() * 60000;
+const TODAY = new Date(Date.now() - timezoneOffset).toISOString().split('T')[0];
 
 export const INITIAL_STATE: STATE_TYPE = {
   platforms: [],
@@ -24,8 +34,8 @@ export const INITIAL_STATE: STATE_TYPE = {
   operatingSystems: [],
   groups: [],
   form: {
-    from: '2021-11-17',
-    to: '2021-11-17',
+    from: TODAY,
+    to: TODAY,
     limit: 10,
     offset: 0,
     groupBy: 'day',
@@ -33,7 +43,15 @@ export const INITIAL_STATE: STATE_TYPE = {
     browsers: [],
     operatingSystems: [],
   },
-  data: [],
+  statistics: {
+    count: 0,
+    rows: [],
+    total: {
+      impressions: 0,
+      clicks: 0,
+      money: 0,
+    },
+  },
 };
 
 export const reducer = (state = INITIAL_STATE, action: AnyAction): STATE_TYPE => {
@@ -49,6 +67,12 @@ export const reducer = (state = INITIAL_STATE, action: AnyAction): STATE_TYPE =>
 
     case GET_GROUPS:
       return { ...state, groups: action.groups };
+
+    case GET_STATISTICS:
+      return { ...state, statistics: action.statistics };
+
+    case SAVE_FORM_DATA:
+      return { ...state, form: action.form };
 
     default:
       return state;

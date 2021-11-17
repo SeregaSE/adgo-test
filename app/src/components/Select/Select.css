@@ -12,3 +12,7 @@
 .Select:focus {
   border-color: gray;
 }
+
+.Select_absolute {
+  position: absolute;
+}

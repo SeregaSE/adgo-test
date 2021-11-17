@@ -24,7 +24,7 @@ export type RequestFormType = {
   from: string;
   to: string;
   limit: number;
-  offset?: number;
+  offset: number;
   groupBy: string;
   platforms: number[];
   browsers: number[];
@@ -37,14 +37,29 @@ export type SummarizedDataType = {
   money: number;
 };
 
-export type StatisticsDataType = {
-  date: string;
-  impressions: number;
-  clicks: number;
-  money: number;
+export type StatisticsByDayType = SummarizedDataType & {
+  day: string;
 };
 
-export type ResponseDataType = {
+export type StatisticsByPlatformType = SummarizedDataType & {
+  platform: string;
+};
+
+export type StatisticsByOSType = SummarizedDataType & {
+  operatingSystem: string;
+};
+
+export type StatisticsByBrowserType = SummarizedDataType & {
+  browser: string;
+};
+
+export type StatisticsDataType =
+  | StatisticsByDayType
+  | StatisticsByPlatformType
+  | StatisticsByOSType
+  | StatisticsByBrowserType;
+
+export type StatisticsResponseDataType = {
   count: number;
   rows: StatisticsDataType[];
   total: SummarizedDataType;

@@ -20,10 +20,10 @@ export type SelectProps = {
   required?: boolean;
   multiple?: boolean;
   hidden?: boolean;
-  values?: number[];
   platforms?: number[];
   clear?: boolean;
   setClear?: Dispatch<SetStateAction<boolean>>;
+  absolute?: boolean;
 };
 
 export const Select: FC<SelectProps> = ({
@@ -35,10 +35,10 @@ export const Select: FC<SelectProps> = ({
   required = false,
   multiple = false,
   hidden = false,
-  values,
   platforms,
   clear,
   setClear,
+  absolute = false,
 }) => {
   const select = useRef<HTMLSelectElement>(null);
 
@@ -55,7 +55,7 @@ export const Select: FC<SelectProps> = ({
     }
   }, [clear, setClear]);
 
-  const selectClasses = classNames('Select', { hidden: hidden });
+  const selectClasses = classNames('Select', { hidden: hidden, Select_absolute: absolute });
 
   return (
     <select

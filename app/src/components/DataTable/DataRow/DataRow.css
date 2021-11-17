@@ -1,0 +1,29 @@
+.DataRow {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr 1fr;
+  /* gap: 2px; */
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  /* border-bottom: 2px solid gray; */
+  /* background-color: gray; */
+}
+
+.DataRow__item {
+  border-bottom: 2px solid gray;
+  border-right: 2px solid gray;
+  padding: 5px;
+  background-color: white;
+}
+
+.DataRow__columnTitle {
+  font-weight: 700;
+}
+
+.DataRow:first-child {
+  border-top: 2px solid gray;
+}
+
+.DataRow__item:first-child {
+  border-left: 2px solid gray;
+}

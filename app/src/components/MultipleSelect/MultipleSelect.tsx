@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { RequestFormType } from '../../store/store.types';
@@ -36,26 +36,31 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
     setHidden(false);
   };
 
-  const handleBlur = () => {
+  const handleBlur = useCallback(() => {
     setHidden(true);
-  };
+  }, []);
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const result = Array.from(event.currentTarget.selectedOptions).map((option) =>
-      Number(option.value)
-    );
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const result = Array.from(event.currentTarget.selectedOptions).map((option) =>
+        Number(option.value)
+      );
 
-    setValue(result);
+      setValue(result);
 
-    setForm((prev) => {
-      return {
-        ...prev,
-        [name]: result,
-      };
-    });
-  };
+      setForm((prev) => {
+        return {
+          ...prev,
+          [event.target.name]: result,
+        };
+      });
+    },
+    [setForm]
+  );
 
   useEffect(() => {
+    console.log(platforms);
+
     setValue((prev) =>
       prev.filter((index) => {
         if (!platforms || platforms.length === 0) {
@@ -74,7 +79,7 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
       .map((el) => el.label)
       .join(', ');
 
-  const clearInput = () => {
+  const clearInput = useCallback(() => {
     setValue(INITIAL_INPUT_VALUE);
     setClear(true);
     setForm((prev) => {
@@ -83,7 +88,11 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
         [name]: [],
       };
     });
-  };
+  }, [name, setForm]);
+
+  useEffect(() => {
+    clearInput();
+  }, [clearInput, disabled]);
 
   return (
     <div className="MultipleSelect">
@@ -100,15 +109,16 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
         X
       </button>
       <Select
+        name={name}
         options={options}
         hidden={hidden}
         multiple={true}
         onChange={handleChange}
         onBlur={handleBlur}
         platforms={platforms}
-        values={value}
         clear={clear}
         setClear={setClear}
+        absolute={true}
       />
     </div>
   );

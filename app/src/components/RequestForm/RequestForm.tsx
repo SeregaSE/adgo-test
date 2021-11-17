@@ -16,6 +16,11 @@ import { Select } from '../Select/Select';
 
 import './RequestForm.css';
 
+const limits = [
+  { value: 10, label: '10' },
+  { value: 25, label: '25' },
+];
+
 export const RequestForm: FC = () => {
   const dispatch = useDispatch();
 
@@ -37,7 +42,7 @@ export const RequestForm: FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    dispatch(getStatistics(form));
+    dispatch(getStatistics({ ...form, offset: 0 }));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -100,6 +105,16 @@ export const RequestForm: FC = () => {
             setForm={setForm}
             groupBy={form.groupBy}
             platforms={form.platforms}
+          />
+        </div>
+        <div className="RequestForm__field">
+          <label>Group by</label>
+          <Select
+            options={limits}
+            name="limit"
+            value={form.limit.toString()}
+            onChange={handleChange}
+            required={true}
           />
         </div>
       </fieldset>

@@ -4,6 +4,8 @@ import {
   getGroupsSuccess,
   getOperatingSystemsSuccess,
   getPlatformsSuccess,
+  getStatisticsSuccess,
+  saveFormData,
 } from './actions';
 import { RequestFormType } from './store.types';
 
@@ -64,6 +66,8 @@ export const getStatistics = (form: RequestFormType) => {
   const keyList = Object.keys(form).filter(isFormKey);
 
   return async (dispatch: Dispatch) => {
+    dispatch(saveFormData(form));
+
     const parameters: string[] = [];
 
     keyList.forEach((key) => {
@@ -97,9 +101,11 @@ export const getStatistics = (form: RequestFormType) => {
       const response = await fetch(
         `http://localhost:3000/api/v1/statistics?${parameters.join('&')}`
       );
-      const data = await response.json();
+      const statistics = await response.json();
 
-      console.log(data);
+      console.log(statistics);
+
+      dispatch(getStatisticsSuccess(statistics));
     } catch (err) {
       console.log(err);
     }
