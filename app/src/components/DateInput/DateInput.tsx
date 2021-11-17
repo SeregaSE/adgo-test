@@ -8,9 +8,18 @@ export type DateInputProps = {
   value: string;
   onChange: ChangeEventHandler;
   required?: boolean;
+  minValue?: string;
+  maxValue?: string;
 };
 
-export const DateInput: FC<DateInputProps> = ({ name, value, onChange, required = false }) => {
+export const DateInput: FC<DateInputProps> = ({
+  name,
+  value,
+  onChange,
+  required = false,
+  minValue,
+  maxValue,
+}) => {
   return (
     <input
       name={name}
@@ -19,6 +28,8 @@ export const DateInput: FC<DateInputProps> = ({ name, value, onChange, required 
       required={required}
       value={value}
       onChange={onChange}
+      min={minValue}
+      max={maxValue}
     />
   );
 };

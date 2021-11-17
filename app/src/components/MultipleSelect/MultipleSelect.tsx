@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { RequestFormType } from '../../store/store.types';
@@ -10,7 +10,7 @@ import './MultipleSelect.css';
 export type MultipleSelectProps = {
   options: OptionType[];
   name: keyof RequestFormType;
-  setForm: Dispatch<SetStateAction<RequestFormType>>;
+  setForm: React.Dispatch<React.SetStateAction<RequestFormType>>;
   groupBy: string;
   platforms?: number[];
 };
@@ -32,7 +32,7 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
 
   const buttonClasses = classNames('MultipleSelect__button', { hidden: value.length === 0 });
 
-  const handleFocus = (event: any) => {
+  const handleFocus = () => {
     setHidden(false);
   };
 
@@ -48,12 +48,10 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
 
       setValue(result);
 
-      setForm((prev) => {
-        return {
-          ...prev,
-          [event.target.name]: result,
-        };
-      });
+      setForm((prev) => ({
+        ...prev,
+        [event.target.name]: result,
+      }));
     },
     [setForm]
   );
@@ -82,12 +80,10 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
   const clearInput = useCallback(() => {
     setValue(INITIAL_INPUT_VALUE);
     setClear(true);
-    setForm((prev) => {
-      return {
-        ...prev,
-        [name]: [],
-      };
-    });
+    setForm((prev) => ({
+      ...prev,
+      [name]: [],
+    }));
   }, [name, setForm]);
 
   useEffect(() => {

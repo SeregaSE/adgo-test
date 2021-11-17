@@ -31,6 +31,17 @@ export type RequestFormType = {
   operatingSystems: number[];
 };
 
+export type PartialRequestFormType = {
+  from?: string;
+  to?: string;
+  limit?: number;
+  offset?: number;
+  groupBy?: string;
+  platforms?: number[];
+  browsers?: number[];
+  operatingSystems?: number[];
+};
+
 export type SummarizedDataType = {
   impressions: number;
   clicks: number;

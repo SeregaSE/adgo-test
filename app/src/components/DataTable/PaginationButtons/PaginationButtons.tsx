@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { getStatistics } from '../../../store/thunk';
@@ -13,12 +13,11 @@ export type PaginationButtonsProps = {
 
 export const PaginationButtons: FC<PaginationButtonsProps> = ({ pages }) => {
   const form = useSelector((state: RootState) => state.form);
-  const [currentPage, setCurrentPage] = useState(form.offset);
+  const currentPage = form.offset;
   const dispatch = useDispatch();
 
   const handleClick = (page: number) => {
     return () => {
-      setCurrentPage(page);
       dispatch(getStatistics({ ...form, offset: page }));
     };
   };
@@ -127,12 +126,10 @@ export const PaginationButtons: FC<PaginationButtonsProps> = ({ pages }) => {
 
   const nextPage = () => {
     dispatch(getStatistics({ ...form, offset: currentPage + 1 }));
-    setCurrentPage((prev) => prev + 1);
   };
 
   const prevPage = () => {
     dispatch(getStatistics({ ...form, offset: currentPage - 1 }));
-    setCurrentPage((prev) => prev - 1);
   };
 
   return (

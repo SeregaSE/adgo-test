@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { StatisticsDataType } from '../../store/store.types';
@@ -10,29 +10,37 @@ import { PaginationButtons } from './PaginationButtons/PaginationButtons';
 export const DataTable: FC = () => {
   const form = useSelector((state: RootState) => state.form);
   const groups = useSelector((state: RootState) => state.groups);
+  const [groupBy, setGroupBy] = useState(form.groupBy);
+  const [limit, setLimit] = useState(form.limit);
   const statistics = useSelector((state: RootState) => state.statistics);
 
-  const headers = [
+  useEffect(() => {
+    setGroupBy(form.groupBy);
+    setLimit(form.limit);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statistics]);
+
+  const headers = () => [
     '№',
-    groups.filter((el) => el.value === form.groupBy)[0]?.label || 'Day',
+    groups.filter((el) => el.value === groupBy)[0]?.label || 'Day',
     'Impressions',
     'Conversions',
     'Money',
   ];
 
-  const numberOfPages = Math.ceil(statistics.count / form.limit);
+  const numberOfPages = Math.ceil(statistics.count / limit);
 
   return (
     <div className="DataTable">
-      <DataRow data={headers} title={true} />
+      <DataRow data={headers()} title={true} />
       {statistics.rows.map((data, i) => {
         const isDataKey = (key: string): key is keyof StatisticsDataType =>
           data.hasOwnProperty(key);
 
-        const groupTitle = isDataKey(form.groupBy) ? data[form.groupBy] : '';
+        const groupTitle = isDataKey(groupBy) ? data[groupBy] : '';
 
         const dataArray = [
-          (form.offset * form.limit + i + 1).toString(),
+          (form.offset * limit + i + 1).toString(),
           groupTitle.toString(),
           data.impressions.toString(),
           data.clicks.toString(),
@@ -41,9 +49,9 @@ export const DataTable: FC = () => {
 
         return <DataRow data={dataArray} key={dataArray.join('-')} />;
       })}
-      {Array(form.limit - statistics.rows.length)
+      {Array(limit - statistics.rows.length < 0 ? 0 : limit - statistics.rows.length)
         .fill('')
-        .map((el, i) => (
+        .map((_, i) => (
           <p key={`empty_${i}`} className="DataTable__emptyRow"></p>
         ))}
       <PaginationButtons pages={numberOfPages} />

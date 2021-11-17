@@ -72,7 +72,7 @@ export const reducer = (state = INITIAL_STATE, action: AnyAction): STATE_TYPE =>
       return { ...state, statistics: action.statistics };
 
     case SAVE_FORM_DATA:
-      return { ...state, form: action.form };
+      return { ...state, form: { ...state.form, ...action.form } };
 
     default:
       return state;

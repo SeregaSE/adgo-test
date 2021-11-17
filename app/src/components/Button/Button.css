@@ -34,11 +34,13 @@
   border-color: transparent;
 }
 
-.Button_prev {
+.Button_prev,
+.Button_prev:hover {
   border-radius: 5px 0 0 5px;
 }
 
-.Button_next {
+.Button_next,
+.Button_next:hover {
   border-radius: 0 5px 5px 0;
 }
 

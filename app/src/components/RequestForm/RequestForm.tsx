@@ -46,12 +46,10 @@ export const RequestForm: FC = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setForm((prev) => {
-      return {
-        ...prev,
-        [event.target.name]: event.target.value,
-      };
-    });
+    setForm((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   return (
@@ -59,11 +57,23 @@ export const RequestForm: FC = () => {
       <fieldset className="RequestForm__fieldset">
         <div className="RequestForm__field">
           <label>From</label>
-          <DateInput name="from" required={true} value={form.from} onChange={handleChange} />
+          <DateInput
+            name="from"
+            required={true}
+            value={form.from}
+            onChange={handleChange}
+            maxValue={form.to}
+          />
         </div>
         <div className="RequestForm__field">
           <label>To</label>
-          <DateInput name="to" required={true} value={form.to} onChange={handleChange} />
+          <DateInput
+            name="to"
+            required={true}
+            value={form.to}
+            onChange={handleChange}
+            minValue={form.from}
+          />
         </div>
         <div className="RequestForm__field">
           <label>Group by</label>
@@ -75,7 +85,7 @@ export const RequestForm: FC = () => {
             required={true}
           />
         </div>
-        <Button>Применить</Button>
+        <Button>Save and get statistics</Button>
       </fieldset>
       <fieldset className="RequestForm__fieldset">
         <div className="RequestForm__field">
