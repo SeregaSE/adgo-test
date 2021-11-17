@@ -11,23 +11,15 @@ export type MultipleSelectProps = {
   options: OptionType[];
   name: keyof RequestFormType;
   setForm: React.Dispatch<React.SetStateAction<RequestFormType>>;
-  groupBy: string;
   platforms?: number[];
 };
 
 export type InputValue = number[];
 const INITIAL_INPUT_VALUE: InputValue = [];
 
-export const MultipleSelect: FC<MultipleSelectProps> = ({
-  options,
-  name,
-  setForm,
-  groupBy,
-  platforms,
-}) => {
+export const MultipleSelect: FC<MultipleSelectProps> = ({ options, name, setForm, platforms }) => {
   const [hidden, setHidden] = useState(true);
   const [value, setValue] = useState(INITIAL_INPUT_VALUE);
-  const disabled = `${groupBy}s` === name;
   const [clear, setClear] = useState(false);
 
   const buttonClasses = classNames('MultipleSelect__button', { hidden: value.length === 0 });
@@ -86,10 +78,6 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
     }));
   }, [name, setForm]);
 
-  useEffect(() => {
-    clearInput();
-  }, [clearInput, disabled]);
-
   return (
     <div className="MultipleSelect">
       <input
@@ -97,9 +85,8 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
         className="MultipleSelect__input"
         onFocus={handleFocus}
         placeholder="Choose..."
-        value={disabled ? '' : printInputValues()}
+        value={printInputValues()}
         readOnly
-        disabled={disabled}
       />
       <button className={buttonClasses} type="button" onClick={clearInput}>
         X

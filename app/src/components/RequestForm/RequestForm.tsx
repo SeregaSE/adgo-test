@@ -90,12 +90,7 @@ export const RequestForm: FC = () => {
       <fieldset className="RequestForm__fieldset">
         <div className="RequestForm__field">
           <label>Platform</label>
-          <MultipleSelect
-            options={platforms}
-            name="platforms"
-            setForm={setForm}
-            groupBy={form.groupBy}
-          />
+          <MultipleSelect options={platforms} name="platforms" setForm={setForm} />
         </div>
         <div className="RequestForm__field">
           <label>Operating system</label>
@@ -103,7 +98,6 @@ export const RequestForm: FC = () => {
             options={operatingSystems}
             name="operatingSystems"
             setForm={setForm}
-            groupBy={form.groupBy}
             platforms={form.platforms}
           />
         </div>
@@ -113,7 +107,6 @@ export const RequestForm: FC = () => {
             options={browsers}
             name="browsers"
             setForm={setForm}
-            groupBy={form.groupBy}
             platforms={form.platforms}
           />
         </div>
