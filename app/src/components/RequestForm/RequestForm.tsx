@@ -46,12 +46,15 @@ export const RequestForm: FC = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setForm((prev) => {
-      return {
-        ...prev,
-        [event.target.name]: event.target.value,
-      };
-    });
+    const name = event.target.name;
+    const value = ['limit', 'platform'].includes(name)
+      ? Number(event.target.value)
+      : event.target.value;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (

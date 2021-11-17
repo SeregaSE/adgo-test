@@ -28,7 +28,7 @@ export const DataTable: FC = () => {
     'Money',
   ];
 
-  const numberOfPages = Math.ceil(statistics.count / limit);
+  const numberOfPages = Math.ceil(statistics.count / Number(limit));
 
   return (
     <div className="DataTable">
@@ -40,7 +40,7 @@ export const DataTable: FC = () => {
         const groupTitle = isDataKey(groupBy) ? data[groupBy] : '';
 
         const dataArray = [
-          (form.offset * limit + i + 1).toString(),
+          (form.offset * Number(limit) + i + 1).toString(),
           groupTitle.toString(),
           data.impressions.toString(),
           data.clicks.toString(),
@@ -49,7 +49,7 @@ export const DataTable: FC = () => {
 
         return <DataRow data={dataArray} key={dataArray.join('-')} />;
       })}
-      {Array(limit - statistics.rows.length < 0 ? 0 : limit - statistics.rows.length)
+      {Array(Math.max(0, Number(limit) - statistics.rows.length))
         .fill('')
         .map((_, i) => (
           <p key={`empty_${i}`} className="DataTable__emptyRow"></p>
