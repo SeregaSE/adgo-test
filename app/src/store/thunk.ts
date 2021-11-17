@@ -1,4 +1,3 @@
-import { format } from 'path';
 import { Dispatch } from 'redux';
 import {
   getBrowsersSuccess,
@@ -60,7 +59,7 @@ export const getGroups = () => {
   };
 };
 
-export const getStatisticsData = (form: RequestFormType) => {
+export const getStatistics = (form: RequestFormType) => {
   const isFormKey = (key: string): key is keyof RequestFormType => form.hasOwnProperty(key);
   const keyList = Object.keys(form).filter(isFormKey);
 

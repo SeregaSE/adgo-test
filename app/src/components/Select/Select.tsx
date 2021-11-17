@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC, useEffect, useRef } from 'react';
+import { ChangeEventHandler, Dispatch, FC, SetStateAction, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -22,6 +22,8 @@ export type SelectProps = {
   hidden?: boolean;
   values?: number[];
   platforms?: number[];
+  clear?: boolean;
+  setClear?: Dispatch<SetStateAction<boolean>>;
 };
 
 export const Select: FC<SelectProps> = ({
@@ -35,6 +37,8 @@ export const Select: FC<SelectProps> = ({
   hidden = false,
   values,
   platforms,
+  clear,
+  setClear,
 }) => {
   const select = useRef<HTMLSelectElement>(null);
 
@@ -43,6 +47,13 @@ export const Select: FC<SelectProps> = ({
       select.current.focus();
     }
   }, [hidden]);
+
+  useEffect(() => {
+    if (select.current && clear && setClear) {
+      select.current.selectedIndex = -1;
+      setClear(false);
+    }
+  }, [clear, setClear]);
 
   const selectClasses = classNames('Select', { hidden: hidden });
 
@@ -58,22 +69,13 @@ export const Select: FC<SelectProps> = ({
       required={required}
       value={value}
     >
-      {multiple ? null : (
-        <option key="empty-option" value="">
-          Choose...
-        </option>
-      )}
       {options
         .filter(
           (el) =>
             !el.platform || !platforms || platforms.length === 0 || platforms?.includes(el.platform)
         )
         .map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            selected={values?.includes(Number(option.value))}
-          >
+          <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}

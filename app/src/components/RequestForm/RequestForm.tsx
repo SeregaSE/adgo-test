@@ -6,7 +6,7 @@ import {
   getGroups,
   getOperatingSystems,
   getPlatforms,
-  getStatisticsData,
+  getStatistics,
 } from '../../store/thunk';
 
 import { Button } from '../Button/Button';
@@ -37,7 +37,7 @@ export const RequestForm: FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    dispatch(getStatisticsData(form));
+    dispatch(getStatistics(form));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

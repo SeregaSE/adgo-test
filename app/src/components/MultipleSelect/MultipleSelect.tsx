@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { RequestFormType } from '../../store/store.types';
@@ -28,6 +28,7 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
   const [hidden, setHidden] = useState(true);
   const [value, setValue] = useState(INITIAL_INPUT_VALUE);
   const disabled = `${groupBy}s` === name;
+  const [clear, setClear] = useState(false);
 
   const buttonClasses = classNames('MultipleSelect__button', { hidden: value.length === 0 });
 
@@ -40,7 +41,6 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(name, 'changed');
     const result = Array.from(event.currentTarget.selectedOptions).map((option) =>
       Number(option.value)
     );
@@ -55,6 +55,19 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
     });
   };
 
+  useEffect(() => {
+    setValue((prev) =>
+      prev.filter((index) => {
+        if (!platforms || platforms.length === 0) {
+          return true;
+        }
+
+        const currentPlatform = options.filter((el) => el.value === index)[0].platform;
+        return currentPlatform === undefined || platforms.includes(currentPlatform);
+      })
+    );
+  }, [options, platforms]);
+
   const printInputValues = () =>
     options
       .filter((el) => value.includes(Number(el.value)))
@@ -63,6 +76,13 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
 
   const clearInput = () => {
     setValue(INITIAL_INPUT_VALUE);
+    setClear(true);
+    setForm((prev) => {
+      return {
+        ...prev,
+        [name]: [],
+      };
+    });
   };
 
   return (
@@ -86,6 +106,9 @@ export const MultipleSelect: FC<MultipleSelectProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         platforms={platforms}
+        values={value}
+        clear={clear}
+        setClear={setClear}
       />
     </div>
   );
