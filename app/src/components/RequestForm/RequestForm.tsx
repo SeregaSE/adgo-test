@@ -104,7 +104,7 @@ export const RequestForm: FC = () => {
           />
         </div>
         <div className="RequestForm__field">
-          <label>Operating system</label>
+          <label>Operating system(s)</label>
           <MultipleSelect
             options={operatingSystems}
             name="operatingSystems"
@@ -113,7 +113,7 @@ export const RequestForm: FC = () => {
           />
         </div>
         <div className="RequestForm__field">
-          <label>Browser</label>
+          <label>Browser(s)</label>
           <MultipleSelect
             options={browsers}
             name="browsers"
