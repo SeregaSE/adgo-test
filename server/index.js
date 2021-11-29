@@ -11,7 +11,7 @@ server.on('request', (request, response) => {
     const [, api, version, route] = url.pathname.split('/');
 
     if (request.headers.origin !== undefined) {
-        response.setHeader('Access-Control-Allow-Origin', request.headers.origin);
+        response.setHeader('Access-Control-Allow-Origin', '*');
     }
 
     response.setHeader('Access-Control-Allow-Headers', 'content-type');
